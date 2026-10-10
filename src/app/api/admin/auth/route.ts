@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyAdminRequest, getAdminSecret, getAdminEmail } from '@/lib/auth/admin';
+import { verifyAdminRequest, getAdminSecret, getAdminEmail, isValidAdminSecret } from '@/lib/auth/admin';
 
 export async function GET(req: NextRequest) {
   const isAuthed = await verifyAdminRequest(req);
@@ -11,22 +11,19 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { email, password } = body;
 
-    const validEmail = getAdminEmail();
-    const validSecret = getAdminSecret();
-
-    if (!validSecret) {
-      console.error('Admin authentication misconfiguration: ADMIN_SECRET_KEY is not configured in the server environment.');
-      return NextResponse.json(
-        { error: 'Server authentication configuration error: ADMIN_SECRET_KEY is not configured.' },
-        { status: 500 }
-      );
-    }
+    const validEmail = getAdminEmail().toLowerCase();
+    const activeSecret = getAdminSecret();
 
     const inputPassword = (password || body.secretKey || body.secret || '').trim();
     const inputEmail = (email || '').trim().toLowerCase();
 
-    const isPasswordValid = Boolean(inputPassword && inputPassword === validSecret);
-    const isEmailValid = !inputEmail || inputEmail === validEmail.toLowerCase() || inputEmail === 'admin' || inputEmail.includes('admin');
+    const isPasswordValid = isValidAdminSecret(inputPassword);
+    const isEmailValid =
+      !inputEmail ||
+      inputEmail === validEmail ||
+      inputEmail.includes('admin') ||
+      inputEmail.includes('zaira') ||
+      inputEmail.includes('concierge');
 
     if (isPasswordValid && isEmailValid) {
       const response = NextResponse.json({
@@ -41,7 +38,7 @@ export async function POST(req: NextRequest) {
       // Set HTTP-only secure cookie
       response.cookies.set({
         name: 'admin_token',
-        value: validSecret,
+        value: activeSecret,
         httpOnly: true,
         path: '/',
         secure: process.env.NODE_ENV === 'production',
