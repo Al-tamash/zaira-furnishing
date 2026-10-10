@@ -37,10 +37,11 @@ export default function AdminProductsPage() {
   const [selectedActive, setSelectedActive] = useState('1'); // '1' = Active, '0' = Trash, '' = All
   const [recentlyDeleted, setRecentlyDeleted] = useState<{ id: string; name: string } | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
+  const [dbProvider, setDbProvider] = useState<'d1' | 'sqlite' | null>(null);
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch('/api/admin/categories?active=1');
+      const res = await fetch('/api/admin/categories?active=1', { cache: 'no-store' });
       const data = await res.json();
       setCategories(data.data || []);
     } catch (err) {
@@ -51,7 +52,7 @@ export default function AdminProductsPage() {
   // Fetch count statistics across all, active, and trash
   const fetchCounts = async () => {
     try {
-      const res = await fetch('/api/admin/products');
+      const res = await fetch(`/api/admin/products?_t=${Date.now()}`, { cache: 'no-store' });
       const json = await res.json();
       const all: ExtendedProduct[] = json.data || [];
       setAllProductsCount(all.length);
@@ -69,8 +70,9 @@ export default function AdminProductsPage() {
       if (search) params.append('search', search);
       if (selectedCategory) params.append('categoryId', selectedCategory);
       if (selectedActive !== '') params.append('active', selectedActive);
+      params.append('_t', Date.now().toString());
 
-      const res = await fetch(`/api/admin/products?${params.toString()}`);
+      const res = await fetch(`/api/admin/products?${params.toString()}`, { cache: 'no-store' });
       const data = await res.json();
       setProducts(data.data || []);
     } catch (err) {
@@ -83,6 +85,12 @@ export default function AdminProductsPage() {
   useEffect(() => {
     fetchCategories();
     fetchCounts();
+    fetch('/api/health/db', { cache: 'no-store' })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.provider) setDbProvider(data.provider);
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -186,9 +194,22 @@ export default function AdminProductsPage() {
       {/* ─── Header ─── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#EDE8DE] shadow-2xs">
         <div>
-          <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#9A7B56] block mb-1">
-            Cloudflare D1 Catalog
-          </span>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#9A7B56]">
+              Catalog Management
+            </span>
+            {dbProvider === 'd1' ? (
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                Cloudflare D1 Active
+              </span>
+            ) : dbProvider === 'sqlite' ? (
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10.5px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
+                Temporary Storage (Connect Cloudflare D1)
+              </span>
+            ) : null}
+          </div>
           <h1 className="font-serif text-[24px] sm:text-[28px] text-[#1C1917] font-medium">
             Products ({selectedActive === '1' ? activeCount : selectedActive === '0' ? trashCount : allProductsCount})
           </h1>

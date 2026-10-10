@@ -5,6 +5,9 @@ import { ensureDatabaseSchema } from '@/lib/db/auto-migrate';
 import { CATEGORIES } from '@/lib/data/categories';
 import { DbProduct } from '@/lib/db/types';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   const isAuthorized = await verifyAdminRequest(req);
   if (!isAuthorized) {
@@ -67,7 +70,14 @@ export async function GET(req: NextRequest) {
       }
     >(sql, params);
 
-    return NextResponse.json({ data: products });
+    return NextResponse.json(
+      { data: products },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Admin GET products error:', error);
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });

@@ -11,6 +11,9 @@ import {
   DbCustomizationConfig,
 } from '@/lib/db/types';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const isAuthorized = await verifyAdminRequest(req);
   if (!isAuthorized) {
@@ -50,15 +53,22 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
       ),
     ]);
 
-    return NextResponse.json({
-      data: {
-        ...product,
-        images: images || [],
-        variants: variants || [],
-        specifications: specifications || [],
-        customization_configs: customization_configs || [],
+    return NextResponse.json(
+      {
+        data: {
+          ...product,
+          images: images || [],
+          variants: variants || [],
+          specifications: specifications || [],
+          customization_configs: customization_configs || [],
+        },
       },
-    });
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Admin GET product by id error:', error);
     return NextResponse.json({ error: 'Failed to fetch product details' }, { status: 500 });

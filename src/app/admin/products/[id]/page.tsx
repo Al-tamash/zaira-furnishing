@@ -366,7 +366,8 @@ const formatOptionsForInput = (raw: string | null | undefined): string => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to save product');
 
-      alert('Product saved successfully to Cloudflare D1!');
+      alert('Product saved successfully!');
+      router.refresh();
       router.push('/admin/products');
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Error saving product');
