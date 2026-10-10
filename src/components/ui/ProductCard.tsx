@@ -78,6 +78,7 @@ export function ProductCard({
             src={activeImage}
             alt={product.images?.find((img) => img.url === activeImage)?.altText || product.imageAlt || product.displayName || product.name}
             fill
+            unoptimized={Boolean(activeImage?.startsWith('data:') || activeImage?.startsWith('blob:'))}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-106"
           />

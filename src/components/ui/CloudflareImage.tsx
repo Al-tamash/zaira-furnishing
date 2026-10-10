@@ -42,6 +42,7 @@ export function CloudflareImage({
     >
       <Image
         {...rest}
+        unoptimized={Boolean(resolvedSrc.startsWith('data:') || resolvedSrc.startsWith('blob:')) || rest.unoptimized}
         src={resolvedSrc}
         alt={alt}
         fill={fill}

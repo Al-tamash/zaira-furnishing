@@ -787,6 +787,7 @@ export function ProductDetailView({
                           src={img}
                           alt={getImageAlt(img, `thumbnail ${idx + 1}`)}
                           fill
+                          unoptimized={Boolean(img?.startsWith('data:') || img?.startsWith('blob:'))}
                           sizes="(max-width: 640px) 70px, (max-width: 1024px) 76px, 82px"
                           className="object-cover object-center"
                         />
@@ -812,6 +813,7 @@ export function ProductDetailView({
                   alt={getImageAlt(activeImage)}
                   fill
                   priority
+                  unoptimized={Boolean(activeImage?.startsWith('data:') || activeImage?.startsWith('blob:'))}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center transition-transform duration-700 ease-out animate-gallery-fade group-hover:scale-105"
                 />

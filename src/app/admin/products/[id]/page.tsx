@@ -765,7 +765,7 @@ const formatOptionsForInput = (raw: string | null | undefined): string => {
 
             <label className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1C1714] hover:bg-[#2C221E] text-white text-[12.5px] font-semibold transition-all shadow-2xs cursor-pointer shrink-0">
               <Upload className="w-4 h-4" />
-              <span>{uploadingImage ? 'Uploading to R2...' : 'Upload Image to R2'}</span>
+              <span>{uploadingImage ? 'Uploading...' : 'Upload Image'}</span>
               <input
                 type="file"
                 accept="image/*"

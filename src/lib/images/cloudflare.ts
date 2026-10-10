@@ -26,8 +26,8 @@ export interface CloudflareImageOptions {
 export function getMediaUrl(pathOrUrl: string, options?: CloudflareImageOptions): string {
   if (!pathOrUrl) return '';
 
-  // 1. If it's already an absolute URL (e.g. Unsplash, external CDN)
-  if (pathOrUrl.startsWith('http://') || pathOrUrl.startsWith('https://')) {
+  // 1. If it's already an absolute URL (e.g. Unsplash, external CDN) or data URI
+  if (pathOrUrl.startsWith('data:') || pathOrUrl.startsWith('blob:') || pathOrUrl.startsWith('http://') || pathOrUrl.startsWith('https://')) {
     return pathOrUrl;
   }
 
