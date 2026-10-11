@@ -5,6 +5,7 @@ import {
   ProductVariation,
   ProductSpecification,
   ProductType,
+  VariationType,
 } from '@/lib/data/types';
 import {
   Product,
@@ -255,8 +256,7 @@ function mapProductRow(
     return {
       id: v.id,
       name: v.name,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      type: v.variant_type as any,
+      type: v.variant_type as VariationType,
       colorHex: v.color_hex || undefined,
       thumbnailImage: v.thumbnail_image || undefined,
       image: v.preview_image || undefined,
