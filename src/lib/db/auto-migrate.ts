@@ -363,6 +363,7 @@ CREATE INDEX IF NOT EXISTS idx_admin_notif_created ON admin_notifications(create
 `;
 
 let initializationPromise: Promise<boolean> | null = null;
+let isMigrating = false;
 
 /**
  * Seeds flagship categories, products, and review placeholders safely.
@@ -422,7 +423,9 @@ export async function seedCatalogData(db: DatabaseClient): Promise<void> {
  */
 export async function ensureDatabaseSchema(db: DatabaseClient): Promise<boolean> {
   if (initializationPromise) return initializationPromise;
+  if (isMigrating) return true;
 
+  isMigrating = true;
   initializationPromise = (async () => {
     try {
       // 1. Fast check: does the products table already exist with rows?
@@ -538,6 +541,8 @@ export async function ensureDatabaseSchema(db: DatabaseClient): Promise<boolean>
       console.error('[DATABASE AUTO-MIGRATE FATAL] Error during schema auto-migration:', err);
       initializationPromise = null;
       return false;
+    } finally {
+      isMigrating = false;
     }
   })();
 

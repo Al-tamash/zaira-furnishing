@@ -274,7 +274,7 @@ class CloudflareD1HttpClient implements DatabaseClient {
   private databaseId: string;
   private apiToken: string;
   private schemaVerified = false;
-  private schemaInitPromise: Promise<boolean> | null = null;
+  private isInitializingSchema = false;
 
   constructor(accountId: string, databaseId: string, apiToken: string) {
     this.accountId = accountId;
@@ -283,24 +283,16 @@ class CloudflareD1HttpClient implements DatabaseClient {
   }
 
   private async ensureSchemaChecked(): Promise<void> {
-    if (this.schemaVerified) return;
-    if (this.schemaInitPromise) {
-      await this.schemaInitPromise;
-      return;
+    if (this.schemaVerified || this.isInitializingSchema) return;
+    this.isInitializingSchema = true;
+    try {
+      await ensureDatabaseSchema(this);
+      this.schemaVerified = true;
+    } catch (err) {
+      console.warn('[CLOUDFLARE D1] Initial schema check warning:', err);
+    } finally {
+      this.isInitializingSchema = false;
     }
-    this.schemaInitPromise = (async () => {
-      try {
-        await ensureDatabaseSchema(this);
-        this.schemaVerified = true;
-        return true;
-      } catch (err) {
-        console.warn('[CLOUDFLARE D1] Initial schema check warning:', err);
-        return false;
-      } finally {
-        this.schemaInitPromise = null;
-      }
-    })();
-    await this.schemaInitPromise;
   }
 
   private sanitizeParams(params: unknown[] = []): unknown[] {
@@ -339,13 +331,16 @@ class CloudflareD1HttpClient implements DatabaseClient {
   }
 
   async query<T = unknown>(sql: string, params: unknown[] = []): Promise<T[]> {
-    try {
+    if (!this.schemaVerified && !this.isInitializingSchema) {
       await this.ensureSchemaChecked();
+    }
+
+    try {
       return await this.rawQuery<T>(sql, params);
     } catch (err: any) {
-      if (err?.message && err.message.includes('no such table')) {
+      if (!this.isInitializingSchema && err?.message && err.message.includes('no such table')) {
         console.warn('[CLOUDFLARE D1] "no such table" error. Running schema migration and retrying...');
-        await ensureDatabaseSchema(this);
+        await this.ensureSchemaChecked();
         return await this.rawQuery<T>(sql, params);
       }
       throw err;
@@ -363,8 +358,11 @@ class CloudflareD1HttpClient implements DatabaseClient {
       return { changes: 0 };
     }
 
-    try {
+    if (!this.schemaVerified && !this.isInitializingSchema) {
       await this.ensureSchemaChecked();
+    }
+
+    try {
       const url = `https://api.cloudflare.com/client/v4/accounts/${this.accountId}/d1/database/${this.databaseId}/query`;
       const res = await fetch(url, {
         method: 'POST',
@@ -394,9 +392,9 @@ class CloudflareD1HttpClient implements DatabaseClient {
         lastInsertRowid: meta?.last_row_id,
       };
     } catch (err: any) {
-      if (err?.message && err.message.includes('no such table')) {
+      if (!this.isInitializingSchema && err?.message && err.message.includes('no such table')) {
         console.warn('[CLOUDFLARE D1] "no such table" error on execute. Auto-migrating and retrying...');
-        await ensureDatabaseSchema(this);
+        await this.ensureSchemaChecked();
         return await this.execute(sql, params);
       }
       throw err;
@@ -405,8 +403,12 @@ class CloudflareD1HttpClient implements DatabaseClient {
 
   async batch(statements: BatchStatement[]): Promise<{ changes: number }[]> {
     if (statements.length === 0) return [];
-    try {
+
+    if (!this.schemaVerified && !this.isInitializingSchema) {
       await this.ensureSchemaChecked();
+    }
+
+    try {
       const url = `https://api.cloudflare.com/client/v4/accounts/${this.accountId}/d1/database/${this.databaseId}/query`;
       const payload = statements.map((s) => ({
         sql: s.sql,
@@ -437,9 +439,9 @@ class CloudflareD1HttpClient implements DatabaseClient {
         changes: r?.meta?.changes || 0,
       }));
     } catch (err: any) {
-      if (err?.message && err.message.includes('no such table')) {
+      if (!this.isInitializingSchema && err?.message && err.message.includes('no such table')) {
         console.warn('[CLOUDFLARE D1] "no such table" error on batch. Auto-migrating and retrying...');
-        await ensureDatabaseSchema(this);
+        await this.ensureSchemaChecked();
         return await this.batch(statements);
       }
       throw err;
@@ -461,7 +463,15 @@ class CloudflareD1HttpClient implements DatabaseClient {
       });
 
     for (const stmt of statements) {
-      await this.execute(stmt);
+      try {
+        await this.execute(stmt);
+      } catch (err: any) {
+        const msg = (err?.message || '').toLowerCase();
+        if (msg.includes('already exists') || msg.includes('duplicate column')) {
+          continue;
+        }
+        throw err;
+      }
     }
   }
 
