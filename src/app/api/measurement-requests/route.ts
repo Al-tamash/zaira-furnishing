@@ -8,10 +8,22 @@ import { generateMeasurementRequestNumber, resolveProductAndVariant } from '@/li
 import { ensureDatabaseSchema } from '@/lib/db/auto-migrate';
 import { triggerNewMeasurementNotification } from '@/lib/notifications/service';
 import { buildMeasurementWhatsAppUrl } from '@/lib/whatsapp';
+import { checkRateLimit, getClientIp } from '@/lib/security/rate-limit';
 
 // ─── POST /api/measurement-requests ───
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+    const rateLimit = checkRateLimit(`meas-req:${ip}`, 10, 600);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: `Too many booking requests. Please wait ${Math.ceil(rateLimit.resetInSeconds / 60)} minutes before trying again.`,
+        },
+        { status: 429 }
+      );
+    }
+
     const db = getDatabase();
     await ensureDatabaseSchema(db);
     const body = await req.json();

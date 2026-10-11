@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { getDatabase } from '@/lib/db';
 import { verifyAdminRequest } from '@/lib/auth/admin';
 import { DbContactInquiry } from '@/lib/db/types';
+import { checkRateLimit, getClientIp } from '@/lib/security/rate-limit';
 
 /**
  * Generates unique readable inquiry reference.
@@ -26,6 +27,18 @@ async function generateInquiryNumber(db: ReturnType<typeof getDatabase>): Promis
 // ─── POST /api/contact ───
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+    // Rate limit: 10 contact inquiries per 10 minutes (600s)
+    const rateLimit = checkRateLimit(`contact-form:${ip}`, 10, 600);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: `Too many submissions. Please wait ${Math.ceil(rateLimit.resetInSeconds / 60)} minutes before trying again.`,
+        },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const { name, phone, email, subject, message, idempotencyKey } = body;
 
@@ -58,62 +71,81 @@ export async function POST(req: NextRequest) {
     // 4. Validate message
     if (!message || typeof message !== 'string' || message.trim().length < 5) {
       return NextResponse.json(
-        { error: 'Please enter your message or project scope (at least 5 characters).' },
+        { error: 'Please write a message with at least 5 characters.' },
         { status: 400 }
       );
     }
 
     const db = getDatabase();
 
-    // 5. Duplicate protection / Idempotency check
-    if (idempotencyKey && typeof idempotencyKey === 'string' && idempotencyKey.trim().length > 0) {
+    // 5. Check Idempotency Key
+    if (idempotencyKey && typeof idempotencyKey === 'string') {
       const existing = await db.queryOne<DbContactInquiry>(
         'SELECT * FROM contact_inquiries WHERE idempotency_key = ?',
-        [idempotencyKey.trim()]
+        [idempotencyKey]
       );
       if (existing) {
-        return NextResponse.json(
-          { success: true, inquiry: existing, duplicate: true },
-          { status: 200 }
-        );
+        return NextResponse.json({
+          success: true,
+          inquiry: existing,
+          duplicate: true,
+        });
       }
     }
 
-    // 6. Generate unique ID and reference number
-    const id = `ci-${crypto.randomUUID()}`;
+    const inquiryId = `ci_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`;
     const inquiryNumber = await generateInquiryNumber(db);
-    const resolvedSubject = typeof subject === 'string' && subject.trim() ? subject.trim() : 'General Inquiry';
+    const trimmedSubject = (subject && typeof subject === 'string') ? subject.trim() : 'General Inquiry';
 
-    // 7. Persist inquiry into database
-    await db.execute(
-      `INSERT INTO contact_inquiries (
+    const insertSql = `
+      INSERT INTO contact_inquiries (
         id, inquiry_number, name, phone, email, subject, message, status, idempotency_key, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, 'NEW', ?, datetime('now'), datetime('now'))`,
-      [
-        id,
-        inquiryNumber,
-        name.trim(),
-        cleanPhone,
-        email.trim().toLowerCase(),
-        resolvedSubject,
-        message.trim(),
-        idempotencyKey && typeof idempotencyKey === 'string' ? idempotencyKey.trim() : null,
-      ]
-    );
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, 'NEW', ?, datetime('now'), datetime('now'))
+    `;
 
-    const createdRecord = await db.queryOne<DbContactInquiry>(
+    await db.execute(insertSql, [
+      inquiryId,
+      inquiryNumber,
+      name.trim(),
+      cleanPhone,
+      email.trim(),
+      trimmedSubject,
+      message.trim(),
+      idempotencyKey || null,
+    ]);
+
+    // Insert notification for admin
+    try {
+      const notifId = `notif_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`;
+      await db.execute(
+        `INSERT INTO notifications (id, title, message, type, is_read, created_at)
+         VALUES (?, ?, ?, 'lead', 0, datetime('now'))`,
+        [
+          notifId,
+          `New Contact Inquiry: ${inquiryNumber}`,
+          `${name.trim()} (${cleanPhone}) sent a message: "${trimmedSubject}"`,
+        ]
+      );
+    } catch {
+      // Notification insertion is best-effort
+    }
+
+    const createdInquiry = await db.queryOne<DbContactInquiry>(
       'SELECT * FROM contact_inquiries WHERE id = ?',
-      [id]
+      [inquiryId]
     );
 
     return NextResponse.json(
-      { success: true, inquiry: createdRecord },
+      {
+        success: true,
+        inquiry: createdInquiry,
+      },
       { status: 201 }
     );
   } catch (err: any) {
-    console.error('Error creating contact inquiry:', err);
+    console.error('Contact inquiry submission error:', err);
     return NextResponse.json(
-      { error: 'An unexpected server error occurred while sending your message. Please try again or reach out to us directly.' },
+      { error: 'Failed to submit inquiry. Please try again or reach out on WhatsApp.' },
       { status: 500 }
     );
   }
@@ -190,5 +222,47 @@ export async function GET(req: NextRequest) {
       { error: 'Failed to fetch contact inquiries.' },
       { status: 500 }
     );
+  }
+}
+
+// ─── PATCH /api/contact (Admin Only: Status Update) ───
+export async function PATCH(req: NextRequest) {
+  try {
+    const isAdmin = await verifyAdminRequest(req);
+    if (!isAdmin) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin authentication required.' },
+        { status: 401 }
+      );
+    }
+
+    const body = await req.json();
+    const { id, status } = body;
+
+    if (!id || !status) {
+      return NextResponse.json({ error: 'Missing inquiry ID or status' }, { status: 400 });
+    }
+
+    const validStatuses = ['NEW', 'READ', 'CONTACTED', 'RESOLVED', 'ARCHIVED'];
+    const upperStatus = String(status).toUpperCase();
+    if (!validStatuses.includes(upperStatus)) {
+      return NextResponse.json({ error: 'Invalid status value' }, { status: 400 });
+    }
+
+    const db = getDatabase();
+    await db.execute(
+      `UPDATE contact_inquiries SET status = ?, updated_at = datetime('now') WHERE id = ?`,
+      [upperStatus, id]
+    );
+
+    const updated = await db.queryOne<DbContactInquiry>(
+      'SELECT * FROM contact_inquiries WHERE id = ?',
+      [id]
+    );
+
+    return NextResponse.json({ success: true, inquiry: updated });
+  } catch (err: any) {
+    console.error('Error updating contact inquiry:', err);
+    return NextResponse.json({ error: 'Failed to update inquiry.' }, { status: 500 });
   }
 }

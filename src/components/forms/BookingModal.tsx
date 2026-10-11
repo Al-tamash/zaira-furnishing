@@ -173,9 +173,9 @@ export function BookingModal() {
       setSubmitted(true);
     } catch (err: any) {
       console.error('Booking submission error:', err);
-      // Fallback display anyway for seamless UX
-      setBookingRef(generatedRef);
-      setSubmitted(true);
+      setErrorMessage(
+        err.message || 'Unable to submit booking right now. Please verify your connection or confirm directly via WhatsApp.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -243,9 +243,22 @@ export function BookingModal() {
         {/* ─── Body Content ─── */}
         <div className="p-5 sm:p-7 overflow-y-auto flex-1">
           {errorMessage && (
-            <div className="mb-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-[12.5px] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
-              <span>{errorMessage}</span>
+            <div className="mb-5 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-[12.5px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+              <a
+                href={`https://wa.me/${ZAIRA_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                  `Hello Zaira Furnishing Atelier, I would like to book a consultation.\nName: ${customerName}\nPhone: ${customerPhone.replace(/\D/g, '')}\nArea: ${selectedArea}\nService: ${selectedService}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white text-[11.5px] font-semibold rounded-lg hover:bg-[#20BA5C] transition-colors shrink-0"
+              >
+                <MessageSquare className="w-3.5 h-3.5 fill-white" />
+                <span>Book via WhatsApp</span>
+              </a>
             </div>
           )}
 

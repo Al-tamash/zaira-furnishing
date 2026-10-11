@@ -7,9 +7,21 @@ import {
   CUSTOMER_SESSION_COOKIE,
   SESSION_MAX_AGE_SECONDS,
 } from '@/lib/auth/customer';
+import { checkRateLimit, getClientIp } from '@/lib/security/rate-limit';
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+    const rateLimit = checkRateLimit(`cust-login:${ip}`, 5, 900);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: `Too many login attempts. Please try again in ${Math.ceil(rateLimit.resetInSeconds / 60)} minutes.`,
+        },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json().catch(() => null);
     if (!body) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });

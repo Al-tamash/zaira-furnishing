@@ -7,10 +7,22 @@ import { DbQuoteRequest } from '@/lib/db/types';
 import { generateQuoteRequestNumber, resolveProductAndVariant } from '@/lib/db/requests';
 import { ensureDatabaseSchema } from '@/lib/db/auto-migrate';
 import { triggerNewQuoteNotification } from '@/lib/notifications/service';
+import { checkRateLimit, getClientIp } from '@/lib/security/rate-limit';
 
 // ─── POST /api/quote-requests ───
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+    const rateLimit = checkRateLimit(`quote-req:${ip}`, 10, 600);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: `Too many quote requests. Please wait ${Math.ceil(rateLimit.resetInSeconds / 60)} minutes before trying again.`,
+        },
+        { status: 429 }
+      );
+    }
+
     const db = getDatabase();
     await ensureDatabaseSchema(db);
     const body = await req.json();

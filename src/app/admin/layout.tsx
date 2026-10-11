@@ -69,6 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [newQuotesCount, setNewQuotesCount] = useState<number>(0);
   const [newMeasCount, setNewMeasCount] = useState<number>(0);
+  const [newInquiriesCount, setNewInquiriesCount] = useState<number>(0);
   const [unreadOrdersCount, setUnreadOrdersCount] = useState<number>(0);
   const [orderNotifications, setOrderNotifications] = useState<any[]>([]);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -113,6 +114,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       .then((r) => r.json())
       .then((data) => {
         if (data?.counts?.new !== undefined) setNewMeasCount(data.counts.new);
+      })
+      .catch(() => {});
+
+    fetch('/api/contact?status=NEW&limit=1')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.total !== undefined) setNewInquiriesCount(data.total);
       })
       .catch(() => {});
   }, [checkingAuth, isLoginPage, pathname]);
@@ -254,6 +262,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = [
     { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { label: 'Notifications', href: '/admin/notifications', icon: Bell, badgeCount: unreadOrdersCount },
+    { label: 'Inquiries', href: '/admin/inquiries', icon: MessageSquare, badgeCount: newInquiriesCount },
     { label: 'Orders', href: '/admin/orders', icon: ShoppingBag, badgeCount: unreadOrdersCount },
     { label: 'Quote Requests', href: '/admin/quote-requests', icon: FileQuestion, badgeCount: newQuotesCount },
     { label: 'Measurement Requests', href: '/admin/measurement-requests', icon: Ruler, badgeCount: newMeasCount },
@@ -269,7 +278,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7F4EE] flex text-[#1C1917]">
+    <div className="h-screen w-full flex overflow-hidden bg-[#F7F4EE] text-[#1C1917]">
       {/* ─── Mobile Sidebar Backdrop ─── */}
       {mobileOpen && (
         <div
@@ -280,7 +289,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* ─── Sidebar ─── */}
       <aside
-        className={`fixed lg:sticky top-0 h-screen z-50 w-64 bg-[#2C221E] text-[#FAF7F2] flex flex-col transition-transform duration-200 ${
+        className={`fixed lg:static top-0 h-full z-50 w-64 shrink-0 bg-[#2C221E] text-[#FAF7F2] flex flex-col transition-transform duration-200 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
@@ -324,7 +333,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                     onClick={() => setMobileOpen(false)}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-[13px] font-medium transition-colors ${
                       isActive
-                        ? 'bg-[#2C221E] text-white font-semibold shadow-xs'
+                        ? 'bg-[#3D302A] text-white font-semibold shadow-xs border-l-2 border-[#C5A059]'
                         : 'text-[#A8A29E] hover:text-white hover:bg-white/5'
                     }`}
                   >
@@ -394,7 +403,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* ─── Main Content Area ─── */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* Top Header */}
         <header className="h-16 px-4 sm:px-8 bg-white border-b border-[#EAE4D8] flex items-center justify-between shrink-0 sticky top-0 z-30">
           <div className="flex items-center gap-3">

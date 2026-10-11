@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyAdminRequest, getAdminSecret, getAdminEmail, isValidAdminSecret } from '@/lib/auth/admin';
+import {
+  verifyAdminRequest,
+  getAdminEmail,
+  isValidAdminSecret,
+  createAdminSessionToken,
+} from '@/lib/auth/admin';
+import { checkRateLimit, getClientIp } from '@/lib/security/rate-limit';
 
 export async function GET(req: NextRequest) {
   const isAuthed = await verifyAdminRequest(req);
@@ -8,12 +14,27 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+    // Rate limit: 5 attempts per 15 minutes (900 seconds)
+    const rateLimit = checkRateLimit(`admin-login:${ip}`, 5, 900);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: `Too many login attempts. Please try again in ${Math.ceil(rateLimit.resetInSeconds / 60)} minutes.`,
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(rateLimit.resetInSeconds),
+          },
+        }
+      );
+    }
+
     const body = await req.json();
     const { email, password } = body;
 
     const validEmail = getAdminEmail().toLowerCase();
-    const activeSecret = getAdminSecret();
-
     const inputPassword = (password || body.secretKey || body.secret || '').trim();
     const inputEmail = (email || '').trim().toLowerCase();
 
@@ -26,6 +47,9 @@ export async function POST(req: NextRequest) {
       inputEmail.includes('concierge');
 
     if (isPasswordValid && isEmailValid) {
+      // Generate cryptographically signed HMAC-SHA256 session token
+      const sessionToken = await createAdminSessionToken();
+
       const response = NextResponse.json({
         success: true,
         user: {
@@ -35,10 +59,10 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      // Set HTTP-only secure cookie
+      // Set HTTP-only secure cookie containing signed session token
       response.cookies.set({
         name: 'admin_token',
-        value: activeSecret,
+        value: sessionToken,
         httpOnly: true,
         path: '/',
         secure: process.env.NODE_ENV === 'production',
@@ -49,7 +73,10 @@ export async function POST(req: NextRequest) {
       return response;
     }
 
-    return NextResponse.json({ error: 'Invalid administrator credentials' }, { status: 401 });
+    return NextResponse.json(
+      { error: 'Invalid administrator credentials' },
+      { status: 401 }
+    );
   } catch (error) {
     console.error('Admin login error:', error);
     return NextResponse.json({ error: 'Authentication failed' }, { status: 500 });
