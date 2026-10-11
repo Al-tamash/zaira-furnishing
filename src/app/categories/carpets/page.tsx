@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { CarpetsLanding } from '@/components/carpets/CarpetsLanding';
-import { getDynamicSubcategories, getDynamicSubcategoryBySlug } from '@/lib/db/catalog';
+import { listSubcategories, getSubcategory } from '@/lib/catalog';
 
 export const metadata: Metadata = {
   title: 'Carpets & Rugs | Hand-Tufted Wool, Silk Blends & Area Rugs | Zaira Furnishing',
@@ -17,13 +17,17 @@ interface CarpetsPageProps {
 export default async function CarpetsCategoryPage({ searchParams }: CarpetsPageProps) {
   const resolved = await searchParams;
   if (resolved?.type && resolved.type !== 'all') {
-    const matched = await getDynamicSubcategoryBySlug('cat-6', resolved.type);
+    const matched = await getSubcategory('carpets-rugs', resolved.type);
     if (matched) {
       redirect(`/categories/carpets/${matched.slug}`);
     }
   }
 
-  const subcategories = await getDynamicSubcategories('cat-6');
+  const subcategories = await listSubcategories('carpets-rugs');
 
-  return <CarpetsLanding subcategories={subcategories} />;
+  return (
+    <CarpetsLanding
+      subcategories={subcategories as unknown as Parameters<typeof CarpetsLanding>[0]['subcategories']}
+    />
+  );
 }

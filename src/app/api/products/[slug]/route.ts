@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDynamicProductBySlug } from '@/lib/db/catalog';
-import { getDbProductBySlug } from '@/lib/db/queries/products';
+import { getProduct } from '@/lib/catalog';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -15,25 +14,15 @@ export async function GET(
       return NextResponse.json({ error: 'Product slug is required' }, { status: 400 });
     }
 
-    // Try dynamic catalog first (with full relations)
-    const product = await getDynamicProductBySlug(slug);
-    if (product) {
-      return NextResponse.json(
-        { data: product },
-        { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate' } }
-      );
+    const product = await getProduct(slug);
+    if (!product) {
+      return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
 
-    // Fallback to raw DB query
-    const dbProduct = await getDbProductBySlug(slug);
-    if (dbProduct) {
-      return NextResponse.json(
-        { data: dbProduct },
-        { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate' } }
-      );
-    }
-
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 });
+    return NextResponse.json(
+      { data: product },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate' } }
+    );
   } catch (error) {
     console.error('API /api/products/[slug] error:', error);
     return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });

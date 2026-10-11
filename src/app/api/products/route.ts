@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDbProducts, getDbProductBySlug } from '@/lib/db/queries/products';
+import { listProducts, getProduct } from '@/lib/catalog';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     const limit = limitParam ? parseInt(limitParam, 10) : undefined;
 
     if (slug) {
-      const product = await getDbProductBySlug(slug);
+      const product = await getProduct(slug);
       if (!product) {
         return NextResponse.json({ error: 'Product not found' }, { status: 404 });
       }
@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const products = await getDbProducts({ categorySlug, featured, search, limit });
+    const products = await listProducts({ categorySlug, featured, search, limit });
     return NextResponse.json(
       {
         data: products,

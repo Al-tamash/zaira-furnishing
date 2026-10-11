@@ -1,11 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-  getDynamicProducts,
-  getDynamicSubcategories,
-  getDynamicSubcategoryBySlug,
-} from '@/lib/db/catalog';
+import { listProducts, listSubcategories, getSubcategory } from '@/lib/catalog';
 import { SofaFabricTypePage } from '@/components/sofa-fabrics/SofaFabricTypePage';
 
 interface SofaFabricTypeRouteProps {
@@ -13,7 +9,7 @@ interface SofaFabricTypeRouteProps {
 }
 
 export async function generateStaticParams() {
-  const subcategories = await getDynamicSubcategories('cat-3');
+  const subcategories = await listSubcategories('sofa-fabrics-upholstery');
   return subcategories.map((t) => ({
     type: t.slug,
   }));
@@ -21,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: SofaFabricTypeRouteProps): Promise<Metadata> {
   const resolved = await params;
-  const sofaFabricType = await getDynamicSubcategoryBySlug('cat-3', resolved.type);
+  const sofaFabricType = await getSubcategory('sofa-fabrics-upholstery', resolved.type);
 
   if (!sofaFabricType) {
     return {
@@ -37,18 +33,23 @@ export async function generateMetadata({ params }: SofaFabricTypeRouteProps): Pr
 
 export default async function SofaFabricTypeRoute({ params }: SofaFabricTypeRouteProps) {
   const resolved = await params;
-  const sofaFabricType = await getDynamicSubcategoryBySlug('cat-3', resolved.type);
+  const sofaFabricType = await getSubcategory('sofa-fabrics-upholstery', resolved.type);
 
   if (!sofaFabricType) {
     notFound();
   }
 
   // Filter sofa fabric products directly from Cloudflare D1
-  const sofaFabricProducts = await getDynamicProducts({
+  const sofaFabricProducts = await listProducts({
     categorySlug: 'sofa-fabrics-upholstery',
     subcategorySlug: sofaFabricType.slug,
   });
 
-  return <SofaFabricTypePage sofaFabricType={sofaFabricType} products={sofaFabricProducts} />;
+  return (
+    <SofaFabricTypePage
+      sofaFabricType={sofaFabricType as unknown as Parameters<typeof SofaFabricTypePage>[0]['sofaFabricType']}
+      products={sofaFabricProducts}
+    />
+  );
 }
 

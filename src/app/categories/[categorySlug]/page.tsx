@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import { redirect, notFound } from 'next/navigation';
 import { ArrowLeft, ChevronRight, Sparkles, Calendar } from 'lucide-react';
 import { normalizeCategorySlug } from '@/lib/data/categories';
-import { getDynamicCategories, getDynamicCategoryBySlug, getDynamicProducts } from '@/lib/db/catalog';
+import { listCategories, getCategory, listProducts } from '@/lib/catalog';
 import { ProductCard } from '@/components/ui/ProductCard';
 
 interface CategoryPageProps {
@@ -12,7 +12,7 @@ interface CategoryPageProps {
 }
 
 export async function generateStaticParams() {
-  const categories = await getDynamicCategories();
+  const categories = await listCategories();
   const dedicated = new Set([
     'curtains-drapes',
     'window-blinds-shades',
@@ -33,7 +33,7 @@ export async function generateMetadata({
 }: CategoryPageProps): Promise<Metadata> {
   const { categorySlug } = await params;
   const normalized = normalizeCategorySlug(categorySlug);
-  const category = await getDynamicCategoryBySlug(normalized);
+  const category = await getCategory(normalized);
 
   if (!category) {
     return {
@@ -75,13 +75,13 @@ export default async function CategoryDetailPage({
     redirect(`/categories/${normalized}`);
   }
 
-  const category = await getDynamicCategoryBySlug(normalized);
+  const category = await getCategory(normalized);
   if (!category) {
     notFound();
   }
 
   // Fetch genuine products belonging to this category from Cloudflare D1
-  const categoryProducts = await getDynamicProducts({ categorySlug: category.slug });
+  const categoryProducts = await listProducts({ categorySlug: category.slug });
 
   return (
     <div className="bg-[#FAF7F2] min-h-screen text-[#1C1917] selection:bg-[#9A7B56] selection:text-white">

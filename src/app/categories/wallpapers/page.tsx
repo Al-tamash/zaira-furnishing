@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { WallpapersLanding } from '@/components/wallpapers/WallpapersLanding';
-import { getDynamicSubcategories, getDynamicSubcategoryBySlug } from '@/lib/db/catalog';
+import { listSubcategories, getSubcategory } from '@/lib/catalog';
 
 export const metadata: Metadata = {
   title: 'Wallpapers & Wall Coverings | Luxury Murals & Textured Coverings | Zaira Furnishing',
@@ -17,13 +17,17 @@ interface WallpapersPageProps {
 export default async function WallpapersCategoryPage({ searchParams }: WallpapersPageProps) {
   const resolved = await searchParams;
   if (resolved?.type && resolved.type !== 'all') {
-    const matched = await getDynamicSubcategoryBySlug('cat-4', resolved.type);
+    const matched = await getSubcategory('wallpapers-wall-coverings', resolved.type);
     if (matched) {
       redirect(`/categories/wallpapers/${matched.slug}`);
     }
   }
 
-  const subcategories = await getDynamicSubcategories('cat-4');
+  const subcategories = await listSubcategories('wallpapers-wall-coverings');
 
-  return <WallpapersLanding subcategories={subcategories} />;
+  return (
+    <WallpapersLanding
+      subcategories={subcategories as unknown as Parameters<typeof WallpapersLanding>[0]['subcategories']}
+    />
+  );
 }

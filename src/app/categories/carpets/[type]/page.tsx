@@ -1,11 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-  getDynamicProducts,
-  getDynamicSubcategories,
-  getDynamicSubcategoryBySlug,
-} from '@/lib/db/catalog';
+import { listProducts, listSubcategories, getSubcategory } from '@/lib/catalog';
 import { CarpetTypePage } from '@/components/carpets/CarpetTypePage';
 
 interface CarpetTypeRouteProps {
@@ -13,7 +9,7 @@ interface CarpetTypeRouteProps {
 }
 
 export async function generateStaticParams() {
-  const subcategories = await getDynamicSubcategories('cat-6');
+  const subcategories = await listSubcategories('carpets-rugs');
   return subcategories.map((t) => ({
     type: t.slug,
   }));
@@ -21,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: CarpetTypeRouteProps): Promise<Metadata> {
   const resolved = await params;
-  const carpetType = await getDynamicSubcategoryBySlug('cat-6', resolved.type);
+  const carpetType = await getSubcategory('carpets-rugs', resolved.type);
 
   if (!carpetType) {
     return {
@@ -37,18 +33,23 @@ export async function generateMetadata({ params }: CarpetTypeRouteProps): Promis
 
 export default async function CarpetTypeRoute({ params }: CarpetTypeRouteProps) {
   const resolved = await params;
-  const carpetType = await getDynamicSubcategoryBySlug('cat-6', resolved.type);
+  const carpetType = await getSubcategory('carpets-rugs', resolved.type);
 
   if (!carpetType) {
     notFound();
   }
 
   // Filter carpet products directly from Cloudflare D1
-  const carpetProducts = await getDynamicProducts({
+  const carpetProducts = await listProducts({
     categorySlug: 'carpets-rugs',
     subcategorySlug: carpetType.slug,
   });
 
-  return <CarpetTypePage carpetType={carpetType} products={carpetProducts} />;
+  return (
+    <CarpetTypePage
+      carpetType={carpetType as unknown as Parameters<typeof CarpetTypePage>[0]['carpetType']}
+      products={carpetProducts}
+    />
+  );
 }
 

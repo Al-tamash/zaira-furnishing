@@ -1,10 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getDynamicProducts, getDynamicCategories } from '@/lib/db/catalog';
-import { CURTAIN_TYPES } from '@/lib/data/curtains';
-import { BLIND_TYPES } from '@/lib/data/blinds';
-import { SOFA_FABRIC_TYPES } from '@/lib/data/sofa-fabrics';
-import { WALLPAPER_TYPES } from '@/lib/data/wallpapers';
-import { CARPET_TYPES } from '@/lib/data/carpets';
+import { listProducts, listCategories, listSubcategories } from '@/lib/catalog';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://zairafurnishing.com';
 
@@ -58,43 +53,56 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 2. Curated Subcategory Dedicated Pages
-  const subcategoryRoutes: MetadataRoute.Sitemap = [
-    ...CURTAIN_TYPES.map((t) => ({
-      url: `${BASE_URL}/categories/curtains/${t.id}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.85,
-    })),
-    ...BLIND_TYPES.map((t) => ({
-      url: `${BASE_URL}/categories/blinds/${t.id}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.85,
-    })),
-    ...SOFA_FABRIC_TYPES.map((t) => ({
-      url: `${BASE_URL}/categories/sofa-fabrics/${t.id}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.85,
-    })),
-    ...WALLPAPER_TYPES.map((t) => ({
-      url: `${BASE_URL}/categories/wallpapers/${t.id}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.85,
-    })),
-    ...CARPET_TYPES.map((t) => ({
-      url: `${BASE_URL}/categories/carpets/${t.id}`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.85,
-    })),
-  ];
+  let subcategoryRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const [curtainsSubs, blindsSubs, sofaSubs, wallpaperSubs, carpetSubs] = await Promise.all([
+      listSubcategories('curtains-drapes'),
+      listSubcategories('window-blinds-shades'),
+      listSubcategories('sofa-fabrics-upholstery'),
+      listSubcategories('wallpapers-wall-coverings'),
+      listSubcategories('carpets-rugs'),
+    ]);
+
+    subcategoryRoutes = [
+      ...curtainsSubs.map((t) => ({
+        url: `${BASE_URL}/categories/curtains/${t.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+      })),
+      ...blindsSubs.map((t) => ({
+        url: `${BASE_URL}/categories/blinds/${t.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+      })),
+      ...sofaSubs.map((t) => ({
+        url: `${BASE_URL}/categories/sofa-fabrics/${t.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+      })),
+      ...wallpaperSubs.map((t) => ({
+        url: `${BASE_URL}/categories/wallpapers/${t.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+      })),
+      ...carpetSubs.map((t) => ({
+        url: `${BASE_URL}/categories/carpets/${t.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+      })),
+    ];
+  } catch (err) {
+    console.error('Error generating sitemap subcategories:', err);
+  }
 
   // 3. Dynamic Category Landing Pages
   let categoryRoutes: MetadataRoute.Sitemap = [];
   try {
-    const categories = await getDynamicCategories();
+    const categories = await listCategories();
     categoryRoutes = categories.map((cat) => ({
       url: `${BASE_URL}/categories/${cat.slug}`,
       lastModified: now,
@@ -108,7 +116,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 4. Dynamic Product Detail Pages
   let productRoutes: MetadataRoute.Sitemap = [];
   try {
-    const products = await getDynamicProducts();
+    const products = await listProducts();
     productRoutes = products.map((prod) => ({
       url: `${BASE_URL}/products/${prod.slug}`,
       lastModified: now,

@@ -1,11 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-  getDynamicProducts,
-  getDynamicSubcategories,
-  getDynamicSubcategoryBySlug,
-} from '@/lib/db/catalog';
+import { listProducts, listSubcategories, getSubcategory } from '@/lib/catalog';
 import { WallpaperTypePage } from '@/components/wallpapers/WallpaperTypePage';
 
 interface WallpaperTypeRouteProps {
@@ -13,7 +9,7 @@ interface WallpaperTypeRouteProps {
 }
 
 export async function generateStaticParams() {
-  const subcategories = await getDynamicSubcategories('cat-4');
+  const subcategories = await listSubcategories('wallpapers-wall-coverings');
   return subcategories.map((t) => ({
     type: t.slug,
   }));
@@ -21,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: WallpaperTypeRouteProps): Promise<Metadata> {
   const resolved = await params;
-  const wallpaperType = await getDynamicSubcategoryBySlug('cat-4', resolved.type);
+  const wallpaperType = await getSubcategory('wallpapers-wall-coverings', resolved.type);
 
   if (!wallpaperType) {
     return {
@@ -37,18 +33,23 @@ export async function generateMetadata({ params }: WallpaperTypeRouteProps): Pro
 
 export default async function WallpaperTypeRoute({ params }: WallpaperTypeRouteProps) {
   const resolved = await params;
-  const wallpaperType = await getDynamicSubcategoryBySlug('cat-4', resolved.type);
+  const wallpaperType = await getSubcategory('wallpapers-wall-coverings', resolved.type);
 
   if (!wallpaperType) {
     notFound();
   }
 
   // Filter wallpaper products directly from Cloudflare D1
-  const wallpaperProducts = await getDynamicProducts({
+  const wallpaperProducts = await listProducts({
     categorySlug: 'wallpapers-wall-coverings',
     subcategorySlug: wallpaperType.slug,
   });
 
-  return <WallpaperTypePage wallpaperType={wallpaperType} products={wallpaperProducts} />;
+  return (
+    <WallpaperTypePage
+      wallpaperType={wallpaperType as unknown as Parameters<typeof WallpaperTypePage>[0]['wallpaperType']}
+      products={wallpaperProducts}
+    />
+  );
 }
 

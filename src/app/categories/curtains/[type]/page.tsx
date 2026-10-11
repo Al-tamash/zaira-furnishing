@@ -1,11 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-  getDynamicProducts,
-  getDynamicSubcategories,
-  getDynamicSubcategoryBySlug,
-} from '@/lib/db/catalog';
+import { listProducts, listSubcategories, getSubcategory } from '@/lib/catalog';
 import { CurtainTypePage } from '@/components/curtains/CurtainTypePage';
 
 interface CurtainTypeRouteProps {
@@ -13,7 +9,7 @@ interface CurtainTypeRouteProps {
 }
 
 export async function generateStaticParams() {
-  const subcategories = await getDynamicSubcategories('cat-1');
+  const subcategories = await listSubcategories('curtains-drapes');
   return subcategories.map((t) => ({
     type: t.slug,
   }));
@@ -21,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: CurtainTypeRouteProps): Promise<Metadata> {
   const resolved = await params;
-  const curtainType = await getDynamicSubcategoryBySlug('cat-1', resolved.type);
+  const curtainType = await getSubcategory('curtains-drapes', resolved.type);
 
   if (!curtainType) {
     return {
@@ -37,18 +33,23 @@ export async function generateMetadata({ params }: CurtainTypeRouteProps): Promi
 
 export default async function CurtainTypeRoute({ params }: CurtainTypeRouteProps) {
   const resolved = await params;
-  const curtainType = await getDynamicSubcategoryBySlug('cat-1', resolved.type);
+  const curtainType = await getSubcategory('curtains-drapes', resolved.type);
 
   if (!curtainType) {
     notFound();
   }
 
   // Filter curtain products directly from Cloudflare D1
-  const curtainProducts = await getDynamicProducts({
+  const curtainProducts = await listProducts({
     categorySlug: 'curtains-drapes',
     subcategorySlug: curtainType.slug,
   });
 
-  return <CurtainTypePage curtainType={curtainType} products={curtainProducts} />;
+  return (
+    <CurtainTypePage
+      curtainType={curtainType as unknown as Parameters<typeof CurtainTypePage>[0]['curtainType']}
+      products={curtainProducts}
+    />
+  );
 }
 

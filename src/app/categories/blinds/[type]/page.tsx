@@ -1,11 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-  getDynamicProducts,
-  getDynamicSubcategories,
-  getDynamicSubcategoryBySlug,
-} from '@/lib/db/catalog';
+import { listProducts, listSubcategories, getSubcategory } from '@/lib/catalog';
 import { BlindTypePage } from '@/components/blinds/BlindTypePage';
 
 interface BlindTypeRouteProps {
@@ -13,7 +9,7 @@ interface BlindTypeRouteProps {
 }
 
 export async function generateStaticParams() {
-  const subcategories = await getDynamicSubcategories('cat-2');
+  const subcategories = await listSubcategories('window-blinds-shades');
   return subcategories.map((t) => ({
     type: t.slug,
   }));
@@ -21,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: BlindTypeRouteProps): Promise<Metadata> {
   const resolved = await params;
-  const blindType = await getDynamicSubcategoryBySlug('cat-2', resolved.type);
+  const blindType = await getSubcategory('window-blinds-shades', resolved.type);
 
   if (!blindType) {
     return {
@@ -37,18 +33,23 @@ export async function generateMetadata({ params }: BlindTypeRouteProps): Promise
 
 export default async function BlindTypeRoute({ params }: BlindTypeRouteProps) {
   const resolved = await params;
-  const blindType = await getDynamicSubcategoryBySlug('cat-2', resolved.type);
+  const blindType = await getSubcategory('window-blinds-shades', resolved.type);
 
   if (!blindType) {
     notFound();
   }
 
   // Filter window blinds products directly from Cloudflare D1
-  const blindProducts = await getDynamicProducts({
+  const blindProducts = await listProducts({
     categorySlug: 'window-blinds-shades',
     subcategorySlug: blindType.slug,
   });
 
-  return <BlindTypePage blindType={blindType} products={blindProducts} />;
+  return (
+    <BlindTypePage
+      blindType={blindType as unknown as Parameters<typeof BlindTypePage>[0]['blindType']}
+      products={blindProducts}
+    />
+  );
 }
 
