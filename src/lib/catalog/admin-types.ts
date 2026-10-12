@@ -64,7 +64,7 @@ export const CreateProductInputSchema = z.object({
   description: z.string().default(''),
   shortDescription: z.string().default(''),
   productType: z.enum(['standard', 'custom_made']).default('standard'),
-  pricingType: z.enum(['fixed', 'custom_estimate', 'tiered']).default('fixed'),
+  pricingType: z.string().default('fixed'),
   price: z.number().min(0, 'Base price must be non-negative').default(0),
   startingPrice: z.boolean().default(false),
   unit: z.string().default('piece'),
