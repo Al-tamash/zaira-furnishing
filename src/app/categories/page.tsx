@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { Calendar, ChevronRight, Sparkles } from 'lucide-react';
-import { getDynamicCategories, getDynamicCategoryBySlug, getDynamicCategoryDiscovery } from '@/lib/db/catalog';
-import { CATEGORIES, getCategoryHref } from '@/lib/data/categories';
+import { getCategory, listCategories } from '@/lib/catalog';
+import { getDynamicCategoryDiscovery } from '@/lib/db/catalog';
+import { getCategoryHref } from '@/lib/data/categories';
 import { CategoryCard } from '@/components/ui/CategoryCard';
 import { BrowseByCategories } from '@/components/home/BrowseByCategories';
 
@@ -26,7 +27,7 @@ export async function generateMetadata({
     : undefined;
 
   if (rawSlug) {
-    const category = await getDynamicCategoryBySlug(rawSlug);
+    const category = await getCategory(rawSlug);
     if (category) {
       return {
         title: `${category.name} | Zaira Furnishing`,
@@ -59,12 +60,10 @@ export default async function CategoriesPage({ searchParams }: CategoriesPagePro
     redirect(targetHref);
   }
 
-  const [categoriesData, discoveryCategories] = await Promise.all([
-    getDynamicCategories(),
+  const [categories, discoveryCategories] = await Promise.all([
+    listCategories(),
     getDynamicCategoryDiscovery(),
   ]);
-
-  const categories = categoriesData && categoriesData.length > 0 ? categoriesData : CATEGORIES;
 
   // ─── MAIN CATEGORIES BROWSING PAGE ───
   return (

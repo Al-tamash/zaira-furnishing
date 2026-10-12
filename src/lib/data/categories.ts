@@ -187,21 +187,8 @@ export function getCategoryHref(slug: string): string {
  * Returns the canonical clean route URL for any subcategory.
  */
 export function getSubcategoryHref(categorySlug: string, subcategorySlug: string): string {
-  const normCat = normalizeCategorySlug(categorySlug);
-  switch (normCat) {
-    case 'curtains-drapes':
-      return `/categories/curtains/${subcategorySlug}`;
-    case 'window-blinds-shades':
-      return `/categories/blinds/${subcategorySlug}`;
-    case 'sofa-fabrics-upholstery':
-      return `/categories/sofa-fabrics/${subcategorySlug}`;
-    case 'wallpapers-wall-coverings':
-      return `/categories/wallpapers/${subcategorySlug}`;
-    case 'carpets-rugs':
-      return `/categories/carpets/${subcategorySlug}`;
-    default:
-      return `/categories/${normCat}?type=${subcategorySlug}`;
-  }
+  const catHref = getCategoryHref(categorySlug);
+  return `${catHref}/${subcategorySlug}`;
 }
 
 /**
