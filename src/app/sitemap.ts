@@ -55,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 2. Dynamic Category Landing Pages & Subcategory Detail Pages
   let categoryRoutes: MetadataRoute.Sitemap = [];
-  let subcategoryRoutes: MetadataRoute.Sitemap = [];
+  const subcategoryRoutes: MetadataRoute.Sitemap = [];
   try {
     const categories = await listCategories();
     categoryRoutes = categories.map((cat) => ({

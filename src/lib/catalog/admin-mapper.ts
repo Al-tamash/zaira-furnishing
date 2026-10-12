@@ -1,5 +1,4 @@
 import {
-  CreateProductInput,
   CreateProductInputSchema,
   ValidatedProductInput,
   UpdateProductInput,
