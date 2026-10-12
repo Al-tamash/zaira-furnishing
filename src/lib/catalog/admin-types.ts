@@ -29,7 +29,7 @@ export const ProductVariantInputSchema = z.object({
   previewImage: z.string().optional().nullable(),
   priceAdjustment: z.number().default(0),
   inStock: z.boolean().default(true),
-  attributes: z.record(z.unknown()).default({}),
+  attributes: z.record(z.string(), z.unknown()).default({}),
   displayOrder: z.number().default(0),
   active: z.boolean().default(true),
 });
@@ -87,13 +87,14 @@ export const DeleteProductOptionsSchema = z.object({
   permanent: z.boolean().default(false),
 });
 
-export type ProductImageInput = z.infer<typeof ProductImageInputSchema>;
-export type ProductVariantInput = z.infer<typeof ProductVariantInputSchema>;
-export type ProductSpecificationInput = z.infer<typeof ProductSpecificationInputSchema>;
-export type CustomizationConfigInput = z.infer<typeof CustomizationConfigInputSchema>;
-export type CreateProductInput = z.infer<typeof CreateProductInputSchema>;
-export type UpdateProductInput = z.infer<typeof UpdateProductInputSchema>;
-export type DeleteProductOptions = z.infer<typeof DeleteProductOptionsSchema>;
+export type ProductImageInput = z.input<typeof ProductImageInputSchema>;
+export type ProductVariantInput = z.input<typeof ProductVariantInputSchema>;
+export type ProductSpecificationInput = z.input<typeof ProductSpecificationInputSchema>;
+export type CustomizationConfigInput = z.input<typeof CustomizationConfigInputSchema>;
+export type CreateProductInput = z.input<typeof CreateProductInputSchema>;
+export type ValidatedProductInput = z.output<typeof CreateProductInputSchema>;
+export type UpdateProductInput = z.input<typeof UpdateProductInputSchema>;
+export type DeleteProductOptions = z.input<typeof DeleteProductOptionsSchema>;
 
 export interface ProductMutationResult {
   success: boolean;

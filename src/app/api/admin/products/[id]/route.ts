@@ -110,7 +110,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     }
     if (error instanceof ZodError) {
       return NextResponse.json(
-        { error: error.errors.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ') },
+        { error: error.issues.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ') },
         { status: 400 }
       );
     }

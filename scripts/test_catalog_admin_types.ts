@@ -17,7 +17,7 @@ async function run() {
     variants: [{ name: 'Gold Sheen', variantType: 'color', priceAdjustment: 500 }],
   });
   if (!valid.success) {
-    throw new Error('Valid payload failed to parse: ' + JSON.stringify(valid.error.errors));
+    throw new Error('Valid payload failed to parse: ' + JSON.stringify(valid.error.issues));
   }
   console.log('✓ Valid create schema parsed successfully');
 

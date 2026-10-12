@@ -1,6 +1,7 @@
 import {
   CreateProductInput,
   CreateProductInputSchema,
+  ValidatedProductInput,
   UpdateProductInput,
   UpdateProductInputSchema,
   ProductImageInput,
@@ -9,7 +10,7 @@ import {
   CustomizationConfigInput,
 } from './admin-types';
 
-export function normalizeCreateProductPayload(raw: any): CreateProductInput {
+export function normalizeCreateProductPayload(raw: any): ValidatedProductInput {
   if (!raw || typeof raw !== 'object') {
     throw new Error('Invalid request payload: must be a JSON object');
   }

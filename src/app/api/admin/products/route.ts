@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
     console.error('Admin POST product error:', error);
     if (error instanceof ZodError) {
       return NextResponse.json(
-        { error: error.errors.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ') },
+        { error: error.issues.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ') },
         { status: 400 }
       );
     }
