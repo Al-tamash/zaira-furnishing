@@ -3,37 +3,37 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { redirect, notFound } from 'next/navigation';
 import { ArrowLeft, ChevronRight, Sparkles, Calendar } from 'lucide-react';
-import { normalizeCategorySlug } from '@/lib/data/categories';
-import { listCategories, getCategory, listProducts } from '@/lib/catalog';
+import { listCategories, getCategory, listSubcategories, listProducts } from '@/lib/catalog';
+import { getCategoryHref } from '@/lib/data/categories';
+import { CategoryLandingView } from '@/components/category/CategoryLandingView';
 import { ProductCard } from '@/components/ui/ProductCard';
 
 interface CategoryPageProps {
   params: Promise<{ categorySlug: string }>;
+  searchParams?: Promise<{ type?: string }>;
 }
 
 export async function generateStaticParams() {
   const categories = await listCategories();
-  const dedicated = new Set([
-    'curtains-drapes',
-    'window-blinds-shades',
-    'sofa-fabrics-upholstery',
-    'wallpapers-wall-coverings',
-    'carpets-rugs',
-  ]);
+  const params: { categorySlug: string }[] = [];
 
-  return categories
-    .filter((c) => !dedicated.has(c.slug))
-    .map((c) => ({
-      categorySlug: c.slug,
-    }));
+  for (const cat of categories) {
+    const href = getCategoryHref(cat.slug);
+    const shortSlug = href.replace('/categories/', '');
+    params.push({ categorySlug: shortSlug });
+    if (shortSlug !== cat.slug) {
+      params.push({ categorySlug: cat.slug });
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { categorySlug } = await params;
-  const normalized = normalizeCategorySlug(categorySlug);
-  const category = await getCategory(normalized);
+  const category = await getCategory(categorySlug);
 
   if (!category) {
     return {
@@ -49,38 +49,44 @@ export async function generateMetadata({
 
 export default async function CategoryDetailPage({
   params,
+  searchParams,
 }: CategoryPageProps) {
   const { categorySlug } = await params;
-  const normalized = normalizeCategorySlug(categorySlug);
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
 
-  // Redirect dedicated categories to their specialized primary routes
-  if (normalized === 'curtains-drapes') {
-    redirect('/categories/curtains');
-  }
-  if (normalized === 'window-blinds-shades') {
-    redirect('/categories/blinds');
-  }
-  if (normalized === 'sofa-fabrics-upholstery') {
-    redirect('/categories/sofa-fabrics');
-  }
-  if (normalized === 'wallpapers-wall-coverings') {
-    redirect('/categories/wallpapers');
-  }
-  if (normalized === 'carpets-rugs') {
-    redirect('/categories/carpets');
-  }
-
-  // Canonical slug redirect if user visited alias URL
-  if (categorySlug !== normalized) {
-    redirect(`/categories/${normalized}`);
-  }
-
-  const category = await getCategory(normalized);
+  const category = await getCategory(categorySlug);
   if (!category) {
     notFound();
   }
 
-  // Fetch genuine products belonging to this category from Cloudflare D1
+  // Canonicalize category URL (e.g., /categories/curtains-drapes -> /categories/curtains)
+  const canonicalHref = getCategoryHref(category.slug);
+  const canonicalShortSlug = canonicalHref.replace('/categories/', '');
+
+  if (categorySlug !== canonicalShortSlug) {
+    redirect(`/categories/${canonicalShortSlug}`);
+  }
+
+  // Backward compatibility: If URL has ?type= query param, redirect to subcategory clean route
+  if (resolvedSearchParams?.type && resolvedSearchParams.type !== 'all') {
+    redirect(`/categories/${canonicalShortSlug}/${resolvedSearchParams.type}`);
+  }
+
+  const subcategories = await listSubcategories(category.slug);
+
+  // If this discipline has defined subcategories, render the rich CategoryLandingView
+  if (subcategories.length > 0) {
+    return (
+      <CategoryLandingView
+        category={category}
+        subcategories={subcategories}
+        canonicalSlug={canonicalShortSlug}
+      />
+    );
+  }
+
+  // If this category has no subcategories (e.g. Mattresses, Flooring, Cushions, Bed Linen),
+  // render the direct product catalog view
   const categoryProducts = await listProducts({ categorySlug: category.slug });
 
   return (
@@ -113,10 +119,12 @@ export default async function CategoryDetailPage({
 
         {/* ─── 2. CATEGORY HEADER ─── */}
         <div className="mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#EAE4D8] text-[10.5px] uppercase tracking-[0.2em] text-[#9A7B56] font-semibold mb-3 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{category.tagline}</span>
-          </div>
+          {category.tagline && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#EAE4D8] text-[10.5px] uppercase tracking-[0.2em] text-[#9A7B56] font-semibold mb-3 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{category.tagline}</span>
+            </div>
+          )}
           <h1 className="font-serif text-[30px] sm:text-[42px] text-[#1C1917] font-medium tracking-tight mb-3">
             {category.name}
           </h1>
