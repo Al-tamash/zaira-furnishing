@@ -421,7 +421,7 @@ class CloudflareD1HttpClient implements DatabaseClient {
           Authorization: `Bearer ${this.apiToken}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ batch: payload }),
       });
 
       if (!res.ok) {
@@ -430,12 +430,14 @@ class CloudflareD1HttpClient implements DatabaseClient {
       }
 
       const data = await res.json();
-      if (!data.success) {
-        throw new Error(`Cloudflare D1 batch error: ${JSON.stringify(data.errors)}`);
+      if (!data.success && data.success !== undefined) {
+        throw new Error(`Cloudflare D1 batch error: ${JSON.stringify(data.errors || data)}`);
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (data.result || []).map((r: any) => ({
+      const resultsList = Array.isArray(data) ? data : (data.result || []);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return resultsList.map((r: any) => ({
         changes: r?.meta?.changes || 0,
       }));
     } catch (err: any) {
