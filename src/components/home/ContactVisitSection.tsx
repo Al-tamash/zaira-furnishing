@@ -1,9 +1,22 @@
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock, Navigation, ArrowRight } from 'lucide-react';
+import {
+  MapPin,
+  Clock,
+  Phone,
+  Navigation,
+  MessageCircle,
+  ArrowUpRight,
+} from 'lucide-react';
 import { DbCmsContent } from '@/lib/db/types';
-import { ZAIRA_WHATSAPP_DISPLAY, ZAIRA_WHATSAPP_URL } from '@/lib/whatsapp';
+import {
+  ZAIRA_WHATSAPP_DISPLAY,
+  ZAIRA_WHATSAPP_URL,
+  ZAIRA_SHOWROOM_ADDRESS,
+  ZAIRA_SHOWROOM_TIMINGS,
+  ZAIRA_SHOWROOM_MAPS_URL,
+  ZAIRA_SHOWROOM_360_TOUR_EMBED_URL,
+  ZAIRA_WHATSAPP_NUMBER,
+} from '@/lib/whatsapp';
 
 interface ContactVisitSectionProps {
   cmsContent?: DbCmsContent | null;
@@ -19,146 +32,136 @@ export function ContactVisitSection({ cmsContent }: ContactVisitSectionProps) {
     }
   }
 
-  const eyebrow = contentParsed.eyebrow || 'VISIT THE SHOWROOM';
   const title = cmsContent?.title || 'Visit the Zaira Showroom';
   const subtitle =
     cmsContent?.subtitle ||
-    'See fabrics, furnishings and finishes in person, and discuss your requirements with our team.';
-  const address =
-    contentParsed.address ||
-    'Rd Number 5, Kyetian Goud Nilayam, Alkapur Twp, Puppalguda, Hyderabad, Telangana 500089';
-  const rawPhone = contentParsed.phone;
-  const phone = rawPhone && !rawPhone.includes('63001') ? rawPhone : ZAIRA_WHATSAPP_DISPLAY;
-  const email = contentParsed.email || 'concierge@zairafurnishing.com';
-  const hours = contentParsed.hours || 'Mon–Sat 10:30 AM–8:30 PM · Sunday by appointment';
-  const showroomImage = cmsContent?.image_url || '/images/hero/living_room.jpg';
-  const mapsUrl =
-    contentParsed.maps_query ||
-    'https://www.google.com/maps/search/?api=1&query=Zaira+Furnishing,+Rd+Number+5,+Kyetian+Goud+Nilayam,+Alkapur+Twp,+Puppalguda,+Hyderabad,+Telangana+500089';
+    'Touch and feel 500+ curated drapery fabrics in natural light, test live motorized curtain tracks, and inspect custom upholstery finishes in person.';
+  const address = contentParsed.address || ZAIRA_SHOWROOM_ADDRESS;
+  const hours = contentParsed.hours || ZAIRA_SHOWROOM_TIMINGS;
+  const phone = ZAIRA_WHATSAPP_DISPLAY;
+  const mapsUrl = contentParsed.maps_query || ZAIRA_SHOWROOM_MAPS_URL;
+
+  const whatsappVisitUrl = `https://wa.me/${ZAIRA_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    'Hello Zaira Furnishing, I would like to visit your Puppalguda showroom to inspect fabrics and drapery setups.'
+  )}`;
 
   return (
-    <section id="contact" className="py-12 sm:py-18 lg:py-24 bg-[#FDFBF7] border-t border-[#EAE4D9]">
+    <section id="contact" className="py-14 sm:py-20 lg:py-24 bg-[#FAF7F2] border-t border-[#EAE4D9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-          {/* ─── LEFT: Relevant Showroom Image ─── */}
-          <div className="lg:col-span-6 w-full">
-            <div className="relative aspect-[16/11] sm:aspect-[16/11] lg:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F4EFE6] border border-[#EAE4D9] shadow-atelier">
-              <Image
-                src={showroomImage}
-                alt="Zaira Furnishing interior showroom space"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center"
+          {/* ─── LEFT: 360° Showroom Frame (7 cols) ─── */}
+          <div className="lg:col-span-7">
+            <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] w-full min-h-[380px] sm:min-h-[460px] rounded-2xl overflow-hidden border border-[#E7E2D8] bg-[#F2EDE4] shadow-sm">
+              <iframe
+                src={ZAIRA_SHOWROOM_360_TOUR_EMBED_URL}
+                title="Zaira Furnishing Puppalguda Flagship Showroom 360-Degree Interactive Virtual Walkthrough"
+                className="w-full h-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
+            </div>
+
+            {/* Clean location caption under frame */}
+            <div className="flex items-center justify-between text-[12px] text-[#78716C] mt-3 px-1">
+              <span>Puppalguda Flagship Atelier &bull; Alkapur Township, Hyderabad</span>
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[#1C1714] font-medium hover:underline"
+              >
+                <span>View on Google Maps</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
 
-          {/* ─── RIGHT: Showroom Invitation & Compact Details ─── */}
-          <div className="lg:col-span-6 flex flex-col justify-center text-left">
-            {/* Small Eyebrow */}
-            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.24em] text-[#C5A059] font-bold block mb-2 sm:mb-2.5">
-              {eyebrow}
+          {/* ─── RIGHT: Authentic Atelier Invitation & Information (5 cols) ─── */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <span className="text-[11px] uppercase tracking-[0.22em] text-[#9A7B56] font-semibold block mb-2.5">
+              Experience Center &bull; Hyderabad
             </span>
 
-            {/* Main Heading */}
-            <h2 className="font-serif text-[24px] sm:text-[34px] lg:text-[40px] text-[#1C1714] font-normal tracking-tight mb-2 sm:mb-3 leading-[1.2]">
+            <h2 className="font-serif text-[28px] sm:text-[36px] text-[#1C1714] font-medium tracking-tight leading-tight mb-3">
               {title}
             </h2>
 
-            {/* Short Supporting Text */}
-            <p className="text-[13px] sm:text-[15px] text-[#78716C] leading-relaxed mb-5 sm:mb-7 max-w-lg">
+            <p className="text-[14px] text-[#57534E] leading-relaxed mb-6">
               {subtitle}
             </p>
 
-            {/* Compact Contact Information */}
-            <div className="space-y-3.5 sm:space-y-4 mb-6 sm:mb-8 border-y border-[#EAE4D9] py-4 sm:py-6">
-              {/* Location */}
-              <div className="flex items-start gap-2.5 sm:gap-3">
-                <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                <div>
-                  <span className="block text-[9.5px] uppercase tracking-[0.16em] text-[#8C827A] font-semibold mb-0.5">
-                    Location
-                  </span>
-                  <address className="not-italic text-[12.5px] sm:text-[13.5px] text-[#1C1714] leading-relaxed">
+            {/* Atelier Info Box */}
+            <div className="space-y-4 bg-white p-5 sm:p-6 rounded-2xl border border-[#EAE4D8] mb-6 shadow-2xs">
+              {/* Showroom Address */}
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4.5 h-4.5 text-[#9A7B56] shrink-0 mt-0.5" />
+                <div className="text-[13px]">
+                  <p className="font-medium text-[#1C1714] leading-relaxed">
                     {address}
-                  </address>
+                  </p>
+                  <p className="text-[12px] text-[#78716C] mt-0.5">
+                    10 mins from Financial District &bull; Complimentary parking available
+                  </p>
                 </div>
               </div>
 
-              {/* Contact Grid: Phone & Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 pt-0.5">
-                {/* Phone */}
-                <div className="flex items-start gap-2.5 sm:gap-3">
-                  <Phone className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-[9.5px] uppercase tracking-[0.16em] text-[#8C827A] font-semibold mb-0.5">
-                      Phone &amp; WhatsApp
-                    </span>
-                    <a
-                      href={ZAIRA_WHATSAPP_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Chat with Zaira Furnishing on WhatsApp"
-                      className="text-[12.5px] sm:text-[13.5px] font-bold text-[#1C1714] hover:text-[#C5A059] transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#C5A059] focus-visible:ring-offset-1 rounded-xs"
-                    >
-                      {phone}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-start gap-2.5 sm:gap-3">
-                  <Mail className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-[9.5px] uppercase tracking-[0.16em] text-[#8C827A] font-semibold mb-0.5">
-                      Email
-                    </span>
-                    <a
-                      href={`mailto:${email}`}
-                      className="text-[12.5px] sm:text-[13.5px] text-[#1C1714] hover:text-[#C5A059] transition-colors break-all"
-                    >
-                      {email}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Hours */}
-              <div className="flex items-start gap-2.5 sm:gap-3 pt-0.5">
-                <Clock className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                <div>
-                  <span className="block text-[9.5px] uppercase tracking-[0.16em] text-[#8C827A] font-semibold mb-0.5">
-                    Showroom Hours
-                  </span>
-                  <p className="text-[12.5px] sm:text-[13.5px] text-[#1C1714] leading-relaxed">
+              {/* Showroom Timings */}
+              <div className="flex items-start gap-3 pt-3.5 border-t border-[#F0EDE6]">
+                <Clock className="w-4.5 h-4.5 text-[#9A7B56] shrink-0 mt-0.5" />
+                <div className="text-[13px]">
+                  <p className="font-medium text-[#1C1714]">
                     {hours}
+                  </p>
+                  <p className="text-[12px] text-[#78716C] mt-0.5">
+                    Sunday visits arranged by prior appointment
+                  </p>
+                </div>
+              </div>
+
+              {/* Phone & WhatsApp */}
+              <div className="flex items-start gap-3 pt-3.5 border-t border-[#F0EDE6]">
+                <Phone className="w-4.5 h-4.5 text-[#9A7B56] shrink-0 mt-0.5" />
+                <div className="text-[13px]">
+                  <a
+                    href={ZAIRA_WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-[#1C1714] hover:underline"
+                  >
+                    {phone}
+                  </a>
+                  <p className="text-[12px] text-[#78716C] mt-0.5">
+                    Direct line for site visits, quotes, and directions
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Actions: Get Directions & Contact Us */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-full bg-[#1C1714] hover:bg-[#C5A059] text-white hover:text-[#1C1714] text-[12px] sm:text-[13px] font-bold uppercase tracking-wider transition-all shadow-md group active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#1C1714] hover:bg-[#2C221E] text-white text-[13px] font-medium transition-colors shadow-xs"
               >
-                <Navigation className="w-3.5 h-3.5 text-[#C5A059] group-hover:text-[#1C1714]" />
-                <span>Get Directions</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                <Navigation className="w-4 h-4 text-[#D4AF37]" />
+                <span>Get Driving Directions</span>
               </a>
 
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-1.5 px-6 py-3 sm:py-3.5 rounded-full border border-[#C5A059] hover:bg-[#C5A059]/10 text-[#1C1714] text-[12px] sm:text-[13px] font-semibold uppercase tracking-wider transition-colors group active:scale-95"
+              <a
+                href={whatsappVisitUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-[#FAF7F2] border border-[#E7E2D8] text-[#1C1714] text-[13px] font-medium transition-colors shadow-2xs"
               >
-                <span>Contact Concierge</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#C5A059] transition-transform duration-200 group-hover:translate-x-0.5" />
-              </Link>
+                <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                <span>Message on WhatsApp</span>
+              </a>
             </div>
+
           </div>
 
         </div>

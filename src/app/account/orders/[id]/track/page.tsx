@@ -238,16 +238,16 @@ export default function OrderTrackingPage() {
       key: 'CONFIRMED',
       name: 'Order Confirmed',
       shortExplanation: 'Your order has been recorded with specifications and delivery details.',
-      note: `Reference #${order.id} registered in atelier records.`,
+      note: `Reference #${order.id} registered in showroom records.`,
     },
     {
       key: 'PROCESSING',
-      name: order.hasCustomProducts ? 'Custom Tailoring & Atelier Processing' : 'Preparation & Quality Check',
+      name: order.hasCustomProducts ? 'Custom Tailoring & Workshop Craft' : 'Preparation & Quality Check',
       shortExplanation: order.hasCustomProducts
         ? 'Fabrics cut and hand-stitched by master tailors to your exact measurements.'
         : 'Furnishings carefully inspected, pressed, steamed, and packaged.',
       note: order.hasCustomProducts
-        ? 'Handcrafted to exact dimensions in our atelier.'
+        ? 'Handcrafted to exact dimensions in our workshop.'
         : 'Protected in dust covers for transit.',
     },
     {
@@ -522,7 +522,7 @@ export default function OrderTrackingPage() {
             <div className="mt-8 pt-4 border-t border-[#F2ECE1] flex items-start gap-2.5 text-[11.5px] text-[#78716C]">
               <Info className="w-4 h-4 text-[#9A7B56] shrink-0 mt-0.5" />
               <p>
-                <strong>Notice:</strong> This progress timeline directly reflects your order&apos;s real-time atelier status. Sizing visits and deliveries are confirmed directly via WhatsApp.
+                <strong>Notice:</strong> This progress timeline directly reflects your order&apos;s real-time workshop status. Sizing visits and deliveries are confirmed directly via WhatsApp.
               </p>
             </div>
           </div>

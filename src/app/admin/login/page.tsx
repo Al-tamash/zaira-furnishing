@@ -7,7 +7,7 @@ import { Lock, Mail, ArrowRight, ShieldCheck, Eye, EyeOff } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('concierge@zairafurnishing.com');
+  const [email, setEmail] = useState('zairafurnishing@gmail.com');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
           <div className="absolute inset-0 pointer-events-none select-none">
             <Image
               src="/images/about/about-main-living.jpg"
-              alt="Zaira Furnishing Atelier"
+              alt="Zaira Furnishing"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 44vw"
@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
 
             <div className="mt-2">
               <span className="inline-block text-[9.5px] uppercase tracking-[0.24em] text-[#C4B9A1] font-medium py-0.5">
-                Atelier Management
+                Showroom Management
               </span>
             </div>
           </div>
@@ -210,7 +210,7 @@ export default function AdminLoginPage() {
 
       {/* ─── Discreet Page Footer ─── */}
       <div className="mt-5 text-center text-[11px] text-[#8C827A] tracking-wide space-y-0.5">
-        <p>Zaira Furnishing · Atelier Management</p>
+        <p>Zaira Furnishing · Showroom Management</p>
         <p className="text-[10px] text-[#A8A29E]">© 2026 Zaira Furnishing</p>
       </div>
     </div>

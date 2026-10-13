@@ -198,11 +198,11 @@ async function main() {
   // TEST L: WhatsApp Helper & Number Verification
   // ───────────────────────────────────────────
   console.log('\nTEST L: Centralized WhatsApp Utility');
-  assert(ZAIRA_WHATSAPP_NUMBER === '917947415666', `Official WhatsApp Number is 917947415666`);
-  assert(ZAIRA_WHATSAPP_DISPLAY === '07947415666', `Official WhatsApp Display is 07947415666`);
+  assert(ZAIRA_WHATSAPP_NUMBER === '916300145763', `Official WhatsApp Number is 916300145763`);
+  assert(ZAIRA_WHATSAPP_DISPLAY === '+91 63001 45763', `Official WhatsApp Display is +91 63001 45763`);
 
   const waUrl = `https://wa.me/${ZAIRA_WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello Zaira Furnishing, I have a question about my order ${ORDER_A_NUM}.`)}`;
-  assert(waUrl.includes('917947415666'), `WhatsApp link targets official atelier number`);
+  assert(waUrl.includes('916300145763'), `WhatsApp link targets official atelier number`);
   assert(waUrl.includes(ORDER_A_NUM), `WhatsApp link includes exact order number: ${ORDER_A_NUM}`);
 
   // ───────────────────────────────────────────

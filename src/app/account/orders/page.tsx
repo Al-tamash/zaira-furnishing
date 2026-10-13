@@ -19,13 +19,15 @@ import {
 import { useStore, Order } from '@/lib/context/StoreContext';
 
 export default function MyOrdersPage() {
-  const { orders, refreshOrders } = useStore();
+  const { orders, refreshOrders, isAuthenticated, isAuthLoading } = useStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    refreshOrders();
-  }, [refreshOrders]);
+    if (isAuthenticated) {
+      refreshOrders();
+    }
+  }, [refreshOrders, isAuthenticated]);
 
   const getStatusBadge = (order: Order) => {
     const raw = (order.rawStatus || '').toUpperCase();
@@ -141,7 +143,29 @@ export default function MyOrdersPage() {
         </div>
 
         {/* ─── ORDERS LIST OR EMPTY STATE ─── */}
-        {orders.length === 0 ? (
+        {!isAuthLoading && !isAuthenticated ? (
+          <div className="bg-white rounded-2xl border border-[#EDE8DE] p-8 sm:p-14 text-center max-w-xl mx-auto shadow-[0_2px_12px_rgba(28,25,23,0.03)]">
+            <div className="w-16 h-16 rounded-full bg-[#FAF7F2] border border-[#EDE8DE] flex items-center justify-center mx-auto mb-4 text-[#9A7B56]">
+              <ShoppingBag className="w-7 h-7 stroke-[1.5]" />
+            </div>
+
+            <h2 className="font-serif text-[22px] sm:text-[24px] text-[#1C1917] font-medium mb-2">
+              Sign In to View Orders
+            </h2>
+
+            <p className="text-[13px] sm:text-[14px] text-[#78716C] leading-relaxed mb-6 font-light max-w-md mx-auto">
+              Please sign in with your customer account to track tailoring progress, view past furnishing orders, and manage measurements.
+            </p>
+
+            <Link
+              href="/account"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#1C1714] hover:bg-[#2C221E] text-white text-[11.5px] uppercase tracking-wider font-semibold transition-all shadow-xs"
+            >
+              <span>Sign In to Account</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        ) : orders.length === 0 ? (
           <div className="bg-white rounded-2xl border border-[#EDE8DE] p-8 sm:p-14 text-center max-w-xl mx-auto shadow-[0_2px_12px_rgba(28,25,23,0.03)]">
             <div className="w-16 h-16 rounded-full bg-[#FAF7F2] border border-[#EDE8DE] flex items-center justify-center mx-auto mb-4 text-[#9A7B56]">
               <ShoppingBag className="w-7 h-7 stroke-[1.5]" />

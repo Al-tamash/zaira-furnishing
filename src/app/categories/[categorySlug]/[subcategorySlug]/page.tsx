@@ -68,7 +68,11 @@ export default async function SubcategoryPage({ params }: SubcategoryPageProps) 
     redirect(`/categories/${canonicalShortSlug}/${subcategorySlug}`);
   }
 
-  const subcategory = await getSubcategory(category.slug, subcategorySlug);
+  const [subcategory, allSubcategories] = await Promise.all([
+    getSubcategory(category.slug, subcategorySlug),
+    listSubcategories(category.slug),
+  ]);
+
   if (!subcategory) {
     notFound();
   }
@@ -83,6 +87,7 @@ export default async function SubcategoryPage({ params }: SubcategoryPageProps) 
     <SubcategoryDetailView
       category={category}
       subcategory={subcategory}
+      subcategories={allSubcategories}
       products={products}
       canonicalSlug={canonicalShortSlug}
     />

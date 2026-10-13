@@ -332,7 +332,7 @@ export const OFFICIAL_CATALOG: OfficialCategory[] = [
         categoryNumber: '01',
         description: 'Detailed threadwork and traditional embroidery for grand luxury interior settings.',
         varietiesNotes: 'Zari metallic borders, French knot motifs, corded lace embroidery, and floral trellises.',
-        badge: 'ROYAL ATELIER',
+        badge: 'ROYAL COLLECTION',
         badgeColor: 'bg-[#9E4733]',
         price: 5800,
         originalPrice: 7500,
@@ -394,14 +394,14 @@ export const OFFICIAL_CATALOG: OfficialCategory[] = [
         categoryNumber: '01',
         description: 'Custom stitching according to exact window dimensions and specific fabric selections.',
         varietiesNotes: 'Bespoke millimeters measurement, custom double-lining, curved bay window tracks, motorized.',
-        badge: 'BESPOKE ATELIER',
+        badge: 'MADE TO MEASURE',
         badgeColor: 'bg-gray-900',
         price: 5200,
         startingPrice: true,
         image: '/images/products/curtains/custom-made-curtains/main.jpg',
         galleryImages: ['/images/products/curtains/custom-made-curtains/main.jpg'],
         swatches: [
-          { name: 'Atelier Signature Ivory', hex: '#FDFBF7' },
+          { name: 'Signature Ivory', hex: '#FDFBF7' },
           { name: 'Warm Taupe', hex: '#B38B6D' },
           { name: 'Royal Gold', hex: '#D4AF37' },
         ],
@@ -412,7 +412,7 @@ export const OFFICIAL_CATALOG: OfficialCategory[] = [
           'White-glove delivery, steam pressing & professional installation',
         ],
         specifications: [
-          { label: 'Crafting', value: '100% Hand-Tailored in Hyderabad Atelier' },
+          { label: 'Crafting', value: '100% Hand-Tailored in Hyderabad Workshop' },
           { label: 'Measurement', value: 'Free On-Site Laser Consultation Included' },
         ],
       },
@@ -1043,7 +1043,7 @@ export const OFFICIAL_CATALOG: OfficialCategory[] = [
     heroImage: '/images/hero/wallpapers.jpg',
     hardwareAccessories: [
       { name: 'Eco Paste & Primer', varieties: 'Heavy-duty zero-VOC fungicide adhesive, anti-dampness wall sealer primer' },
-      { name: 'Installation Ateliers', varieties: 'Laser pattern matching, butt-joint seam rollers, dust-free edge trimming' },
+      { name: 'Installation Services', varieties: 'Laser pattern matching, butt-joint seam rollers, dust-free edge trimming' },
     ],
     products: [
       {

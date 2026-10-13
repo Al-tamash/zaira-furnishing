@@ -4,7 +4,7 @@ export const SERVICES: Service[] = [
   {
     id: 'srv-1',
     slug: 'free-in-home-measurement',
-    title: 'Free In-Home Measurement / Site Visit',
+    title: 'Free In-Home Measurement & Site Visit',
     shortDesc: 'Our technical specialists visit your space with laser precision tools to record exact millimeter dimensions.',
     fullDesc: 'Ensure flawless drape drops and window fit with our complimentary on-site measurement service. Our specialists check wall structural integrity, track clearances, and drop heights so your custom furnishings fit immaculately.',
     iconName: 'Ruler',
@@ -14,7 +14,7 @@ export const SERVICES: Service[] = [
   {
     id: 'srv-2',
     slug: 'doorstep-fabric-demo',
-    title: 'Doorstep Fabric / Sample Demo',
+    title: 'Doorstep Fabric & Sample Demo',
     shortDesc: 'Experience luxury textile swatches, wooden finishes, and wallpapers directly in your home’s natural lighting.',
     fullDesc: 'Lighting alters colors dramatically. Our stylists bring curated fabric swatches, drape samples, and tactile catalogues directly to your doorstep so you can assess textures alongside your existing furniture and ambient light.',
     iconName: 'Sparkles',
@@ -25,10 +25,10 @@ export const SERVICES: Service[] = [
     id: 'srv-3',
     slug: 'custom-tailoring-and-stitching',
     title: 'Custom Tailoring & Stitching',
-    shortDesc: 'Master atelier stitching for custom headers, double-pinch pleats, motorized hems, and bespoke upholstery.',
+    shortDesc: 'Master artisan stitching for custom headers, double-pinch pleats, motorized hems, and bespoke upholstery.',
     fullDesc: 'Every curtain drape, cushion accent, and sofa slipcover is handcrafted by experienced artisans using high-grade German interlinings, blind stitch hemming, and calibrated fullness ratios for perfect waterfall draping.',
     iconName: 'Scissors',
-    highlights: ['Master artisan ateliers', 'French & Pinch pleat specialists', 'Weighted drapery hems'],
+    highlights: ['Master artisan tailors', 'French & Pinch pleat specialists', 'Weighted drapery hems'],
   },
   {
     id: 'srv-4',
@@ -43,7 +43,7 @@ export const SERVICES: Service[] = [
   {
     id: 'srv-5',
     slug: 'motorization-smart-home',
-    title: 'Motorization / Smart Home Setup',
+    title: 'Motorization & Smart Home Setup',
     shortDesc: 'Whisper-quiet motorized tracks and automated blinds integrated with Somfy, Alexa, Google Home & Tuya.',
     fullDesc: 'Automate your drapery and roller shades with ultra-quiet motors. Schedule automatic sunrise opening, sunset privacy closing, and voice-command activation seamlessly paired with your smart home ecosystem.',
     iconName: 'Cpu',
@@ -61,7 +61,7 @@ export const SERVICES: Service[] = [
   {
     id: 'srv-7',
     slug: 'corporate-institutional-furnishings',
-    title: 'Corporate / Institutional Furnishings',
+    title: 'Corporate & Commercial Furnishings',
     shortDesc: 'Flame-retardant curtains, heavy-duty acoustic carpet tiles, and motorized conference blinds for commercial spaces.',
     fullDesc: 'Engineered commercial grade solutions for hotels, corporate headquarters, luxury clinics, and executive suites. All commercial textiles carry flame retardancy (FR) and high Martindale abrasion certifications.',
     iconName: 'Building2',

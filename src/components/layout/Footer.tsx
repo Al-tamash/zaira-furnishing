@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { DbCmsContent } from '@/lib/db/types';
-import { ZAIRA_WHATSAPP_DISPLAY, ZAIRA_WHATSAPP_URL } from '@/lib/whatsapp';
+import { ZAIRA_WHATSAPP_DISPLAY, ZAIRA_WHATSAPP_URL, ZAIRA_EMAIL } from '@/lib/whatsapp';
 
 interface FooterProps {
   cmsContent?: DbCmsContent | null;
@@ -24,9 +24,8 @@ export function Footer({ cmsContent }: FooterProps) {
   const address =
     contentParsed.address ||
     'Rd Number 5, Kyetian Goud Nilayam, Alkapur Twp, Puppalguda, Hyderabad, Telangana 500089';
-  const rawPhone = contentParsed.phone;
-  const phone = rawPhone && !rawPhone.includes('63001') ? rawPhone : ZAIRA_WHATSAPP_DISPLAY;
-  const email = contentParsed.email || 'concierge@zairafurnishing.com';
+  const phone = ZAIRA_WHATSAPP_DISPLAY;
+  const email = ZAIRA_EMAIL;
   const hours = contentParsed.hours || 'Mon–Sat 10:30 AM–8:30 PM · Sunday by appointment';
   const copyright = contentParsed.copyright || '© 2026 Zaira Furnishing. All rights reserved.';
 
@@ -42,11 +41,10 @@ export function Footer({ cmsContent }: FooterProps) {
 
   const exploreLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'My Orders', href: '/account/orders' },
-    { name: 'Admin Portal', href: '/admin' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Our Services', href: '/services' },
+    { name: 'Showroom & Contact', href: '/contact' },
+    { name: 'Book Free Visit', href: '/contact#consultation-form' },
   ];
 
   return (
@@ -70,7 +68,7 @@ export function Footer({ cmsContent }: FooterProps) {
                   ZAIRA
                 </span>
                 <span className="text-[7.5px] uppercase tracking-[0.32em] text-[#C5A059] font-bold mt-1 leading-none">
-                  FURNISHINGS
+                  FURNISHING
                 </span>
               </div>
             </Link>
@@ -80,7 +78,7 @@ export function Footer({ cmsContent }: FooterProps) {
             </p>
 
             <div className="pt-2 text-[11px] text-[#C5A059] uppercase tracking-wider font-semibold">
-              Hyderabad &bull; Financial District Flagship Atelier
+              Puppalguda &bull; Financial District, Hyderabad
             </div>
           </div>
 
@@ -106,7 +104,7 @@ export function Footer({ cmsContent }: FooterProps) {
           {/* COLUMN 3 — EXPLORE (2 cols) */}
           <div className="lg:col-span-2">
             <h4 className="text-[11px] sm:text-[11.5px] uppercase tracking-[0.2em] font-semibold text-[#C5A059] mb-4">
-              Atelier Services
+              Quick Links
             </h4>
             <ul className="space-y-2.5 text-[13px] text-[#A8A29E]">
               {exploreLinks.map((item) => (

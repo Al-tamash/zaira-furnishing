@@ -172,7 +172,7 @@ export default function AdminNotificationsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#EDE8DE]">
         <div>
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#9A7B56] font-semibold">
-            <span>Atelier Real-Time Dispatch</span>
+            <span>Showroom Real-Time Dispatch</span>
             <span>•</span>
             <span>Mobile Alert Center</span>
           </div>

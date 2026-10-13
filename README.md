@@ -18,7 +18,7 @@ A luxury e-commerce and consultation booking platform built for **Zaira Furnishi
 
 * **Showroom Address**: Shop No. 5, Rd Number 5, Kyettaian Gouda Nilayam (Syamala Enclave), Alkapur Township, Puppalguda, Hyderabad, Telangana 500089
 * **Doorstep Consultations**: Banjara Hills, Jubilee Hills, Gachibowli, Hitec City, Kokapet, Financial District, and all across Hyderabad.
-* **Concierge Desk**: +91 7947415666
+* **Concierge Desk**: +91 63001 45763 | zairafurnishing@gmail.com
 
 ---
 

@@ -146,7 +146,7 @@ export default async function CategoryDetailPage({
               Catalog items updating
             </h3>
             <p className="text-[13px] text-[#78716C] leading-relaxed">
-              We are currently curating more atelier pieces for {category.name}. Check back soon or visit our showroom.
+              We are currently adding more designs and fabric swatches for {category.name}. Check back soon or visit our Puppalguda showroom.
             </p>
           </div>
         )}

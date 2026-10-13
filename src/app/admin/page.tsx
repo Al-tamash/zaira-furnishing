@@ -102,7 +102,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-2xl border border-[#EDE8DE] shadow-2xs">
         <div>
           <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#9A7B56] block mb-1">
-            Flagship Atelier Management Console
+            Flagship Showroom Operations Console
           </span>
           <h1 className="font-serif text-[26px] sm:text-[32px] text-[#1C1917] font-medium tracking-tight">
             Showroom Operations & Inquiries
@@ -499,7 +499,7 @@ export default function AdminDashboardPage() {
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="w-4 h-4 text-[#9A7B56]" />
               <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#C4B9A1]">
-                Quick Atelier Actions
+                Quick Showroom Actions
               </span>
             </div>
             <h3 className="font-serif text-[18px] font-medium mb-2">
@@ -526,7 +526,7 @@ export default function AdminDashboardPage() {
               >
                 <div className="flex items-center gap-2.5">
                   <Wrench className="w-4 h-4 text-[#C5A059]" />
-                  <span>Manage Atelier Services</span>
+                  <span>Manage Services</span>
                 </div>
                 <span className="text-[11px] text-[#A8A29E]">12 Services →</span>
               </Link>
@@ -547,7 +547,7 @@ export default function AdminDashboardPage() {
           {/* Showroom Status Card */}
           <div className="bg-white p-6 rounded-2xl border border-[#EDE8DE] shadow-2xs space-y-3">
             <h4 className="font-serif text-[16px] font-semibold text-[#1C1917]">
-              Flagship Atelier Location
+              Puppalguda Showroom Location
             </h4>
             <div className="text-[12.5px] text-[#78716C] space-y-1.5 leading-relaxed">
               <p className="font-medium text-[#1C1917]">Puppalguda & Financial District</p>

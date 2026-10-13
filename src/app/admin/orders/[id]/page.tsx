@@ -184,7 +184,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
         };
       case 'PROCESSING':
         return {
-          label: 'Processing / Atelier',
+          label: 'Processing & Workshop',
           classes: 'bg-amber-50 text-amber-800 border-amber-200',
         };
       case 'READY':
@@ -554,7 +554,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                 </div>
               )}
               <div className="flex justify-between text-[#78716C]">
-                <span>Delivery & Atelier Service Charge</span>
+                <span>Delivery & Service Charge</span>
                 <span className="font-mono text-[#1C1917]">
                   {order.delivery_charge === 0 ? 'Complimentary' : `₹${order.delivery_charge.toLocaleString('en-IN')}`}
                 </span>
@@ -575,7 +575,7 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                 Delivery & Site Inspection Details
               </h2>
               <span className="text-[11.5px] uppercase font-bold text-[#9A7B56] tracking-wider">
-                {order.delivery_option === 'service_visit' ? 'Atelier Sizing Visit' : 'Standard Delivery'}
+                {order.delivery_option === 'service_visit' ? 'In-Home Sizing Visit' : 'Standard Delivery'}
               </span>
             </div>
 
@@ -679,14 +679,14 @@ export default function AdminOrderDetailPage({ params }: { params: Promise<{ id:
                   <option value="REFUNDED">Refunded</option>
                 </select>
                 <p className="text-[11px] text-[#8C827A]">
-                  Payment method remains fixed to <strong className="text-[#1C1917]">COD</strong>. Mark as Paid once collected by the atelier delivery executive.
+                  Payment method remains fixed to <strong className="text-[#1C1917]">COD</strong>. Mark as Paid once collected by the delivery executive.
                 </p>
               </div>
 
               {/* Admin Notes */}
               <div className="space-y-1.5">
                 <label className="text-[12px] font-semibold text-[#1C1917] block">
-                  Order & Atelier Notes
+                  Order & Internal Notes
                 </label>
                 <textarea
                   value={notes}

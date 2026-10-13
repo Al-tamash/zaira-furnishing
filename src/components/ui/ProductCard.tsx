@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, Check, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Heart, Check, ShoppingBag, ArrowRight, MessageCircle } from 'lucide-react';
 import { Product } from '@/lib/data/types';
 import { useStore } from '@/lib/context/StoreContext';
+import { ZAIRA_WHATSAPP_NUMBER } from '@/lib/whatsapp';
 
 interface ProductCardProps {
   product: Product;
@@ -14,8 +15,8 @@ interface ProductCardProps {
   showCategory?: boolean;
 }
 
-// Unified Zaira Atelier Luxury Theme Token (consistent across all categories & pages)
-const UNIFIED_ATELIER_CARD_THEME = {
+// Unified Zaira Card Theme Token (consistent across all categories & pages)
+const UNIFIED_CARD_THEME = {
   bgGradient: 'from-[#FAF8F5] via-[#FAF6F0] to-[#F5EFE6]',
   borderColor: 'border-[#EDE8DE]',
   glowColor: 'rgba(154, 123, 86, 0.12)',
@@ -38,8 +39,8 @@ export function ProductCard({
   const activeImage = product.mainImage;
   const isCustom = product.productType === 'custom_made';
 
-  // Unified Zaira Atelier luxury theme for all cards
-  const theme = UNIFIED_ATELIER_CARD_THEME;
+  // Unified luxury theme for all cards
+  const theme = UNIFIED_CARD_THEME;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -129,53 +130,35 @@ export function ProductCard({
 
           {/* Subtitle / Custom Made note */}
           <p className="text-[10px] sm:text-[11px] text-[#70645A] line-clamp-1 mt-0.5 font-sans">
-            {isCustom ? 'Bespoke Made-to-Measure Atelier Drop' : 'Direct Designer Textile Curation'}
+            {isCustom ? 'Custom Made-to-Measure' : 'Premium Furnishing Fabric'}
           </p>
         </div>
 
-        {/* ─── 3. Bottom: Price & Clean Action ─── */}
+        {/* ─── 3. Bottom: Sizing Badge & Direct WhatsApp Inquiry ─── */}
         <div className="pt-2 border-t border-black/5 flex items-center justify-between gap-1.5 sm:gap-2">
-          {/* Price */}
+          {/* Sizing Label (No Price) */}
           <div className="text-left">
             <span className="text-[9px] sm:text-[9.5px] text-[#7C7167] uppercase font-bold tracking-wider block leading-none">
-              {isCustom || product.startingPrice ? 'From' : 'Price'}
+              Bespoke
             </span>
-            <span className="font-serif font-bold text-[14px] sm:text-[16.5px] text-[#1C1714] leading-tight">
-              {product.currency || '₹'}{product.price.toLocaleString('en-IN')}
+            <span className="font-sans font-semibold text-[11.5px] sm:text-[12.5px] text-[#823423] leading-tight block mt-0.5">
+              Custom Fit
             </span>
           </div>
 
-          {/* Quick Action Pill Button */}
-          {isCustom ? (
-            <Link
-              href={`/products/${product.slug}`}
-              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-white/90 hover:bg-white text-[#1C1714] text-[10px] sm:text-[10.5px] font-bold uppercase tracking-wider transition-all shadow-2xs border border-black/5 cursor-pointer hover:scale-105 shrink-0"
-            >
-              <span>Explore</span>
-              <ArrowRight className="w-3 h-3 text-[#C5A059]" />
-            </Link>
-          ) : (
-            <button
-              type="button"
-              onClick={handleAddToCart}
-              className={`inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-[10px] sm:text-[10.5px] font-bold uppercase tracking-wider shadow-sm transition-all cursor-pointer hover:scale-105 shrink-0 ${added
-                  ? 'bg-[#2C221E] text-white ring-2 ring-[#D4AF37]'
-                  : `${theme.btnBg} ${theme.btnText}`
-                }`}
-            >
-              {added ? (
-                <>
-                  <Check className="w-3 h-3" />
-                  <span>Added</span>
-                </>
-              ) : (
-                <>
-                  <ShoppingBag className="w-3 h-3" />
-                  <span>Bag</span>
-                </>
-              )}
-            </button>
-          )}
+          {/* Direct WhatsApp Action Button */}
+          <a
+            href={`https://wa.me/${ZAIRA_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+              `Hello Zaira Furnishing,\n\nI want to inquire about: ${product.displayName || product.name} (${product.categoryName || 'Furnishing'})\nLink: https://zairafurnishing.com/products/${product.slug}\n\nPlease share price and fabric options.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#25D366] hover:bg-[#20BA5C] text-white text-[10.5px] font-bold uppercase tracking-wider shadow-xs transition-all cursor-pointer hover:scale-105 shrink-0"
+          >
+            <MessageCircle className="w-3.5 h-3.5 fill-white text-white" />
+            <span>Inquire</span>
+          </a>
         </div>
       </div>
     </div>

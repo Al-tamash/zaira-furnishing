@@ -63,7 +63,7 @@ export function FloatingConciergeBar() {
         rel="noopener noreferrer"
         aria-label="Chat with Zaira Stylist on WhatsApp"
         className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#25D366] hover:bg-[#20BA5C] text-white flex items-center justify-center shadow-[0_8px_24px_rgba(37,211,102,0.35)] transition-all duration-300 hover:scale-110 cursor-pointer"
-        title="Chat with Atelier Stylist on WhatsApp"
+        title="Chat with Zaira Stylist on WhatsApp"
       >
         <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
       </a>

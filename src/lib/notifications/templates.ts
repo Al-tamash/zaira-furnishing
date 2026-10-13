@@ -12,8 +12,8 @@ interface OrderItemData extends DbOrderItem {
   product_type: string;
 }
 
-const SUPPORT_PHONE = '07947415666';
-const SUPPORT_EMAIL = 'concierge@zairafurnishing.com';
+const SUPPORT_PHONE = '+91 63001 45763';
+const SUPPORT_EMAIL = 'zairafurnishing@gmail.com';
 const SHOWROOM_ADDRESS = 'Rd Number 5, Kyetian Goud Nilayam, Alkapur Twp, Puppalguda, Hyderabad, Telangana 500089';
 
 function getSiteUrl(): string {
@@ -29,7 +29,7 @@ export function formatStatusLabel(status: string): string {
     case 'CONFIRMED':
       return 'Order Confirmed';
     case 'PROCESSING':
-      return 'Processing / Atelier Preparation';
+      return 'Processing & Workshop Preparation';
     case 'READY':
       return 'Ready for Dispatch';
     case 'COMPLETED':
@@ -115,7 +115,7 @@ export function generateCustomerOrderConfirmationEmail(
     <!-- Header -->
     <div style="background-color: #2C221E; padding: 30px 24px; text-align: center; color: #FAF7F2;">
       <h1 style="margin: 0; font-family: Georgia, serif; font-size: 24px; letter-spacing: 0.1em; text-transform: uppercase; color: #FAF7F2;">ZAIRA FURNISHING</h1>
-      <div style="font-size: 11px; letter-spacing: 0.2em; color: #C4B9A1; margin-top: 4px; text-transform: uppercase;">Atelier Order Confirmation</div>
+      <div style="font-size: 11px; letter-spacing: 0.2em; color: #C4B9A1; margin-top: 4px; text-transform: uppercase;">Order Confirmation</div>
     </div>
 
     <!-- Body -->
@@ -170,7 +170,7 @@ export function generateCustomerOrderConfirmationEmail(
         </div>
         ${order.discount > 0 ? `<div style="margin-bottom: 6px; color: #15803D;">Discount: -${formatCurrency(order.discount)}</div>` : ''}
         <div style="margin-bottom: 8px; color: #78716C;">
-          Delivery & Atelier Service: <span style="font-family: monospace; color: #1C1917;">${order.delivery_charge === 0 ? 'Complimentary' : formatCurrency(order.delivery_charge)}</span>
+          Delivery & Installation: <span style="font-family: monospace; color: #1C1917;">${order.delivery_charge === 0 ? 'Complimentary' : formatCurrency(order.delivery_charge)}</span>
         </div>
         <div style="font-size: 16px; font-weight: bold; color: #2C221E; padding-top: 8px; border-top: 1px solid #F2ECE1;">
           Total Payable on Delivery (COD): <span style="font-family: Georgia, serif; font-size: 18px;">${formatCurrency(order.total_amount)}</span>
@@ -206,7 +206,7 @@ export function generateCustomerOrderConfirmationEmail(
   `.trim();
 
   const text = `
-ZAIRA FURNISHING — ATELIER ORDER CONFIRMATION
+ZAIRA FURNISHING — ORDER CONFIRMATION
 ==================================================
 
 Dear ${order.customer_name},
@@ -222,7 +222,7 @@ ORDERED ITEMS:
 ${itemsText}
 
 Subtotal: ${formatCurrency(order.subtotal)}
-Delivery & Atelier Service: ${order.delivery_charge === 0 ? 'Complimentary' : formatCurrency(order.delivery_charge)}
+Delivery & Installation: ${order.delivery_charge === 0 ? 'Complimentary' : formatCurrency(order.delivery_charge)}
 Total Amount Payable on Delivery: ${formatCurrency(order.total_amount)}
 
 DELIVERY DESTINATION:
@@ -281,7 +281,7 @@ export function generateAdminNewOrderEmail(
         <tr><td style="padding: 6px 0; color: #78716C;">Products:</td><td style="padding: 6px 0;">${itemsSummary}</td></tr>
       </table>
       <div style="text-align: center; margin-top: 24px;">
-        <a href="${adminOrderDetailUrl}" style="display: inline-block; padding: 12px 24px; background-color: #2C221E; color: #FFFFFF; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 600;">Open Order in Admin Atelier</a>
+        <a href="${adminOrderDetailUrl}" style="display: inline-block; padding: 12px 24px; background-color: #2C221E; color: #FFFFFF; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 600;">Open Order in Admin Portal</a>
       </div>
     </div>
   </div>
@@ -300,7 +300,7 @@ Destination: ${order.city}, ${order.state}
 Service: ${order.delivery_option}
 Items: ${itemsSummary}
 
-Manage in Admin Atelier:
+Manage in Admin Portal:
 ${adminOrderDetailUrl}
   `.trim();
 
@@ -429,7 +429,7 @@ export function generateAdminMeasurementRequestEmail(
 <body style="margin: 0; padding: 0; background-color: #F7F4EE; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1C1917;">
   <div style="max-width: 600px; margin: 30px auto; background-color: #FFFFFF; border: 1px solid #EDE8DE; border-radius: 12px; overflow: hidden;">
     <div style="background-color: #2C221E; padding: 24px; text-align: center; color: #FAF7F2;">
-      <h1 style="margin: 0; font-family: Georgia, serif; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase;">ZAIRA ATELIER ALERT</h1>
+      <h1 style="margin: 0; font-family: Georgia, serif; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase;">ZAIRA SHOWROOM ALERT</h1>
       <div style="font-size: 11px; letter-spacing: 0.2em; color: #C4B9A1; margin-top: 4px; text-transform: uppercase;">
         New ${label} Received
       </div>
@@ -492,7 +492,7 @@ export function generateAdminMeasurementRequestEmail(
   `.trim();
 
   const text = `
-ZAIRA ATELIER ALERT — NEW ${label.toUpperCase()}
+ZAIRA SHOWROOM ALERT — NEW ${label.toUpperCase()}
 ==================================================
 Ref: #${request.request_number}
 Customer: ${request.customer_name}
@@ -525,7 +525,7 @@ export function generateAdminQuoteRequestEmail(
 <body style="margin: 0; padding: 0; background-color: #F7F4EE; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1C1917;">
   <div style="max-width: 600px; margin: 30px auto; background-color: #FFFFFF; border: 1px solid #EDE8DE; border-radius: 12px; overflow: hidden;">
     <div style="background-color: #2C221E; padding: 24px; text-align: center; color: #FAF7F2;">
-      <h1 style="margin: 0; font-family: Georgia, serif; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase;">ZAIRA ATELIER ALERT</h1>
+      <h1 style="margin: 0; font-family: Georgia, serif; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase;">ZAIRA SHOWROOM ALERT</h1>
       <div style="font-size: 11px; letter-spacing: 0.2em; color: #C4B9A1; margin-top: 4px; text-transform: uppercase;">
         New Quote Request Received
       </div>
@@ -579,7 +579,7 @@ export function generateAdminQuoteRequestEmail(
   `.trim();
 
   const text = `
-ZAIRA ATELIER ALERT — NEW QUOTE REQUEST
+ZAIRA SHOWROOM ALERT — NEW QUOTE REQUEST
 ==================================================
 Ref: #${request.request_number}
 Customer: ${request.customer_name}

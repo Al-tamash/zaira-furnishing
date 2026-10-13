@@ -188,8 +188,8 @@ async function runAudit() {
     // 3. WHATSAPP FLOW & MESSAGE BUILDER ACCURACY (ALL 6 SCENARIOS)
     // ─────────────────────────────────────────────────────────────
     console.log('\n[AUDIT CHECK 3] WhatsApp Message Builder & Centralized Line');
-    assert(ZAIRA_WHATSAPP_NUMBER === '917947415666', `Centralized WhatsApp number is ${ZAIRA_WHATSAPP_NUMBER}`);
-    assert(ZAIRA_WHATSAPP_DISPLAY === '07947415666', `Centralized WhatsApp display is ${ZAIRA_WHATSAPP_DISPLAY}`);
+    assert(ZAIRA_WHATSAPP_NUMBER === '916300145763', `Centralized WhatsApp number is ${ZAIRA_WHATSAPP_NUMBER}`);
+    assert(ZAIRA_WHATSAPP_DISPLAY === '+91 63001 45763', `Centralized WhatsApp display is ${ZAIRA_WHATSAPP_DISPLAY}`);
 
     // Scenario A: Standard product
     const msgA = buildOrderWhatsAppMessage({

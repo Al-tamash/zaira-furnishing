@@ -88,7 +88,7 @@ async function run() {
       }
 
       // 5. Verify WhatsApp button
-      if (!html.includes('Order on WhatsApp') && !html.includes('wa.me/917947415666')) {
+      if (!html.includes('Order on WhatsApp') && !html.includes('wa.me/916300145763')) {
         console.error(`❌ FAIL: ${item.slug} missing WhatsApp action`);
         failed++;
         continue;

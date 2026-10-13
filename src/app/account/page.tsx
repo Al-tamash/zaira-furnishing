@@ -145,7 +145,7 @@ export default function AccountPage() {
           <div className="max-w-md mx-auto bg-white rounded-3xl border border-[#EDE8DE] p-6 sm:p-10 shadow-[0_4px_24px_rgba(28,25,23,0.04)]">
             <div className="text-center mb-6">
               <span className="text-[10.5px] sm:text-[11px] uppercase tracking-[0.25em] text-[#9A7B56] font-semibold block mb-1.5">
-                Client Atelier
+                Client Account
               </span>
               <h1 className="font-serif text-[28px] sm:text-[32px] text-[#1C1917] font-medium tracking-tight mb-2">
                 {authMode === 'login' ? 'Sign In to Your Account' : 'Create an Account'}
@@ -200,12 +200,13 @@ export default function AccountPage() {
             <form onSubmit={handleAuthSubmit} className="space-y-4">
               {authMode === 'register' && (
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
+                  <label htmlFor="auth-name" className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
                     Full Name *
                   </label>
                   <div className="relative">
                     <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A29E]" />
                     <input
+                      id="auth-name"
                       type="text"
                       required
                       value={name}
@@ -218,12 +219,13 @@ export default function AccountPage() {
               )}
 
               <div>
-                <label className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
+                <label htmlFor="auth-email" className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
                   Email Address *
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A29E]" />
                   <input
+                    id="auth-email"
                     type="email"
                     required
                     value={email}
@@ -236,12 +238,13 @@ export default function AccountPage() {
 
               {authMode === 'register' && (
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
+                  <label htmlFor="auth-phone" className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
                     Phone Number
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A29E]" />
                     <input
+                      id="auth-phone"
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -253,12 +256,13 @@ export default function AccountPage() {
               )}
 
               <div>
-                <label className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
+                <label htmlFor="auth-password" className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
                   Password *
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A29E]" />
                   <input
+                    id="auth-password"
                     type="password"
                     required
                     value={password}
@@ -271,12 +275,13 @@ export default function AccountPage() {
 
               {authMode === 'register' && (
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
+                  <label htmlFor="auth-confirm-password" className="block text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] mb-1.5">
                     Confirm Password *
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A29E]" />
                     <input
+                      id="auth-confirm-password"
                       type="password"
                       required
                       value={confirmPassword}

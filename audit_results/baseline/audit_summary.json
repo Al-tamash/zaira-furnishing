@@ -1,0 +1,976 @@
+[
+  {
+    "name": "home",
+    "path": "/",
+    "url": "http://localhost:3000/",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/home_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/home_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/home_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/hero/curtains.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "about",
+    "path": "/about",
+    "url": "http://localhost:3000/about",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "About Zaira Furnishing | Hyderabad Showroom & Services | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/about_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "About Zaira Furnishing | Hyderabad Showroom & Services | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/about_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "About Zaira Furnishing | Hyderabad Showroom & Services | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/about_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "categories_index",
+    "path": "/categories",
+    "url": "http://localhost:3000/categories",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Browse By Categories | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/categories_index_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Browse By Categories | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/categories_index_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Browse By Categories | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/categories_index_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "category_curtains",
+    "path": "/categories/curtains-drapes",
+    "url": "http://localhost:3000/categories/curtains-drapes",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Curtains & Drapes | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_curtains_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Curtains & Drapes | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_curtains_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Curtains & Drapes | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_curtains_mobile.png",
+        "errors_count": 2,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/products/curtains/kids-room-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/products/curtains/jacquard-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "subcategory_blackout",
+    "path": "/categories/curtains-drapes/blackout",
+    "url": "http://localhost:3000/categories/curtains-drapes/blackout",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Blackout Curtains | Curtains & Drapes | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/subcategory_blackout_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Blackout Curtains | Curtains & Drapes | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/subcategory_blackout_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Blackout Curtains | Curtains & Drapes | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/subcategory_blackout_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "category_blinds",
+    "path": "/categories/window-blinds-shades",
+    "url": "http://localhost:3000/categories/window-blinds-shades",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Window Blinds & Shades | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_blinds_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Window Blinds & Shades | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_blinds_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Window Blinds & Shades | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_blinds_mobile.png",
+        "errors_count": 2,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/blinds/venetian.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "subcategory_roller",
+    "path": "/categories/window-blinds-shades/roller",
+    "url": "http://localhost:3000/categories/window-blinds-shades/roller",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Roller Blinds | Window Blinds & Shades | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/subcategory_roller_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Roller Blinds | Window Blinds & Shades | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/subcategory_roller_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Roller Blinds | Window Blinds & Shades | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/subcategory_roller_mobile.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "category_sofa",
+    "path": "/categories/sofa-fabrics-upholstery",
+    "url": "http://localhost:3000/categories/sofa-fabrics-upholstery",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Sofa Fabrics & Upholstery | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_sofa_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Sofa Fabrics & Upholstery | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_sofa_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Sofa Fabrics & Upholstery | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_sofa_mobile.png",
+        "errors_count": 2,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/hero/sofa_fabrics.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/sofa_fabrics.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/sofa_fabrics.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/sofa-fabrics/textured-weave.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "category_wallpapers",
+    "path": "/categories/wallpapers-wall-coverings",
+    "url": "http://localhost:3000/categories/wallpapers-wall-coverings",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Wallpapers & Wall Coverings | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_wallpapers_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Wallpapers & Wall Coverings | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_wallpapers_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Wallpapers & Wall Coverings | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/category_wallpapers_mobile.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/hero/wallpapers.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/wallpapers.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "products_index",
+    "path": "/products",
+    "url": "http://localhost:3000/products",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Browse By Categories | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/products_index_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Browse By Categories | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/products_index_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Browse By Categories | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/products_index_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "product_blackout_curtains",
+    "path": "/products/blackout-curtains",
+    "url": "http://localhost:3000/products/blackout-curtains",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Blackout Curtains | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/product_blackout_curtains_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Blackout Curtains | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/product_blackout_curtains_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Blackout Curtains | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/product_blackout_curtains_mobile.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/products/curtains/blackout-curtains/main.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "product_roller_blinds",
+    "path": "/products/roller-blinds",
+    "url": "http://localhost:3000/products/roller-blinds",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Roller Blinds | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/product_roller_blinds_desktop.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Roller Blinds | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/product_roller_blinds_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Roller Blinds | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/product_roller_blinds_mobile.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading",
+      "[warning] Image with src \"/images/hero/blinds.jpg\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "services",
+    "path": "/services",
+    "url": "http://localhost:3000/services",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Bespoke Services | Zaira Furnishing Hyderabad | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/services_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Bespoke Services | Zaira Furnishing Hyderabad | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/services_tablet.png",
+        "errors_count": 1,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Bespoke Services | Zaira Furnishing Hyderabad | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/services_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>\n      <LoadingBoundary name=\"services/\" loading={null}>\n        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>\n          <RedirectBoundary>\n            <RedirectErrorBoundary router={{...}}>\n              <InnerLayoutRouter url=\"/services\" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>\n                <SegmentViewNode type=\"page\" pagePath=\"services/p...\">\n                  <SegmentTrieNode>\n                  <ServicesPage>\n                    <div className=\"bg-[#FAF7F...\">\n                      <div className=\"max-w-7xl ...\">\n                        <div>\n                        <div>\n                        <div id=\"consultati...\" className=\"scroll-mt-...\">\n                          <div>\n                          <ConsultationForm>\n                            <form onSubmit={function handleSubmit} className=\"max-w-2xl ...\">\n                              <div className=\"grid grid-...\">\n                                <div>\n                                  <label>\n                                  <input\n                                    type=\"text\"\n                                    required={true}\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    disabled={false}\n                                    placeholder=\"Your full name\"\n                                    className=\"w-full px-4 py-3 bg-white border border-[#E7E2D8] text-[16px] sm:text-[...\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                                <div>\n                                  <label>\n                                  <input\n                                    type=\"tel\"\n                                    required={true}\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    disabled={false}\n                                    placeholder=\"Your mobile number\"\n                                    className=\"w-full px-4 py-3 bg-white border border-[#E7E2D8] text-[16px] sm:text-[...\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                              <div className=\"grid grid-...\">\n                                <div>\n                                <div>\n                                  <label>\n                                  <input\n                                    type=\"text\"\n                                    value=\"\"\n                                    onChange={function onChange}\n                                    disabled={false}\n                                    placeholder=\"e.g. This Weekend or Next Week\"\n                                    className=\"w-full px-4 py-3 bg-white border border-[#E7E2D8] text-[16px] sm:text-[...\"\n-                                   style={{caret-color:\"transparent\"}}\n                                  >\n                              <div>\n                                <label>\n                                <textarea\n                                  rows={3}\n                                  value=\"\"\n                                  onChange={function onChange}\n                                  disabled={false}\n                                  placeholder=\"Describe your rooms, number of windows, or specific fabric styles you w...\"\n                                  className=\"w-full px-4 py-3 bg-white border border-[#E7E2D8] text-[16px] sm:text-[13...\"\n-                                 style={{caret-color:\"transparent\"}}\n                                >\n                              ...\n                ...\n              ...\n"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "contact",
+    "path": "/contact",
+    "url": "http://localhost:3000/contact",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Contact & Showroom | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/contact_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Contact & Showroom | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/contact_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Contact & Showroom | Zaira Furnishing | Zaira Furnishing",
+        "screenshot": "audit_results/baseline/screenshots/contact_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "cart",
+    "path": "/cart",
+    "url": "http://localhost:3000/cart",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/cart_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/cart_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/cart_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "checkout",
+    "path": "/checkout",
+    "url": "http://localhost:3000/checkout",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/checkout_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/checkout_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/checkout_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "account",
+    "path": "/account",
+    "url": "http://localhost:3000/account",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/account_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/account_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/account_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "account_orders",
+    "path": "/account/orders",
+    "url": "http://localhost:3000/account/orders",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/account_orders_desktop.png",
+        "errors_count": 2,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/account_orders_tablet.png",
+        "errors_count": 2,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": true,
+        "has_footer": true,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/account_orders_mobile.png",
+        "errors_count": 2,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [
+      "[error] Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "[error] Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "[error] Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "[error] Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "[error] Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "[error] Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "failed_requests": [],
+    "status": 200
+  },
+  {
+    "name": "admin_login",
+    "path": "/admin/login",
+    "url": "http://localhost:3000/admin/login",
+    "viewports": {
+      "desktop": {
+        "overflow": {
+          "scrollWidth": 1440,
+          "clientWidth": 1440,
+          "hasOverflow": false
+        },
+        "has_header": false,
+        "has_footer": false,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/admin_login_desktop.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "tablet": {
+        "overflow": {
+          "scrollWidth": 768,
+          "clientWidth": 768,
+          "hasOverflow": false
+        },
+        "has_header": false,
+        "has_footer": false,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/admin_login_tablet.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      },
+      "mobile": {
+        "overflow": {
+          "scrollWidth": 375,
+          "clientWidth": 375,
+          "hasOverflow": false
+        },
+        "has_header": false,
+        "has_footer": false,
+        "title": "Zaira Furnishing | Bespoke Interior & Furnishing Showroom",
+        "screenshot": "audit_results/baseline/screenshots/admin_login_mobile.png",
+        "errors_count": 0,
+        "failed_reqs_count": 0
+      }
+    },
+    "console_errors": [],
+    "failed_requests": [],
+    "status": 200
+  }
+]

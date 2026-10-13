@@ -169,7 +169,7 @@ export default function AdminServicesPage() {
   };
 
   const handleDeleteService = async (id: string, name: string) => {
-    if (!confirm(`Are you sure you want to permanently delete "${name}" from Atelier services?`)) return;
+    if (!confirm(`Are you sure you want to permanently delete "${name}" from services?`)) return;
 
     setDeletingId(id);
     try {
@@ -210,7 +210,7 @@ export default function AdminServicesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#EDE8DE] shadow-2xs">
         <div>
           <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#9A7B56] block mb-1">
-            Atelier Value-Added Services
+            Showroom Services
           </span>
           <h1 className="font-serif text-[24px] sm:text-[28px] text-[#1C1917] font-medium">
             Services Management ({services.length})
@@ -347,7 +347,7 @@ export default function AdminServicesPage() {
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-[#EDE8DE] mb-4">
               <h2 className="font-serif text-[18px] text-[#1C1917] font-medium">
-                {editingService.id ? 'Edit Atelier Service' : 'Add Atelier Service'}
+                {editingService.id ? 'Edit Service' : 'Add Service'}
               </h2>
               <button
                 onClick={() => setModalOpen(false)}

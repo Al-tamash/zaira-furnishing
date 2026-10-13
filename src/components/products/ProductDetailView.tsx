@@ -129,7 +129,7 @@ export function ProductDetailView({
   const isSofaFabric = product.categorySlug === 'sofa-fabrics-upholstery';
   const isMattress = product.categorySlug === 'mattresses-sleep-systems';
   // Only window treatments (curtains & blinds) require in-home laser measurement
-  const isCustomAtelier = isCurtain || isBlind;
+  const isCustomBespoke = isCurtain || isBlind;
 
   // ─── CONFIRMED HEADING/PLEAT STYLES (FROM PRODUCT DATA ONLY) ───
   const confirmedHeadingStyles = useMemo(() => {
@@ -467,17 +467,18 @@ export function ProductDetailView({
     const sizeLabel = getResolvedSizeLabel();
 
     const messageLines = [
-      'ZAIRA FURNISHING — ORDER REQUEST',
+      'Hello Zaira Furnishing,',
       '',
+      'I would like to inquire about this product from your website:',
       `Product: ${productName}`,
       `Category: ${product.categoryName}`,
     ];
 
     if (currentVariant?.name && product.variations && product.variations.length > 1) {
-      messageLines.push(`Variant: ${currentVariant.name}`);
+      messageLines.push(`Color: ${currentVariant.name}`);
     }
 
-    if (sizeLabel) {
+    if (sizeLabel && sizeLabel !== 'Standard Size') {
       messageLines.push(`Size: ${sizeLabel}`);
     }
 
@@ -486,15 +487,9 @@ export function ProductDetailView({
     }
 
     messageLines.push(`Quantity: ${quantity} ${quantityUnit}`);
-    messageLines.push(
-      `Price: ${product.currency}${effectivePrice.toLocaleString('en-IN')}${pricingUnit ? ` ${pricingUnit}` : ''}`
-    );
-    if (quantity > 1) {
-      messageLines.push(`Estimated Subtotal: ₹${(effectivePrice * quantity).toLocaleString('en-IN')}`);
-    }
     messageLines.push(`Product Link: ${currentUrl}`);
     messageLines.push('');
-    messageLines.push('Please confirm my order.');
+    messageLines.push('Please share fabric availability and pricing for this design.');
 
     return `https://wa.me/${phone}?text=${encodeURIComponent(messageLines.join('\n'))}`;
   }, [
@@ -505,8 +500,6 @@ export function ProductDetailView({
     activeHeadingStyle,
     quantity,
     quantityUnit,
-    pricingUnit,
-    effectivePrice,
     getResolvedSizeLabel,
     isMounted,
   ]);
@@ -761,8 +754,8 @@ export function ProductDetailView({
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-start">
 
-          {/* ─── LEFT: DOMINANT SHOWROOM PRODUCT GALLERY (55%) ─── */}
-          <div className="lg:col-span-7 lg:sticky lg:top-24">
+          {/* ─── LEFT: DOMINANT SHOWROOM PRODUCT GALLERY (55% STICKY) ─── */}
+          <div className="lg:col-span-7 lg:sticky lg:top-28 self-start">
             <div className="flex flex-col lg:flex-row gap-3.5 sm:gap-4 items-start">
 
               {/* Thumbnails: Desktop (Vertical Column on Left), Mobile (Horizontal Row Below Main Image) */}
@@ -918,6 +911,21 @@ export function ProductDetailView({
                     Link copied to clipboard
                   </div>
                 )}
+                {/* Visual reassurance strip under main image on desktop */}
+                <div className="hidden lg:flex items-center justify-between mt-3 px-1 text-[11.5px] text-[#78716C]">
+                  <div className="flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-[#9A7B56] shrink-0" />
+                    <span>100% Genuine Fabrics</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Ruler className="w-3.5 h-3.5 text-[#9A7B56] shrink-0" />
+                    <span>Doorstep Laser Measurement</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#9A7B56] shrink-0" />
+                    <span>5-Year Tailoring Warranty</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -987,32 +995,16 @@ export function ProductDetailView({
               </p>
             )}
 
-            {/* 5. Real Price Display */}
+            {/* 5. Custom Quote & Bespoke Badge */}
             <div className="pb-4 mb-5 border-b border-[#EAE4D8]">
-              <div className="flex items-baseline gap-2 flex-wrap">
-                {product.startingPrice ? (
-                  <span className="text-[11.5px] uppercase tracking-wider font-semibold text-[#8C827A]">
-                    From
-                  </span>
-                ) : null}
-                <span className="font-serif text-[28px] sm:text-[32px] font-semibold text-[#1C1714] tracking-tight leading-none">
-                  {product.currency}{effectivePrice.toLocaleString('en-IN')}
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="px-3 py-1 rounded-full bg-[#FAF3E6] border border-[#D4AF37]/50 text-[#823423] text-[11px] font-bold uppercase tracking-wider">
+                  Bespoke Made-to-Measure
                 </span>
-                {pricingUnit && (
-                  <span className="text-[13.5px] text-[#78716C] font-normal">
-                    {pricingUnit}
-                  </span>
-                )}
-                <span className="text-[11.5px] text-[#8C827A] ml-auto">
-                  Inclusive of all taxes
+                <span className="text-[12.5px] text-[#78716C]">
+                  Custom stitched to your window or room specifications
                 </span>
               </div>
-
-              {quantity > 1 && (
-                <div className="mt-2 text-[12px] text-[#78716C]">
-                  Estimated Subtotal: <strong className="font-semibold text-[#1C1714] text-[13px]">₹{(effectivePrice * quantity).toLocaleString('en-IN')}</strong> for {quantity} {quantityUnit}
-                </div>
-              )}
             </div>
 
             {/* 6. Dynamic Variant Selector */}
@@ -1050,132 +1042,94 @@ export function ProductDetailView({
                 </div>
               </div>
             )}
-            <div className="flex items-center justify-between mb-6 pb-5 border-b border-[#EAE4D8]">
-              <span className="text-[11px] uppercase tracking-wider font-semibold text-[#1C1917]">
-                Quantity
-              </span>
+            {/* Requirement / Window count (Darpan & Bhavani Furnishing Style) */}
+            <div className="flex items-center justify-between mb-5 pb-4 border-b border-[#EAE4D8]">
+              <div>
+                <span className="text-[11px] uppercase tracking-wider font-semibold text-[#1C1917] block">
+                  Requirement
+                </span>
+                <span className="text-[11.5px] text-[#78716C]">
+                  {isCurtain ? 'Windows or spaces to furnish' : 'Quantity / units'}
+                </span>
+              </div>
 
               <div className="inline-flex items-center border border-[#D5CCBA] rounded-lg bg-white overflow-hidden shadow-2xs">
                 <button
                   type="button"
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                   disabled={quantity <= 1}
-                  aria-label="Decrease quantity"
-                  className="w-9 h-9 flex items-center justify-center text-[#57534E] hover:text-[#1C1714] hover:bg-[#FAF7F2] transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                  aria-label="Decrease requirement"
+                  className="w-8.5 h-8.5 flex items-center justify-center text-[#57534E] hover:text-[#1C1714] hover:bg-[#FAF7F2] transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
-                <span className="px-3.5 min-w-[44px] text-center text-[13px] font-semibold text-[#1C1714] select-none">
-                  {quantity}
+                <span className="px-3 min-w-[64px] text-center text-[12px] font-semibold text-[#1C1917] select-none">
+                  {quantity} {isCurtain ? (quantity === 1 ? 'Window' : 'Windows') : (quantity === 1 ? 'Unit' : 'Units')}
                 </span>
                 <button
                   type="button"
                   onClick={() => setQuantity((q) => q + 1)}
-                  aria-label="Increase quantity"
-                  className="w-9 h-9 flex items-center justify-center text-[#57534E] hover:text-[#1C1714] hover:bg-[#FAF7F2] transition-colors cursor-pointer"
+                  aria-label="Increase requirement"
+                  className="w-8.5 h-8.5 flex items-center justify-center text-[#57534E] hover:text-[#1C1714] hover:bg-[#FAF7F2] transition-colors cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
 
-            {/* 7. Action Area: Exactly 2 Action Buttons (Production Best Practice) */}
+            {/* 7. Action Area: Enquire on WhatsApp & Free In-Home Measurement */}
             <div className="space-y-3 mb-6">
-              {isCustomAtelier ? (
-                <>
-                  {/* PRIMARY CTA: BOOK FREE HOME VISIT & MEASUREMENT */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsMeasurementModalOpen(true);
-                      setMeasSubmitted(false);
-                      setMeasError(null);
-                    }}
-                    id="cta-book-free-home-visit"
-                    className="w-full h-12 rounded-xl font-bold text-[13px] uppercase tracking-wider bg-[#D4AF37] hover:bg-[#E5C378] text-[#1C1714] transition-all duration-200 flex items-center justify-center gap-2.5 shadow-md active:scale-[0.99] cursor-pointer"
-                  >
-                    <Ruler className="w-4.5 h-4.5 text-[#1C1714]" />
-                    <span>Book Free Home Visit &amp; Measurement</span>
-                  </button>
+              {/* PRIMARY CTA: ENQUIRE ON WHATSAPP */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="cta-order-on-whatsapp"
+                className="w-full h-12 rounded-xl font-bold text-[13px] uppercase tracking-wider bg-[#25D366] hover:bg-[#20BA5C] text-white transition-all duration-200 flex items-center justify-center gap-2.5 shadow-md active:scale-[0.99] cursor-pointer"
+              >
+                <MessageCircle className="w-5 h-5 fill-white text-white" />
+                <span>Enquire on WhatsApp</span>
+              </a>
 
-                  {/* SECONDARY CTA: INQUIRE / CUSTOMIZE ON WHATSAPP */}
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    id="cta-order-on-whatsapp"
-                    className="w-full h-11 rounded-xl font-semibold text-[12px] uppercase tracking-wider bg-[#1C1714] hover:bg-[#2C221E] text-white transition-all duration-200 flex items-center justify-center gap-2.5 shadow-sm active:scale-[0.99] cursor-pointer"
-                  >
-                    <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
-                    <span>Inquire / Customize on WhatsApp</span>
-                  </a>
+              {/* SECONDARY CTA: BOOK FREE IN-HOME MEASUREMENT */}
+              <button
+                type="button"
+                onClick={() => {
+                  openBookingModal(`Free In-Home Measurement — ${product.displayName || product.name}`);
+                }}
+                id="cta-book-free-home-visit"
+                className="w-full h-11 rounded-xl font-semibold text-[12px] uppercase tracking-wider bg-[#1C1714] hover:bg-[#2C221E] text-white transition-all duration-200 flex items-center justify-center gap-2 shadow-sm active:scale-[0.99] cursor-pointer"
+              >
+                <Ruler className="w-4 h-4 text-[#D4AF37]" />
+                <span>Book Free In-Home Measurement</span>
+              </button>
 
-                  {/* Helper Shortlist Action */}
-                  <div className="text-center pt-0.5">
-                    <button
-                      type="button"
-                      onClick={handleAddToCart}
-                      className="text-[11.5px] uppercase tracking-wider font-semibold text-[#823423] hover:text-[#1C1714] hover:underline cursor-pointer transition-colors inline-flex items-center gap-1.5"
-                    >
-                      {addedNotice ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-[#15803D]" />
-                          <span className="text-[#15803D]">Added to Shortlist</span>
-                        </>
-                      ) : (
-                        <>
-                          <ShoppingBag className="w-3.5 h-3.5" />
-                          <span>+ Shortlist in Bag</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* PRIMARY CTA: DIRECT ORDER ON WHATSAPP */}
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    id="cta-order-on-whatsapp"
-                    className="w-full h-12 rounded-xl font-bold text-[13px] uppercase tracking-wider bg-[#1C1714] hover:bg-[#2C221E] text-white transition-all duration-200 flex items-center justify-center gap-2.5 shadow-md active:scale-[0.99] cursor-pointer"
-                  >
-                    <MessageCircle className="w-4.5 h-4.5 text-[#25D366] fill-[#25D366]" />
-                    <span>Order via WhatsApp</span>
-                  </a>
+              {/* Helper Shortlist Action */}
+              <div className="text-center pt-0.5">
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="text-[11.5px] uppercase tracking-wider font-semibold text-[#78716C] hover:text-[#1C1917] hover:underline cursor-pointer transition-colors inline-flex items-center gap-1.5"
+                >
+                  {addedNotice ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-[#15803D]" />
+                      <span className="text-[#15803D]">Saved to Shortlist</span>
+                    </>
+                  ) : (
+                    <>
+                      <Heart className="w-3.5 h-3.5 text-[#823423]" />
+                      <span>+ Save to Shortlist</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
-                  {/* SECONDARY CTA: ADD TO BAG */}
-                  <button
-                    type="button"
-                    onClick={handleAddToCart}
-                    id="cta-add-to-cart"
-                    className={`w-full h-11 rounded-xl font-semibold text-[12px] uppercase tracking-wider border transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs ${
-                      addedNotice
-                        ? 'border-[#15803D] bg-[#15803D]/10 text-[#15803D]'
-                        : 'border-[#D5CCBA] text-[#1C1714] bg-white hover:bg-[#FAF7F2]'
-                    }`}
-                  >
-                    {addedNotice ? (
-                      <>
-                        <Check className="w-4 h-4 stroke-[2.5]" />
-                        <span>Added to Bag</span>
-                      </>
-                    ) : (
-                      <>
-                        <ShoppingBag className="w-4 h-4" />
-                        <span>Add to Bag</span>
-                      </>
-                    )}
-                  </button>
-                </>
-              )}
-
-              {/* Showroom Experience Trust Line (Replaces bulky button) */}
+              {/* Showroom Experience Trust Line */}
               <div className="flex items-center justify-between pt-2.5 px-1 text-[12px] text-[#78716C] border-t border-[#EDE8DE]">
                 <div className="flex items-center gap-1.5 min-w-0">
                   <MapPin className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-                  <span className="truncate">Experience in person at our Puppalguda Atelier (Alkapur Twp)</span>
+                  <span className="truncate">Puppalguda Showroom, Alkapur Twp, Hyderabad</span>
                 </div>
                 <button
                   type="button"
@@ -1244,16 +1198,6 @@ export function ProductDetailView({
                 </div>
               )}
 
-              {product.description && (
-                <div>
-                  <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1C1917] mb-2">
-                    About this Product
-                  </h2>
-                  <p className="text-[13px] text-[#57534E] leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
-              )}
 
               {careSpec && (
                 <div className="pt-1">
@@ -1331,63 +1275,36 @@ export function ProductDetailView({
           <span className="block text-[10px] text-[#8C827A] uppercase tracking-wider font-semibold truncate">
             {product.displayName || product.name}
           </span>
-          <div className="flex items-baseline gap-1">
-            <span className="font-serif text-[18px] font-bold text-[#1C1714]">
-              {product.currency}{effectivePrice.toLocaleString('en-IN')}
+          <div className="flex flex-col">
+            <span className="font-serif text-[14px] sm:text-[15px] font-semibold text-[#823423] leading-tight">
+              Bespoke Tailoring
             </span>
-            {pricingUnit && (
-              <span className="text-[11px] text-[#78716C] font-medium">{pricingUnit}</span>
-            )}
+            <span className="text-[10px] text-[#78716C] font-medium">
+              Price on Request
+            </span>
           </div>
         </div>
 
         <div className="shrink-0 flex items-center gap-2">
-          {isCustomAtelier ? (
-            <>
-              <button
-                type="button"
-                onClick={() => openBookingModal(`Free Measurement — ${product.displayName || product.name}`)}
-                className="h-10 px-3.5 rounded-xl font-bold text-[11px] uppercase tracking-wider bg-[#D4AF37] text-[#1C1714] hover:bg-[#E5C378] shadow-sm flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer"
-              >
-                <Ruler className="w-3.5 h-3.5 text-[#1C1714]" />
-                <span>Book Visit</span>
-              </button>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-10 w-10 rounded-xl bg-[#25D366] text-white hover:bg-[#20BA5C] shadow-sm flex items-center justify-center active:scale-95 transition-all shrink-0"
-                title="Chat on WhatsApp"
-                aria-label="Order on WhatsApp"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-              </a>
-            </>
-          ) : (
-            <>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-10 px-3.5 rounded-xl font-bold text-[11px] uppercase tracking-wider bg-[#1C1714] text-white hover:bg-[#2C221E] shadow-sm flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer"
-              >
-                <MessageCircle className="w-3.5 h-3.5 fill-[#25D366] text-[#25D366]" />
-                <span>Order</span>
-              </a>
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                aria-label="Add to Bag"
-                className={`h-10 w-10 rounded-xl border flex items-center justify-center active:scale-95 transition-all cursor-pointer ${
-                  addedNotice
-                    ? 'border-[#15803D] bg-[#15803D]/10 text-[#15803D]'
-                    : 'border-[#D5CCBA] bg-white text-[#1C1714]'
-                }`}
-              >
-                {addedNotice ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
-              </button>
-            </>
-          )}
+          <button
+            type="button"
+            onClick={() => openBookingModal(`Free Measurement — ${product.displayName || product.name}`)}
+            className="h-10 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider bg-[#1C1714] text-white hover:bg-[#2C221E] shadow-sm flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer"
+          >
+            <Ruler className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span>Book Visit</span>
+          </button>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="h-10 px-3.5 rounded-xl font-bold text-[11px] uppercase tracking-wider bg-[#25D366] text-white hover:bg-[#20BA5C] shadow-sm flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer"
+            title="Inquire on WhatsApp"
+            aria-label="Inquire on WhatsApp"
+          >
+            <MessageCircle className="w-4 h-4 fill-white text-white" />
+            <span>WhatsApp</span>
+          </a>
         </div>
       </div>
 
@@ -1572,7 +1489,7 @@ export function ProductDetailView({
 
                   <div>
                     <label className="block text-[11px] font-medium text-[#44403C] uppercase tracking-wider mb-1">
-                      Notes / Requirements
+                      Special Requirements (Optional)
                     </label>
                     <textarea
                       rows={3}
@@ -1747,7 +1664,7 @@ export function ProductDetailView({
 
                   <div>
                     <label className="block text-[11px] font-medium text-[#44403C] uppercase tracking-wider mb-1">
-                      Address / Location *
+                      Address in Hyderabad *
                     </label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-3 w-4 h-4 text-[#8C827A]" />

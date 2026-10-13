@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 
-const ADMIN_EMAIL = 'concierge@zairafurnishing.com';
+const ADMIN_EMAIL = 'zairafurnishing@gmail.com';
 
 function cleanSecret(val: string | undefined): string | null {
   if (!val) return null;

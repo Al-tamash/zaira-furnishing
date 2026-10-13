@@ -38,7 +38,7 @@ const SHOWROOMS = [
   {
     id: 'nri-concierge',
     name: 'NRI & Turnkey Home Desk',
-    locality: 'Global / Virtual Styling',
+    locality: 'Global & Virtual Styling',
     description: 'Dedicated concierge for overseas homeowners furnishing villas and luxury apartments in Hyderabad with 4K video walkthroughs and turnkey delivery.',
     image: '/images/hero/bedroom.jpg',
     features: ['4K Video Fabric Walkthroughs', 'Turnkey Site Coordination', 'Transparent WhatsApp Updates'],
@@ -142,9 +142,9 @@ export function ShowroomsSection() {
                 </a>
 
                 <a
-                  href={`tel:${ZAIRA_WHATSAPP_DISPLAY}`}
+                  href={`tel:${ZAIRA_WHATSAPP_DISPLAY.replace(/\s+/g, '')}`}
                   className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3.5 rounded-xl border border-[#D5CCBA] bg-white text-[#57534E] hover:text-[#1C1714] hover:bg-[#FAF7F2] text-[11.5px] font-medium transition-colors shadow-2xs"
-                  title="Call Atelier"
+                  title="Call Zaira Furnishing"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#823423]" />
                   <span>Call</span>

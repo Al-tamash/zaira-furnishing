@@ -108,7 +108,7 @@ export default function AdminOrdersPage() {
         };
       case 'PROCESSING':
         return {
-          label: 'Processing / Atelier',
+          label: 'Processing & Workshop',
           classes: 'bg-amber-50 text-amber-800 border-amber-200',
         };
       case 'READY':
@@ -267,7 +267,7 @@ export default function AdminOrdersPage() {
             >
               <option value="ALL">All Order Statuses</option>
               <option value="CONFIRMED">Confirmed</option>
-              <option value="PROCESSING">Processing / Atelier</option>
+              <option value="PROCESSING">Processing & Workshop</option>
               <option value="READY">Ready for Dispatch</option>
               <option value="COMPLETED">Completed</option>
               <option value="CANCELLED">Cancelled</option>

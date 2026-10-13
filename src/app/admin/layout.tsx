@@ -137,7 +137,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             playNotificationChime();
             if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
               const latest = data.notifications?.[0];
-              new Notification('Zaira Furnishing Atelier', {
+              new Notification('Zaira Furnishing', {
                 body: latest ? `${latest.title || latest.subject}: ${latest.message || latest.customer_name}` : 'New customer request received',
                 icon: '/favicon.ico',
               });
@@ -253,7 +253,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="min-h-screen bg-[#1C1714] text-[#FAF7F2] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-2 border-[#9A7B56] border-t-transparent rounded-full animate-spin" />
-          <span className="text-[13px] text-[#A8A29E] tracking-wider uppercase">Authenticating Atelier Console...</span>
+          <span className="text-[13px] text-[#A8A29E] tracking-wider uppercase">Authenticating Admin Console...</span>
         </div>
       </div>
     );
@@ -268,7 +268,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: 'Measurement Requests', href: '/admin/measurement-requests', icon: Ruler, badgeCount: newMeasCount },
     { label: 'Categories', href: '/admin/categories', icon: Grid },
     { label: 'Products', href: '/admin/products', icon: Package },
-    { label: 'Atelier Services', href: '/admin/services', icon: Wrench },
+    { label: 'Services', href: '/admin/services', icon: Wrench },
     { label: 'Homepage CMS', href: '/admin/cms', icon: FileText },
   ];
 
@@ -304,7 +304,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 ZAIRA
               </span>
               <span className="text-[7.5px] uppercase tracking-[0.25em] text-[#C4B9A1] block mt-0.5 leading-none">
-                ATELIER ADMIN
+                SHOWROOM ADMIN
               </span>
             </div>
           </div>
@@ -414,7 +414,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Menu className="w-5 h-5" />
             </button>
             <span className="text-[12px] uppercase tracking-[0.16em] text-[#8C827A] font-medium hidden sm:inline-block">
-              Zaira Furnishing Management Atelier
+              Zaira Furnishing Management Console
             </span>
           </div>
 

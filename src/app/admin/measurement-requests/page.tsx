@@ -138,7 +138,7 @@ export default function AdminMeasurementRequestsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-2xl border border-[#EDE8DE] shadow-2xs">
         <div>
           <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#9A7B56] block mb-1">
-            Atelier In-Home Laser Measurement
+            In-Home Laser Measurement Service
           </span>
           <h1 className="font-serif text-[24px] sm:text-[30px] text-[#1C1917] font-medium tracking-tight">
             Measurement Requests

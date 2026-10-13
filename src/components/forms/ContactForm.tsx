@@ -85,10 +85,11 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="contact-name" className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Your Name
           </label>
           <input
+            id="contact-name"
             type="text"
             required
             value={name}
@@ -99,10 +100,11 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="contact-phone" className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Phone Number
           </label>
           <input
+            id="contact-phone"
             type="tel"
             required
             value={phone}
@@ -116,10 +118,11 @@ export function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="contact-email" className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Email Address
           </label>
           <input
+            id="contact-email"
             type="email"
             required
             value={email}
@@ -130,10 +133,11 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="contact-subject" className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Nature of Inquiry
           </label>
           <select
+            id="contact-subject"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             disabled={isSubmitting}
@@ -142,18 +146,19 @@ export function ContactForm() {
             <option>Bespoke Drapery & Blinds</option>
             <option>Sofa Re-upholstery & Fabric Selection</option>
             <option>In-Home Laser Site Measurement</option>
-            <option>Wooden Flooring / Carpet Inquiry</option>
-            <option>Architect / Interior Designer Collaboration</option>
+            <option>Wooden Flooring & Carpet Inquiry</option>
+            <option>Architect & Interior Designer Trade</option>
             <option>Other Catalog Inquiry</option>
           </select>
         </div>
       </div>
 
       <div>
-        <label className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
-          Message / Project Scope
+        <label htmlFor="contact-message" className="block text-[11px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          Message & Project Scope
         </label>
         <textarea
+          id="contact-message"
           rows={4}
           required
           value={message}

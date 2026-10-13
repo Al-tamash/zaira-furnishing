@@ -10,7 +10,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { useStore } from '@/lib/context/StoreContext';
-import { ZAIRA_WHATSAPP_DISPLAY } from '@/lib/whatsapp';
+import { ZAIRA_WHATSAPP_DISPLAY, ZAIRA_EMAIL } from '@/lib/whatsapp';
 
 interface CarouselCard {
   id: string;
@@ -374,25 +374,25 @@ export function DecorStylingSolutions() {
 
             <div className="flex flex-wrap items-center justify-center md:justify-end gap-5 text-[12.5px] font-semibold text-[#1C1714]">
               <a
-                href={`tel:${ZAIRA_WHATSAPP_DISPLAY}`}
+                href={`tel:${ZAIRA_WHATSAPP_DISPLAY.replace(/\s+/g, '')}`}
                 className="inline-flex items-center gap-1.5 hover:text-[#C5A059] transition-colors"
               >
                 <div className="w-5 h-5 rounded-full bg-[#1C1714] text-white flex items-center justify-center text-[10px]">
                   <Phone className="w-2.5 h-2.5" />
                 </div>
-                <span>+91 {ZAIRA_WHATSAPP_DISPLAY}</span>
+                <span>{ZAIRA_WHATSAPP_DISPLAY}</span>
               </a>
 
               <span className="text-[#EAE4D9]">|</span>
 
               <a
-                href="mailto:concierge@zairafurnishing.com"
+                href={`mailto:${ZAIRA_EMAIL}`}
                 className="inline-flex items-center gap-1.5 hover:text-[#C5A059] transition-colors"
               >
                 <div className="w-5 h-5 rounded-full bg-[#1C1714] text-white flex items-center justify-center text-[10px]">
                   <Mail className="w-2.5 h-2.5" />
                 </div>
-                <span>concierge@zairafurnishing.com</span>
+                <span>{ZAIRA_EMAIL}</span>
               </a>
             </div>
           </div>

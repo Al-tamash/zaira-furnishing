@@ -85,7 +85,6 @@ export function TestimonialsSection() {
           src="/images/hero/living_room.jpg"
           alt="Share your Stunning Home Stories with Zaira"
           fill
-          priority
           sizes="100vw"
           className="object-cover object-center brightness-[0.70] contrast-[1.05]"
         />

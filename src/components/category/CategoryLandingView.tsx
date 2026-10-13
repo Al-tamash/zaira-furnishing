@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronRight, ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
 import { Category, Subcategory } from '@/lib/catalog';
+import { ZAIRA_WHATSAPP_NUMBER } from '@/lib/whatsapp';
 import { getCategoryBannerConfig } from './category-banners';
 
 interface CategoryLandingViewProps {
@@ -61,7 +62,7 @@ export function CategoryLandingView({
               <Link
                 key={type.id}
                 href={`/categories/${canonicalSlug}/${type.slug}`}
-                className="group flex flex-col bg-white rounded-xl border border-[#EAE4D8] hover:border-[#1C1917] transition-all duration-300 overflow-hidden text-left shadow-2xs hover:shadow-md hover:-translate-y-1 block"
+                className="group flex flex-col bg-white rounded-xl border border-[#EAE4D8] hover:border-[#1C1917] transition-all duration-300 overflow-hidden text-left shadow-2xs hover:shadow-md hover:-translate-y-1"
               >
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F2EDE2]">
                   <Image
@@ -103,7 +104,7 @@ export function CategoryLandingView({
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
-              href={`https://wa.me/917947415666?text=${encodeURIComponent(banner.whatsappPrompt)}`}
+              href={`https://wa.me/${ZAIRA_WHATSAPP_NUMBER}?text=${encodeURIComponent(banner.whatsappPrompt)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1C1917] hover:bg-[#9A7B56] text-white text-[12px] uppercase tracking-wider font-semibold transition-all duration-200 shadow-xs"

@@ -24,6 +24,7 @@ import {
   Flame,
   Percent,
   MessageCircle,
+  MapPin,
 } from 'lucide-react';
 import { useStore } from '@/lib/context/StoreContext';
 import { getCategoryHref, getSubcategoryHref } from '@/lib/data/categories';
@@ -196,7 +197,7 @@ export function Header() {
         { label: 'Architectural Roller Blinds', href: '/categories/blinds/roller' },
         { label: 'Zebra (Day & Night) Blinds', href: '/categories/blinds/zebra' },
         { label: 'Basswood Wooden Venetian', href: '/categories/blinds/wooden' },
-        { label: 'Honeycomb / Roman Blinds', href: '/categories/blinds' },
+        { label: 'Honeycomb & Roman Blinds', href: '/categories/blinds' },
       ],
     },
     {
@@ -280,11 +281,11 @@ export function Header() {
           }`}
       >
         {/* ROW 1: Social Icons (Left) + Signature Gold Logo Plaque (Center) + Phone Hotline, Search & Cart (Right) */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3">
-          <div className="flex items-center justify-between gap-3 sm:gap-6">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-6">
 
             {/* LEFT: Social Media Icons & Mobile Menu Toggle */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {/* Mobile Hamburger Button */}
               <button
                 type="button"
@@ -342,31 +343,31 @@ export function Header() {
             </div>
 
             {/* CENTER: Signature Atelier Brand Identity */}
-            <Link href="/" className="shrink-0 flex flex-col items-center group cursor-pointer text-center py-0.5">
-              <div className="flex items-center gap-2 sm:gap-2.5">
+            <Link href="/" className="shrink min-w-0 flex flex-col items-center group cursor-pointer text-center py-0.5">
+              <div className="flex items-center gap-1.5 sm:gap-2.5">
                 {/* Gold Monogram Jewel */}
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-[#D4AF37] via-[#C5A059] to-[#9A7B56] text-[#1C1714] flex items-center justify-center font-serif text-[15px] sm:text-[17px] font-black shadow-md border border-[#F3E2B3]/60 group-hover:scale-105 transition-transform">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg bg-gradient-to-br from-[#D4AF37] via-[#C5A059] to-[#9A7B56] text-[#1C1714] flex items-center justify-center font-serif text-[15px] sm:text-[17px] font-black shadow-md border border-[#F3E2B3]/60 group-hover:scale-105 transition-transform">
                   Z
                 </div>
-                <div className="flex flex-col text-left leading-none">
-                  <span className="font-serif font-black text-[18px] sm:text-[23px] tracking-[0.14em] text-white uppercase leading-none group-hover:text-[#D4AF37] transition-colors">
+                <div className="flex flex-col text-left leading-none min-w-0">
+                  <span className="font-serif font-black text-[17px] sm:text-[23px] tracking-[0.12em] sm:tracking-[0.14em] text-white uppercase leading-none group-hover:text-[#D4AF37] transition-colors truncate">
                     ZAIRA
                   </span>
-                  <span className="text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.32em] text-[#D4AF37] uppercase leading-none mt-1">
-                    FURNISHING ATELIER
+                  <span className="text-[6.5px] sm:text-[8.5px] font-bold tracking-[0.2em] sm:tracking-[0.32em] text-[#D4AF37] uppercase leading-none mt-1 truncate">
+                    FURNISHING &bull; HYDERABAD
                   </span>
                 </div>
               </div>
             </Link>
 
             {/* RIGHT: Search Icon + Wishlist & Shopping Bag */}
-            <div className="flex items-center gap-3.5 sm:gap-5 shrink-0">
+            <div className="flex items-center gap-1 sm:gap-4 shrink-0">
 
               {/* Search Toggle Icon */}
               <button
                 type="button"
                 onClick={() => setSearchFocused(!searchFocused)}
-                className="p-2 text-white hover:text-[#D4AF37] transition-all hover:scale-110 cursor-pointer rounded-full hover:bg-white/5"
+                className="p-1.5 sm:p-2 text-white hover:text-[#D4AF37] transition-all hover:scale-110 cursor-pointer rounded-full hover:bg-white/5"
                 aria-label="Search store products"
                 title="Search Products"
               >
@@ -376,13 +377,13 @@ export function Header() {
               {/* Wishlist Link with Badge */}
               <Link
                 href="/account"
-                className="relative p-2 text-white hover:text-[#D4AF37] transition-all hover:scale-110 rounded-full hover:bg-white/5"
+                className="relative p-1.5 sm:p-2 text-white hover:text-[#D4AF37] transition-all hover:scale-110 rounded-full hover:bg-white/5"
                 aria-label="Wishlist"
                 title="Wishlist"
               >
                 <Heart className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-0 right-0 min-w-[17px] h-[17px] px-1 text-[9.5px] font-bold text-white bg-[#9E4733] rounded-full flex items-center justify-center shadow-xs border border-[#2C221E]">
+                  <span className="absolute top-0 right-0 min-w-[15px] h-[15px] sm:min-w-[17px] sm:h-[17px] px-1 text-[8px] sm:text-[9.5px] font-bold text-white bg-[#9E4733] rounded-full flex items-center justify-center shadow-xs border border-[#2C221E]">
                     {wishlistCount}
                   </span>
                 )}
@@ -392,20 +393,19 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 text-white hover:text-[#D4AF37] transition-all hover:scale-110 cursor-pointer rounded-full hover:bg-white/5"
+                className="relative p-1.5 sm:p-2 text-white hover:text-[#D4AF37] transition-all hover:scale-110 cursor-pointer rounded-full hover:bg-white/5"
                 aria-label="Shopping Cart"
                 title="View Bag"
               >
                 <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
                 {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 min-w-[17px] h-[17px] px-1 text-[9.5px] font-bold text-white bg-[#9E4733] rounded-full flex items-center justify-center shadow-xs border border-[#2C221E]">
+                  <span className="absolute top-0 right-0 min-w-[15px] h-[15px] sm:min-w-[17px] sm:h-[17px] px-1 text-[8px] sm:text-[9.5px] font-bold text-white bg-[#9E4733] rounded-full flex items-center justify-center shadow-xs border border-[#2C221E]">
                     {cartCount}
                   </span>
                 )}
               </button>
 
             </div>
-
           </div>
 
           {/* Expandable Instant Search Bar (Opens when Search icon is clicked) */}
@@ -475,8 +475,8 @@ export function Header() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <span className="text-[13px] font-bold text-[#9E4733]">
-                              ₹{(item.base_price || item.starting_price || 0).toLocaleString('en-IN')}
+                            <span className="text-[11px] font-medium text-[#9E4733] uppercase tracking-wider">
+                              View Design &rarr;
                             </span>
                           </div>
                         </Link>
@@ -516,133 +516,119 @@ export function Header() {
         {/* ROW 2: ZAIRA CLEAN CATEGORY & SERVICE NAVIGATION BAR */}
         <div ref={navBarRef} className="hidden lg:block bg-[#1E1714] border-t border-[#3D302A]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center justify-between text-[12px] xl:text-[12.5px] font-medium tracking-normal text-white py-1.5 overflow-x-auto no-scrollbar">
+            <nav className="flex items-center justify-between py-2 text-[12px] xl:text-[13px] font-medium tracking-normal text-white/90">
 
-              {/* 1. Explore All Collections ⌵ Dropdown */}
-              <div
-                className="relative group"
-                onMouseEnter={() => setActiveNavMenu('explore')}
-                onMouseLeave={() => setActiveNavMenu(null)}
-              >
-                <Link
-                  href="/categories"
-                  className="inline-flex items-center gap-1 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap font-bold text-[#F3E2B3]"
+              <div className="flex items-center gap-6 xl:gap-8 overflow-x-auto no-scrollbar">
+                {/* 1. Explore All Collections ⌵ Dropdown */}
+                <div
+                  className="relative group"
+                  onMouseEnter={() => setActiveNavMenu('explore')}
+                  onMouseLeave={() => setActiveNavMenu(null)}
                 >
-                  <span>Explore All</span>
-                  <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform opacity-70" />
+                  <Link
+                    href="/categories"
+                    className="inline-flex items-center gap-1.5 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap font-bold text-[#F3E2B3]"
+                  >
+                    <span>Explore All</span>
+                    <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform opacity-75" />
+                  </Link>
+
+                  {/* Dropdown with Zaira's 9 Categories */}
+                  {activeNavMenu === 'explore' && (
+                    <div className="absolute top-full left-0 w-64 bg-white rounded-b-xl shadow-2xl border border-gray-200 py-2.5 z-50 text-gray-900 animate-in fade-in slide-in-from-top-1 duration-150">
+                      <div className="px-4 pb-2 mb-1 border-b border-gray-100 text-[10.5px] font-bold uppercase tracking-wider text-[#9E4733]">
+                        Product Categories
+                      </div>
+                      {navCategories.map((cat) => (
+                        <Link
+                          key={cat.id}
+                          href={cat.href}
+                          onClick={() => setActiveNavMenu(null)}
+                          className="flex items-center justify-between px-4 py-2 hover:bg-[#F6F1E9] hover:text-[#9E4733] transition-colors text-[13px] font-medium"
+                        >
+                          <span>{cat.name}</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-gray-400" />
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. Curtains */}
+                <Link
+                  href="/categories/curtains"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Window Curtains
                 </Link>
 
-                {/* Dropdown with Zaira's 9 Categories */}
-                {activeNavMenu === 'explore' && (
-                  <div className="absolute top-full left-0 w-64 bg-white rounded-b-xl shadow-2xl border border-gray-200 py-2.5 z-50 text-gray-900 animate-in fade-in slide-in-from-top-1 duration-150">
-                    <div className="px-4 pb-2 mb-1 border-b border-gray-100 text-[10.5px] font-bold uppercase tracking-wider text-[#9E4733]">
-                      Product Categories
-                    </div>
-                    {navCategories.map((cat) => (
-                      <Link
-                        key={cat.id}
-                        href={cat.href}
-                        onClick={() => setActiveNavMenu(null)}
-                        className="flex items-center justify-between px-4 py-2 hover:bg-[#F6F1E9] hover:text-[#9E4733] transition-colors text-[13px] font-medium"
-                      >
-                        <span>{cat.name}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-gray-400" />
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                {/* 3. Blinds */}
+                <Link
+                  href="/categories/blinds"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Window Blinds
+                </Link>
+
+                {/* 4. Sofa Fabrics */}
+                <Link
+                  href="/categories/sofa-fabrics"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Sofa Fabrics
+                </Link>
+
+                {/* 5. Wallpapers */}
+                <Link
+                  href="/categories/wallpapers"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Wallpapers
+                </Link>
+
+                {/* 6. Mattresses */}
+                <Link
+                  href="/categories/mattresses-sleep-systems"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Mattresses
+                </Link>
+
+                {/* 7. Wooden Flooring */}
+                <Link
+                  href="/categories/wooden-flooring-sports-floor"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Wooden Flooring
+                </Link>
+
+                {/* 8. Carpets & Rugs */}
+                <Link
+                  href="/categories/carpets"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Carpets &amp; Rugs
+                </Link>
+
+                {/* 9. Bed Linen */}
+                <Link
+                  href="/categories/bed-linen-bath"
+                  className="text-white/85 hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
+                >
+                  Bed Linen
+                </Link>
               </div>
 
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 2. Curtains */}
-              <Link
-                href="/categories/curtains"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Window Curtains
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 3. Blinds */}
-              <Link
-                href="/categories/blinds"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Window Blinds
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 4. Sofa Fabrics */}
-              <Link
-                href="/categories/sofa-fabrics"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Sofa Fabrics
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 5. Wallpapers */}
-              <Link
-                href="/categories/wallpapers"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Wallpapers
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 6. Mattresses */}
-              <Link
-                href="/categories/mattresses-sleep-systems"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Mattresses
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 7. Wooden Flooring */}
-              <Link
-                href="/categories/wooden-flooring-sports-floor"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Wooden Flooring
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 8. Carpets & Rugs */}
-              <Link
-                href="/categories/carpets"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Carpets &amp; Rugs
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
-              {/* 9. Bed Linen */}
-              <Link
-                href="/categories/bed-linen-bath"
-                className="hover:text-[#D4AF37] transition-colors py-1 cursor-pointer whitespace-nowrap"
-              >
-                Bed Linen
-              </Link>
-
-              <span className="text-white/20 select-none">•</span>
-
               {/* 10. Book Free Measurement Action Button */}
-              <button
-                type="button"
-                onClick={() => openBookingModal('Free Doorstep In-Home Measurement')}
-                className="px-3 py-1 rounded-full bg-[#D4AF37] hover:bg-[#E5C378] text-[#1E1714] font-bold text-[11.5px] transition-colors cursor-pointer whitespace-nowrap shadow-2xs"
-              >
-                Book Free Home Visit
-              </button>
+              <div className="flex items-center pl-4 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => openBookingModal('Free Doorstep In-Home Measurement')}
+                  className="px-3.5 py-1.5 rounded-full bg-[#D4AF37] hover:bg-[#E5C378] text-[#1E1714] font-semibold text-[11.5px] tracking-wide transition-all cursor-pointer whitespace-nowrap shadow-xs active:scale-95"
+                >
+                  Book Free Home Visit
+                </button>
+              </div>
 
             </nav>
           </div>
@@ -673,7 +659,7 @@ export function Header() {
                       ZAIRA FURNISHING
                     </span>
                     <span className="text-[8.5px] uppercase tracking-[0.24em] text-[#9A7B56] font-bold mt-0.5">
-                      Flagship Atelier · Hyderabad
+                      Puppalguda · Hyderabad
                     </span>
                   </div>
                 </div>
@@ -694,7 +680,7 @@ export function Header() {
                   className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white border border-[#EAE4D8] text-[#1C1714] text-[11px] font-bold uppercase tracking-wider shadow-2xs hover:border-[#9A7B56] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#9A7B56]" />
-                  <span>Call Atelier</span>
+                  <span>Call Us</span>
                 </a>
                 <a
                   href={ZAIRA_WHATSAPP_URL}
@@ -749,7 +735,7 @@ export function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-[13px] uppercase tracking-[0.14em] font-semibold text-[#1C1917] hover:text-[#823423] py-2.5 border-b border-[#F2ECE1] flex items-center justify-between"
                 >
-                  <span>Atelier Services &amp; Fitting</span>
+                  <span>Fitting &amp; Services</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#A8A29E]" />
                 </Link>
 
@@ -763,13 +749,13 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/account/orders"
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-[13px] uppercase tracking-[0.14em] font-semibold text-[#823423] py-2.5 border-b border-[#F2ECE1] flex items-center justify-between"
                 >
                   <span className="flex items-center gap-2">
-                    <PackageCheck className="w-4 h-4 text-[#823423]" />
-                    <span>Track Order Status</span>
+                    <MapPin className="w-4 h-4 text-[#823423]" />
+                    <span>Showroom &amp; Contact</span>
                   </span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#823423]" />
                 </Link>
@@ -838,7 +824,7 @@ export function Header() {
                 <div className="flex items-center gap-2">
                   <ShoppingBag className="w-5 h-5 text-[#2C221E]" />
                   <span className="font-serif text-[17px] sm:text-[18px] text-[#1C1917] font-medium">
-                    Your Inquiry Bag ({cartCount})
+                    Your Shortlist ({cartCount})
                   </span>
                 </div>
                 <button
@@ -922,8 +908,8 @@ export function Header() {
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
-                          <span className="font-serif text-[14px] font-semibold text-[#1C1917]">
-                            ₹{item.totalPrice.toLocaleString('en-IN')}
+                          <span className="text-[11px] font-semibold text-[#823423] uppercase tracking-wider">
+                            Custom Quote
                           </span>
                         </div>
                       </div>
@@ -934,10 +920,10 @@ export function Header() {
                 <div className="py-16 text-center text-[#78716C]">
                   <ShoppingBag className="w-10 h-10 mx-auto text-[#C4B9A1] stroke-[1.25] mb-3" />
                   <p className="font-serif text-[16px] text-[#1C1917] font-medium mb-1">
-                    Your bag is empty
+                    Your shortlist is empty
                   </p>
                   <p className="text-[12px] max-w-xs mx-auto">
-                    Explore our catalog to add items or book a complimentary site measurement.
+                    Explore our collections to save designs or book a free in-home measurement.
                   </p>
                 </div>
               )}
@@ -946,47 +932,38 @@ export function Header() {
             {/* Bottom Actions */}
             <div className="pt-4 border-t border-[#EAE4D8] space-y-2 mt-6">
               {cart.length > 0 && (
-                <div className="flex justify-between items-center text-[14px] font-semibold text-[#1C1917] mb-2">
-                  <span>Subtotal</span>
-                  <span className="font-serif text-[18px]">
-                    ₹{cartTotal.toLocaleString('en-IN')}
+                <div className="flex justify-between items-center text-[12.5px] font-medium text-[#78716C] mb-2">
+                  <span>Selected Designs</span>
+                  <span className="font-semibold text-[#1C1917]">
+                    {cartCount} {cartCount === 1 ? 'Design' : 'Designs'}
                   </span>
                 </div>
               )}
 
               {cart.length > 0 ? (
                 <div className="space-y-2.5">
-                  {/* Primary Action: Send Bag to WhatsApp */}
+                  {/* Primary Action: Send Shortlist to WhatsApp */}
                   <a
-                    href={buildInquiryBagWhatsAppUrl(cart, cartTotal)}
+                    href={buildInquiryBagWhatsAppUrl(cart, 0)}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsCartOpen(false)}
                     className="w-full py-3.5 rounded-xl text-center text-[12px] uppercase tracking-wider font-bold bg-[#1C1714] text-white hover:bg-[#2C221E] transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4 fill-[#25D366] text-[#25D366]" />
-                    <span>Send Bag to WhatsApp</span>
+                    <span>Send Shortlist to WhatsApp</span>
                   </a>
 
-                  {/* Secondary Action: View Bag Details */}
-                  <Link
-                    href="/cart"
-                    onClick={() => setIsCartOpen(false)}
-                    className="block w-full py-2.5 rounded-xl text-center text-[11.5px] uppercase tracking-wider font-semibold border border-[#D5CCBA] text-[#1C1714] hover:bg-[#FAF7F2] transition-colors"
-                  >
-                    View Bag Details
-                  </Link>
-
-                  {/* Tertiary Helper Trigger */}
+                  {/* Secondary Action: Book Visit */}
                   <button
                     type="button"
                     onClick={() => {
                       setIsCartOpen(false);
                       openBookingModal('Free Measurement for Shortlisted Items');
                     }}
-                    className="block w-full py-1 text-center text-[11px] tracking-wide font-medium text-[#78716C] hover:text-[#823423] hover:underline cursor-pointer transition-colors"
+                    className="block w-full py-2.5 rounded-xl text-center text-[11.5px] uppercase tracking-wider font-semibold border border-[#D5CCBA] text-[#1C1714] hover:bg-[#FAF7F2] transition-colors cursor-pointer"
                   >
-                    + Book In-Home Visit for These Items
+                    Book Free Measurement
                   </button>
                 </div>
               ) : (

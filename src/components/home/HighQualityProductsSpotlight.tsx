@@ -9,7 +9,6 @@ import { useStore } from '@/lib/context/StoreContext';
 interface PopularProductItem {
   id: string;
   name: string;
-  price: number;
   image: string;
   link: string;
 }
@@ -18,28 +17,24 @@ const POPULAR_PRODUCTS: PopularProductItem[] = [
   {
     id: 'pop-velvet-curtains',
     name: 'Royal Velvet Curtains',
-    price: 4950,
     image: '/images/products/curtains/velvet-curtains/main.jpg',
     link: '/categories/curtains/velvet',
   },
   {
     id: 'pop-boucle-sofa',
     name: 'Italian Bouclé Sofa Fabric',
-    price: 2450,
     image: '/images/sofa-fabrics/velvet-chenille.jpg',
     link: '/categories/sofa-fabrics/velvet-chenille',
   },
   {
     id: 'pop-motorized-blinds',
     name: 'Somfy Motorized Blinds',
-    price: 6800,
     image: '/images/blinds/motorized-smart.jpg',
     link: '/categories/blinds/motorized-smart',
   },
   {
     id: 'pop-zebra-blinds',
     name: 'Zebra Day & Night Blinds',
-    price: 2450,
     image: '/images/blinds/zebra.jpg',
     link: '/categories/blinds/zebra',
   },
@@ -103,10 +98,10 @@ export function HighQualityProductsSpotlight() {
                   </Link>
                 </div>
 
-                {/* Price & Heart Row */}
+                {/* Sizing & Heart Row (No Price) */}
                 <div className="mt-2 pt-2 border-t border-[#F7F3EC] flex items-center justify-between">
-                  <span className="font-bold text-[13.5px] sm:text-[15px] text-[#823423]">
-                    ₹{product.price.toLocaleString('en-IN')}
+                  <span className="font-sans font-semibold text-[11.5px] sm:text-[12.5px] text-[#823423] uppercase tracking-wider">
+                    Custom Sizing
                   </span>
 
                   <button

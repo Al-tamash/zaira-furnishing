@@ -8,7 +8,7 @@ import { NotificationPayload, NotificationResult, NotificationProvider } from '.
  * Configured via environment variables:
  * - NOTIFICATION_PROVIDER_API_KEY: Secret API key for delivery provider
  * - NOTIFICATION_FROM_EMAIL: Sender address (e.g. "Zaira Furnishing <orders@zairafurnishing.com>")
- * - NOTIFICATION_ADMIN_EMAIL: Admin recipient address (e.g. "concierge@zairafurnishing.com")
+ * - NOTIFICATION_ADMIN_EMAIL: Admin recipient address (e.g. "zairafurnishing@gmail.com")
  * - NOTIFICATION_MOCK_SUCCESS: "true" for testing success code paths safely without external credentials
  */
 export class DefaultNotificationProvider implements NotificationProvider {
@@ -29,7 +29,7 @@ export class DefaultNotificationProvider implements NotificationProvider {
     return (
       process.env.NOTIFICATION_ADMIN_EMAIL?.trim() ||
       process.env.ADMIN_NOTIFICATION_EMAIL?.trim() ||
-      'concierge@zairafurnishing.com'
+      'zairafurnishing@gmail.com'
     );
   }
 

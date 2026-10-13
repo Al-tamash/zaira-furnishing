@@ -35,7 +35,7 @@ export function CategoryCard({
   return (
     <Link
       href={href}
-      className={`group flex flex-col bg-white rounded-xl sm:rounded-2xl border border-[#EAE4D8] hover:border-[#1C1917] transition-all duration-300 overflow-hidden shadow-2xs hover:shadow-lg hover:-translate-y-1 block text-left ${className}`}
+      className={`group flex flex-col bg-white rounded-xl sm:rounded-2xl border border-[#EAE4D8] hover:border-[#1C1917] transition-all duration-300 overflow-hidden shadow-2xs hover:shadow-lg hover:-translate-y-1 text-left ${className}`}
     >
       {/* ─── 1. Large Realistic Category Image ─── */}
       <div className={`relative ${aspectClass} w-full overflow-hidden bg-[#F2EDE2]`}>

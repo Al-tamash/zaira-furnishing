@@ -247,7 +247,7 @@ export default function AdminInquiriesPage() {
                           {cleanPhone && (
                             <a
                               href={`https://wa.me/91${cleanPhone.slice(-10)}?text=${encodeURIComponent(
-                                `Hello ${inq.name}, thank you for contacting Zaira Furnishing regarding "${inq.subject}". How can our atelier assist you today?`
+                                `Hello ${inq.name}, thank you for contacting Zaira Furnishing regarding "${inq.subject}". How can our team assist you today?`
                               )}`}
                               target="_blank"
                               rel="noreferrer"
@@ -358,7 +358,7 @@ export default function AdminInquiriesPage() {
             <div className="p-4 bg-[#FAF7F2] border-t border-[#EAE4D8] flex items-center justify-between">
               <a
                 href={`https://wa.me/91${(selectedInquiry.phone || '').replace(/\D/g, '').slice(-10)}?text=${encodeURIComponent(
-                  `Hello ${selectedInquiry.name}, thank you for contacting Zaira Furnishing regarding "${selectedInquiry.subject}". How can our atelier assist you today?`
+                  `Hello ${selectedInquiry.name}, thank you for contacting Zaira Furnishing regarding "${selectedInquiry.subject}". How can our team assist you today?`
                 )}`}
                 target="_blank"
                 rel="noreferrer"

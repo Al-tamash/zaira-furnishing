@@ -42,7 +42,7 @@ export function mapDbCategoryToFrontend(c: DbCategory): Category {
     image: c.image || '',
     featured: c.featured === 1,
     isCustomizable: c.is_customizable === 1,
-    itemCountText: c.item_count_text || 'In Atelier',
+    itemCountText: c.item_count_text || 'In Showroom',
   };
 }
 

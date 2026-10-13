@@ -3,8 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, LayoutGrid, Heart, ShoppingBag, Calendar } from 'lucide-react';
+import { Home, LayoutGrid, Heart, ShoppingBag, Calendar, MessageCircle } from 'lucide-react';
 import { useStore } from '@/lib/context/StoreContext';
+import { ZAIRA_WHATSAPP_URL } from '@/lib/whatsapp';
 
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -65,42 +66,35 @@ export function MobileBottomNav() {
           </span>
         </button>
 
-        {/* 4. Wishlist */}
-        <Link
-          href="/account"
-          className={`relative flex flex-col items-center justify-center py-1 transition-all ${
-            isWishlist ? 'text-[#D4AF37] font-bold scale-105' : 'text-[#A8A29E] hover:text-[#FAF7F2]'
-          }`}
-        >
-          <div className="relative">
-            <Heart className={`w-5 h-5 ${isWishlist ? 'stroke-[2.5] fill-[#D4AF37]/30' : 'stroke-[1.8]'}`} />
-            {wishlistCount > 0 && (
-              <span className="absolute -top-1.5 -right-2 min-w-[15px] h-[15px] px-1 text-[8.5px] font-bold text-[#1C1714] bg-[#D4AF37] rounded-full flex items-center justify-center shadow-xs">
-                {wishlistCount}
-              </span>
-            )}
-          </div>
-          <span className="text-[10px] tracking-tight mt-0.5">Wishlist</span>
-          {isWishlist && <span className="w-1 h-1 rounded-full bg-[#D4AF37] mt-0.5" />}
-        </Link>
-
-        {/* 5. Bag */}
+        {/* 4. Shortlist */}
         <button
           type="button"
           onClick={() => setIsCartOpen(true)}
           className="relative flex flex-col items-center justify-center py-1 text-[#A8A29E] hover:text-[#FAF7F2] transition-all cursor-pointer active:scale-95"
-          aria-label={`Shopping bag with ${cartCount} items`}
+          aria-label={`Shortlist with ${cartCount} items`}
         >
           <div className="relative">
-            <ShoppingBag className="w-5 h-5 stroke-[1.8]" />
+            <Heart className="w-5 h-5 stroke-[1.8]" />
             {cartCount > 0 && (
-              <span className="absolute -top-1.5 -right-2.5 min-w-[17px] h-[17px] px-1 text-[9px] font-black text-[#1C1714] bg-[#D4AF37] rounded-full flex items-center justify-center shadow-xs">
+              <span className="absolute -top-1.5 -right-2 min-w-[15px] h-[15px] px-1 text-[8.5px] font-bold text-[#1C1714] bg-[#D4AF37] rounded-full flex items-center justify-center shadow-xs">
                 {cartCount}
               </span>
             )}
           </div>
-          <span className="text-[10px] tracking-tight mt-0.5">Bag</span>
+          <span className="text-[10px] tracking-tight mt-0.5">Shortlist</span>
         </button>
+
+        {/* 5. WhatsApp Direct Action */}
+        <a
+          href={ZAIRA_WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex flex-col items-center justify-center py-1 text-[#25D366] hover:text-[#20BA5C] transition-all active:scale-95"
+          aria-label="Chat on WhatsApp"
+        >
+          <MessageCircle className="w-5 h-5 fill-[#25D366] text-[#25D366]" />
+          <span className="text-[10px] tracking-tight mt-0.5 font-medium text-[#25D366]">WhatsApp</span>
+        </a>
       </div>
     </nav>
   );

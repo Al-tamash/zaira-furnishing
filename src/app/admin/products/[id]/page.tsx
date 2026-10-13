@@ -630,8 +630,8 @@ const formatOptionsForInput = (raw: string | null | undefined): string => {
                 }
                 className="w-full px-3.5 py-2.5 rounded-xl border border-[#D5CDBF] text-[13.5px] bg-white focus:outline-hidden focus:border-[#9A7B56]"
               >
-                <option value="standard">Standard E-Commerce (Add to Cart directly)</option>
-                <option value="custom_made">Custom Made / Atelier (Enquire / Custom Dimensions)</option>
+                <option value="standard">Standard Catalog (Add to Cart directly)</option>
+                <option value="custom_made">Custom Made (Enquire on WhatsApp & Sizing)</option>
               </select>
             </div>
 

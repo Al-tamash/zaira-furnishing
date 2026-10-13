@@ -31,7 +31,7 @@ interface StitchingStyle {
 const STITCHING_STYLES: StitchingStyle[] = [
   {
     id: 'ripple-fold',
-    name: 'Ripple Fold / S-Wave',
+    name: 'Ripple Fold (S-Wave)',
     subtitle: 'Architectural Fluid Waves',
     description: 'Continuous smooth S-curves suspended uniformly from slim ceiling tracks. The top choice for contemporary luxury villas and apartments.',
     bestFor: 'Modern Living Rooms & Floor-to-Ceiling Windows',
@@ -51,7 +51,7 @@ const STITCHING_STYLES: StitchingStyle[] = [
   },
   {
     id: 'american-pleat',
-    name: 'American / Triple Pinch Pleat',
+    name: 'Triple Pinch Pleat',
     subtitle: 'Grand Architectural Body',
     description: 'Deep, three-finger pleats that give exceptional weight, fullness, and grandeur to heavy velvets, silks, and jacquards.',
     bestFor: 'Double-Height Living Rooms & Grand Foyers',
@@ -61,7 +61,7 @@ const STITCHING_STYLES: StitchingStyle[] = [
   },
   {
     id: 'eyelet-grommet',
-    name: 'Eyelet / Grommet',
+    name: 'Eyelet (Grommet)',
     subtitle: 'Contemporary Clean Drape',
     description: 'Stainless steel, brass or matte black eyelet rings that glide directly on decorative architectural curtain poles.',
     bestFor: 'Casual Lounges, Guest Rooms & Bedrooms',
@@ -81,7 +81,7 @@ const STITCHING_STYLES: StitchingStyle[] = [
   },
   {
     id: 'rod-pocket',
-    name: 'Rod Pocket / Casing',
+    name: 'Rod Pocket',
     subtitle: 'Soft Romantic Gathering',
     description: 'Top fabric sleeve gathered softly over a slim brass or wooden rod, creating a relaxed romantic cottage and bedroom ambiance.',
     bestFor: 'Sheer Curtains, Nursery & Powder Rooms',

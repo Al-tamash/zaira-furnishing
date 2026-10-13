@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import {
   X,
   MapPin,
@@ -12,6 +13,7 @@ import {
   Ruler,
   Building2,
   CheckCircle2,
+  Compass,
 } from 'lucide-react';
 import { useStore } from '@/lib/context/StoreContext';
 import {
@@ -58,7 +60,7 @@ export function ShowroomVisitModal() {
 
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10.5px] font-bold uppercase tracking-wider mb-2">
             <Building2 className="w-3.5 h-3.5" />
-            <span>Hyderabad Flagship Atelier</span>
+            <span>Puppalguda, Hyderabad Showroom</span>
           </div>
 
           <h3 className="font-serif text-[22px] sm:text-[24px] font-medium text-white tracking-tight">
@@ -158,6 +160,15 @@ export function ShowroomVisitModal() {
               <Navigation className="w-4 h-4 text-[#D4AF37]" />
               <span>Get Directions on Google Maps</span>
             </a>
+
+            <Link
+              href="/contact#tour"
+              onClick={() => setIsStoreModalOpen(false)}
+              className="w-full h-10 rounded-xl font-semibold text-[11.5px] uppercase tracking-wider bg-[#FAF7F2] hover:bg-[#F2ECE1] border border-[#E7E2D8] text-[#1C1714] transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer"
+            >
+              <Compass className="w-4 h-4 text-[#9A7B56]" />
+              <span>Explore 360° Showroom Tour</span>
+            </Link>
 
             <div className="grid grid-cols-2 gap-2">
               <a

@@ -1,16 +1,18 @@
 /**
  * Zaira Furnishing — Centralized WhatsApp Utilities & Message Builder
  *
- * Official WhatsApp Line: 07947415666
+ * Official WhatsApp Line: +91 63001 45763
  */
 
-export const ZAIRA_WHATSAPP_NUMBER = '917947415666';
-export const ZAIRA_WHATSAPP_DISPLAY = '07947415666';
-export const ZAIRA_WHATSAPP_URL = 'https://wa.me/917947415666';
+export const ZAIRA_WHATSAPP_NUMBER = '916300145763';
+export const ZAIRA_WHATSAPP_DISPLAY = '+91 63001 45763';
+export const ZAIRA_WHATSAPP_URL = 'https://wa.me/916300145763';
 export const ZAIRA_SHOWROOM_ADDRESS = 'Shop No. 5, Rd Number 5, Kyettaian Gouda Nilayam, Alkapur Twp, Puppalguda, Hyderabad, Telangana 500089';
 export const ZAIRA_SHOWROOM_TIMINGS = '10:30 AM – 8:30 PM (Mon–Sat · Sun by Appointment)';
-export const ZAIRA_SHOWROOM_PHONE = '+91 7947415666';
+export const ZAIRA_SHOWROOM_PHONE = '+91 63001 45763';
 export const ZAIRA_SHOWROOM_MAPS_URL = 'https://maps.google.com/?q=Zaira+Furnishing+Alkapur+Township+Puppalguda+Hyderabad';
+export const ZAIRA_SHOWROOM_360_TOUR_EMBED_URL = 'https://www.google.com/maps/embed?pb=!4v1791894683148!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRFIydDI2aEFF!2m2!1d17.39544123570332!2d78.37321712841006!3f184.77997255554175!4f11.232270408289608!5f0.7820865974627469';
+export const ZAIRA_EMAIL = 'zairafurnishing@gmail.com';
 
 export interface WhatsAppOrderItem {
   productId?: string;
@@ -438,10 +440,8 @@ export function buildProductOrderWhatsAppUrl(params: WhatsAppDirectOrderParams):
   }
 
   lines.push(`Quantity: ${params.quantity}`);
-  lines.push(`Price: ${currency}${params.price.toLocaleString('en-IN')}`);
-  lines.push(`Total Amount: ${currency}${(params.price * params.quantity).toLocaleString('en-IN')}`);
   lines.push('');
-  lines.push('Please confirm stock availability and how I can proceed with delivery/payment.');
+  lines.push('Please share current pricing, fabric swatch options, and availability.');
 
   if (typeof window !== 'undefined' && params.productSlug) {
     lines.push('');
@@ -456,31 +456,29 @@ export interface InquiryBagItem {
   variantName?: string | null;
   sizeLabel?: string | null;
   quantity: number;
-  totalPrice: number;
+  totalPrice?: number;
 }
 
 /**
- * Builds direct WhatsApp URL for entire Inquiry Bag (multiple shortlisted items)
+ * Builds direct WhatsApp URL for entire Shortlist (multiple shortlisted items)
  */
-export function buildInquiryBagWhatsAppUrl(items: InquiryBagItem[], grandTotal: number): string {
+export function buildInquiryBagWhatsAppUrl(items: InquiryBagItem[], _grandTotal = 0): string {
   const lines: string[] = [
     'Hello Zaira Furnishing,',
     '',
-    'I have shortlisted the following items on your website and would like to place an order / get availability:',
+    'I have shortlisted the following designs on your website and would like to get pricing & availability:',
     '',
   ];
 
   items.forEach((item, index) => {
-    let itemDesc = `${index + 1}. ${item.name} (Qty: ${item.quantity}) - ₹${item.totalPrice.toLocaleString('en-IN')}`;
+    let itemDesc = `${index + 1}. ${item.name} (Qty: ${item.quantity})`;
     if (item.variantName) itemDesc += ` [Color: ${item.variantName}]`;
     if (item.sizeLabel) itemDesc += ` [Size: ${item.sizeLabel}]`;
     lines.push(itemDesc);
   });
 
   lines.push('');
-  lines.push(`Total Estimated Amount: ₹${grandTotal.toLocaleString('en-IN')}`);
-  lines.push('');
-  lines.push('Please let me know how to proceed with the order confirmation and delivery in Hyderabad / India.');
+  lines.push('Please share fabric options and quotation, or schedule a free in-home measurement visit in Hyderabad.');
 
   return `https://wa.me/${ZAIRA_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
 }

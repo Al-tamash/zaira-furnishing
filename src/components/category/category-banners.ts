@@ -9,7 +9,7 @@ export interface CategoryBannerConfig {
 }
 
 const DEFAULT_BANNER: CategoryBannerConfig = {
-  kicker: 'Atelier Furnishings',
+  kicker: 'Bespoke Furnishings',
   shopByTypeTagline: 'Shop by Collection',
   description: 'Explore our tailored collections, architectural finishes, and bespoke installations.',
   bannerKicker: 'Hyderabad Showroom & In-Home Visits',
@@ -41,7 +41,7 @@ const CATEGORY_BANNERS: Record<string, CategoryBannerConfig> = {
     kicker: 'Upholstery Textiles',
     shopByTypeTagline: 'Shop by Type',
     description: 'Choose a textile below to explore our tactile Italian bouclés, washed linens, performance velvets, and textured weaves.',
-    bannerKicker: 'Re-Upholstery Atelier',
+    bannerKicker: 'Re-Upholstery Studio',
     bannerTitle: 'Bespoke Re-Upholstery & Cut-Length Orders',
     bannerDescription: 'We supply high-performance fabrics by the meter and provide full sofa refurbishment, foam upgrading, and custom piping in Hyderabad.',
     whatsappPrompt: 'Hello Zaira Furnishing, I would like to consult about sofa fabrics and re-upholstery.',
@@ -86,7 +86,7 @@ const CATEGORY_BANNERS: Record<string, CategoryBannerConfig> = {
     kicker: 'Luxury Bed & Bath Linens',
     shopByTypeTagline: 'Shop by Collection',
     description: 'Discover 800TC Egyptian cotton sateen sheets, breathable Belgian linen duvet sets, and ultra-plush Turkish bath towels.',
-    bannerKicker: 'Atelier Monogramming & Hospitality Sizing',
+    bannerKicker: 'Custom Monogramming & Hospitality Sizing',
     bannerTitle: 'Tailored Luxury for the Bed & Bath',
     bannerDescription: 'Elevate your everyday routine with bespoke monograms and custom bed dimensions designed for deep mattresses.',
     whatsappPrompt: 'Hello Zaira Furnishing, I would like to consult about luxury bed and bath linen.',

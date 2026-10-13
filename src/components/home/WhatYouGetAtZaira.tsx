@@ -194,7 +194,15 @@ export function WhatYouGetAtZaira() {
           {PILLARS.map((pillar, idx) => (
             <div
               key={pillar.id}
+              role="button"
+              tabIndex={0}
               onClick={() => openBookingModal(pillar.modalService)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openBookingModal(pillar.modalService);
+                }
+              }}
               className="group cursor-pointer flex flex-col justify-between text-center p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-xs border border-[#EAE4D9] hover:border-[#823423]/60 transition-all duration-300 hover:-translate-y-1 shadow-[0_2px_12px_rgba(28,23,20,0.03)] hover:shadow-md w-[68vw] sm:w-auto shrink-0 sm:shrink snap-start h-full"
             >
               <div className="flex flex-col items-center w-full">

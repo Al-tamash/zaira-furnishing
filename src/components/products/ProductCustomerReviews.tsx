@@ -305,8 +305,8 @@ export function ProductCustomerReviews({
           )}
         </div>
 
-        {/* Top Action Button */}
-        {!isFormOpen && (
+        {/* Top Action Button - only shown when reviews exist to avoid duplicate CTA */}
+        {!isFormOpen && totalReviews > 0 && (
           <button
             type="button"
             onClick={() => {

@@ -250,7 +250,7 @@ export default function OrderDetailsPage() {
       key: 'PROCESSING',
       label: 'Processing',
       description: order.hasCustomProducts
-        ? 'Custom fabric cutting & hand-tailoring in atelier'
+        ? 'Custom fabric cutting & hand-tailoring in workshop'
         : 'Inspection, fabric steaming & batch preparation',
     },
     {

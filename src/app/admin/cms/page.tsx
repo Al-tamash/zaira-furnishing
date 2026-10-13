@@ -191,7 +191,7 @@ export default function AdminCmsPage() {
     home_brand_story: {
       label: 'Brand Story / About',
       icon: BookOpen,
-      desc: 'Warm brand introduction with dual imagery and atelier values',
+      desc: 'Warm brand introduction with dual imagery and craftsmanship values',
     },
     home_showroom_contact: {
       label: 'Showroom Contact',

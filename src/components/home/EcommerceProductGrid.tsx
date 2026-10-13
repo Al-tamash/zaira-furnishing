@@ -11,6 +11,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useStore } from '@/lib/context/StoreContext';
+import { ZAIRA_WHATSAPP_DISPLAY } from '@/lib/whatsapp';
 import { OFFICIAL_CATALOG } from '@/lib/data/officialCatalog';
 
 const CATEGORY_CAROUSEL_ITEMS = [
@@ -202,7 +203,7 @@ export function EcommerceProductGrid({}: EcommerceProductGridProps) {
         <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#EDE8DE] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left shadow-2xs">
           <div className="space-y-1">
             <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#9A7B56] block">
-              Atelier In-Home Service
+              Zaira In-Home Service
             </span>
             <h4 className="font-serif text-[20px] font-medium text-[#1C1917]">
               Want to see 500+ fabric samples directly at your home?
@@ -222,7 +223,7 @@ export function EcommerceProductGrid({}: EcommerceProductGridProps) {
               <span>Book Free Home Visit</span>
             </button>
             <a
-              href="tel:07947415666"
+              href={`tel:${ZAIRA_WHATSAPP_DISPLAY.replace(/\s+/g, '')}`}
               className="px-4 py-3 sm:py-2.5 rounded-full border border-[#EDE8DE] hover:border-[#2C221E] text-[#1C1917] font-semibold text-[12.5px] transition-all inline-flex items-center justify-center gap-2 text-center"
             >
               <Phone className="w-3.5 h-3.5 text-[#9A7B56]" />

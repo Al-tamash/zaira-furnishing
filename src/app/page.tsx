@@ -2,7 +2,6 @@ import React from 'react';
 import { EcommerceHeroBanner } from '@/components/home/EcommerceHeroBanner';
 import { CategoryIconGrid } from '@/components/home/CategoryIconGrid';
 import { FeaturedCollection } from '@/components/home/FeaturedCollection';
-import { HighQualityProductsSpotlight } from '@/components/home/HighQualityProductsSpotlight';
 import { WhatYouGetAtZaira } from '@/components/home/WhatYouGetAtZaira';
 import { BrandStorySection } from '@/components/home/BrandStorySection';
 import { FaqSection } from '@/components/home/FaqSection';
@@ -42,10 +41,7 @@ export default async function HomePage() {
         subtitle="Discover Hyderabad's most sought-after bespoke curtains, motorized blinds, and luxury upholstery."
       />
 
-      {/* 4. 2,3 High Quality Products: Atelier Masterpieces & Signature Selection */}
-      <HighQualityProductsSpotlight />
-
-      {/* 5. Process: Our 5-Step Process & Experience (Quality, Advisory, Measuring, Installation, Assistance) */}
+      {/* 4. Process: Our 5-Step Process & Experience (Quality, Advisory, Measuring, Installation, Assistance) */}
       <WhatYouGetAtZaira />
 
       {/* 6. About: About Zaira Furnishing & Brand Heritage */}

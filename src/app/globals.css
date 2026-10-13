@@ -67,6 +67,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 * {
@@ -79,7 +80,7 @@ body {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

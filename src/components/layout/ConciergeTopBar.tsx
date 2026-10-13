@@ -50,9 +50,9 @@ export function ConciergeTopBar() {
         {/* Right: Direct Concierge Touchpoints */}
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <a
-            href={`tel:${ZAIRA_WHATSAPP_DISPLAY}`}
+            href={`tel:${ZAIRA_WHATSAPP_DISPLAY.replace(/\s+/g, '')}`}
             className="hidden md:inline-flex items-center gap-1.5 text-[#E2D9CF] hover:text-[#D4AF37] transition-colors font-medium"
-            title="Call Atelier Concierge"
+            title="Call Showroom"
           >
             <Phone className="w-3 h-3 text-[#D4AF37]" />
             <span className="text-[#E8E3D8]">{ZAIRA_WHATSAPP_DISPLAY}</span>
@@ -63,11 +63,11 @@ export function ConciergeTopBar() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-[#25D366] hover:text-white transition-colors font-medium"
-            title="Chat with Atelier Stylist on WhatsApp"
+            title="Chat with Zaira Furnishing on WhatsApp"
           >
             <MessageSquare className="w-3.5 h-3.5 fill-current" />
             <span className="text-[#FAF7F2] font-semibold">
-              WhatsApp Concierge
+              WhatsApp Us
             </span>
           </a>
         </div>

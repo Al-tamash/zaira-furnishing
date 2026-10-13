@@ -1,12 +1,13 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Sparkles } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
-import { ZAIRA_WHATSAPP_DISPLAY, ZAIRA_WHATSAPP_URL } from '@/lib/whatsapp';
+import { ShowroomVirtualTour } from '@/components/common/ShowroomVirtualTour';
+import { ZAIRA_WHATSAPP_DISPLAY, ZAIRA_WHATSAPP_URL, ZAIRA_EMAIL } from '@/lib/whatsapp';
 
 export const metadata = {
-  title: 'Contact & Showroom | Zaira Furnishing',
+  title: 'Contact & Showroom',
   description:
-    'Visit the Zaira Furnishing showroom or connect with our atelier specialists for custom drapery, blinds, and interior inquiries.',
+    'Visit the Zaira Furnishing showroom or connect with our showroom specialists for custom drapery, blinds, and interior inquiries.',
 };
 
 export default function ContactPage() {
@@ -77,8 +78,8 @@ export default function ContactPage() {
                     <span className="block font-semibold text-[#1C1917] mb-0.5 uppercase tracking-wider text-[11px]">
                       Written Inquiries & Architect RFPs
                     </span>
-                    <a href="mailto:concierge@zairafurnishing.com" className="text-[#2C221E] font-medium hover:underline">
-                      concierge@zairafurnishing.com
+                    <a href={`mailto:${ZAIRA_EMAIL}`} className="text-[#2C221E] font-medium hover:underline">
+                      {ZAIRA_EMAIL}
                     </a>
                   </div>
                 </div>
@@ -125,6 +126,14 @@ export default function ContactPage() {
 
             <ContactForm />
           </div>
+        </div>
+
+        {/* ─── 360° SHOWROOM VIRTUAL TOUR & EXPERIENCE CENTER ─── */}
+        <div id="tour" className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-[#EBE7DF] scroll-mt-24">
+          <ShowroomVirtualTour
+            title="Experience the Puppalguda Atelier in 360°"
+            subtitle="Walk through our flagship experience center virtually. Rotate 360 degrees to inspect actual fabric drops, motorized curtain automation displays, and designer wall coverings before you visit."
+          />
         </div>
       </div>
     </div>

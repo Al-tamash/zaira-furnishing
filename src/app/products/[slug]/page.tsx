@@ -37,7 +37,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${product.name} | Zaira Furnishing`,
+    title: product.name,
     description: product.shortDescription,
   };
 }

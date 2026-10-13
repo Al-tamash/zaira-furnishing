@@ -36,11 +36,11 @@ async function runSeed() {
 
   // 2. Seed Default Admin User
   console.log('Seeding initial admin user...');
-  const adminSql = `INSERT OR IGNORE INTO users (id, role, name, email, phone, status) VALUES ('usr-admin-01', 'ADMIN', 'Zaira Atelier Admin', 'concierge@zairafurnishing.com', '07947415666', 'active');`;
+  const adminSql = `INSERT OR IGNORE INTO users (id, role, name, email, phone, status) VALUES ('usr-admin-01', 'ADMIN', 'Zaira Furnishing Admin', 'zairafurnishing@gmail.com', '+91 63001 45763', 'active');`;
   sqlStatements.push(adminSql);
   await db.execute(
     `INSERT OR IGNORE INTO users (id, role, name, email, phone, status) VALUES (?, ?, ?, ?, ?, ?)`,
-    ['usr-admin-01', 'ADMIN', 'Zaira Atelier Admin', 'concierge@zairafurnishing.com', '07947415666', 'active']
+    ['usr-admin-01', 'ADMIN', 'Zaira Furnishing Admin', 'zairafurnishing@gmail.com', '+91 63001 45763', 'active']
   );
 
   // 3. Seed All 14 Categories
@@ -303,10 +303,10 @@ async function runSeed() {
       content: JSON.stringify({
         eyebrow: 'VISIT THE SHOWROOM',
         address: 'Rd Number 5, Kyetian Goud Nilayam, Alkapur Twp, Puppalguda, Hyderabad, Telangana 500089',
-        phone: '07947415666',
-        email: 'concierge@zairafurnishing.com',
+        phone: '+91 63001 45763',
+        email: 'zairafurnishing@gmail.com',
         hours: 'Mon–Sat 10:30 AM–8:30 PM · Sunday by appointment',
-        maps_query: 'https://www.google.com/maps/search/?api=1&query=Zaira+Furnishing,+Rd+Number+5,+Kyetian+Goud+Nilayam,+Alkapur+Twp,+Puppalguda,+Hyderabad,+Telangana+500089',
+        maps_query: 'https://www.google.com/maps/search/?api=1&query=Zaira+Furnishing,+Rd+Number+5,+Kyetian+Goud Nilayam,+Alkapur+Twp,+Puppalguda,+Hyderabad,+Telangana+500089',
       }),
       image_url: '/images/hero/living_room.jpg',
     },
@@ -317,8 +317,8 @@ async function runSeed() {
       content: JSON.stringify({
         copyright: '© 2026 Zaira Furnishing. All rights reserved.',
         address: 'Rd Number 5, Kyetian Goud Nilayam, Alkapur Twp, Puppalguda, Hyderabad, Telangana 500089',
-        phone: '07947415666',
-        email: 'concierge@zairafurnishing.com',
+        phone: '+91 63001 45763',
+        email: 'zairafurnishing@gmail.com',
         hours: 'Mon–Sat 10:30 AM–8:30 PM\nSunday by appointment',
       }),
     },

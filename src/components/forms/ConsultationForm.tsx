@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Sparkles, MessageSquare } from 'lucide-react';
+import { ZAIRA_WHATSAPP_URL } from '@/lib/whatsapp';
 
 export function ConsultationForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -11,7 +12,7 @@ export function ConsultationForm() {
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [serviceRequested, setServiceRequested] = useState('Free In-Home Measurement / Site Visit');
+  const [serviceRequested, setServiceRequested] = useState('Free In-Home Measurement');
   const [preferredTimeframe, setPreferredTimeframe] = useState('');
   const [siteLocationAndScope, setSiteLocationAndScope] = useState('');
 
@@ -31,7 +32,7 @@ export function ConsultationForm() {
       }
 
       const address = siteLocationAndScope.trim() || 'Showroom Consultation (Site location to be confirmed via phone)';
-      const preferredDate = preferredTimeframe.trim() || 'Flexible / Coordinator Scheduled';
+      const preferredDate = preferredTimeframe.trim() || 'Flexible, Coordinator Scheduled';
       const preferredTimeSlot = 'Showroom Coordinated';
       const customerNotes = `Service: ${serviceRequested}\nTimeframe: ${preferredTimeframe.trim() || 'Flexible'}\nProject Scope & Location: ${siteLocationAndScope.trim() || 'Not specified'}`;
 
@@ -57,13 +58,13 @@ export function ConsultationForm() {
         return;
       }
 
-      setConfirmedWhatsAppUrl(data.whatsappUrl || 'https://wa.me/917947415666');
+      setConfirmedWhatsAppUrl(data.whatsappUrl || ZAIRA_WHATSAPP_URL);
       setSubmitted(true);
       setName('');
       setPhone('');
       setPreferredTimeframe('');
       setSiteLocationAndScope('');
-      setServiceRequested('Free In-Home Measurement / Site Visit');
+      setServiceRequested('Free In-Home Measurement');
     } catch (err: any) {
       console.error('Consultation form submission error:', err);
       setErrorMessage('A network error occurred. Please check your connection and try again.');
@@ -122,10 +123,11 @@ export function ConsultationForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="consultation-name" className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Full Name
           </label>
           <input
+            id="consultation-name"
             type="text"
             required
             value={name}
@@ -136,10 +138,11 @@ export function ConsultationForm() {
           />
         </div>
         <div>
-          <label className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="consultation-phone" className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Phone Number
           </label>
           <input
+            id="consultation-phone"
             type="tel"
             required
             value={phone}
@@ -153,43 +156,46 @@ export function ConsultationForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="consultation-service" className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Service Requested
           </label>
           <select
+            id="consultation-service"
             value={serviceRequested}
             onChange={(e) => setServiceRequested(e.target.value)}
             disabled={isSubmitting}
             className="w-full px-4 py-3 bg-white border border-[#E7E2D8] text-[16px] sm:text-[13px] text-[#1C1917] focus:outline-hidden focus:border-[#1C1917] disabled:opacity-60 rounded-xl"
           >
-            <option>Free In-Home Measurement / Site Visit</option>
-            <option>Doorstep Fabric / Sample Demo</option>
+            <option>Free In-Home Measurement</option>
+            <option>Doorstep Fabric & Sample Demo</option>
             <option>Custom Tailoring & Stitching</option>
-            <option>Motorization / Smart Home Setup</option>
+            <option>Motorization & Smart Home Setup</option>
             <option>NRI Remote Home Styling</option>
-            <option>Corporate / Institutional Furnishings</option>
+            <option>Commercial & Bulk Furnishings</option>
           </select>
         </div>
         <div>
-          <label className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+          <label htmlFor="consultation-timeframe" className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
             Preferred Timeframe
           </label>
           <input
+            id="consultation-timeframe"
             type="text"
             value={preferredTimeframe}
             onChange={(e) => setPreferredTimeframe(e.target.value)}
             disabled={isSubmitting}
-            placeholder="e.g. This Weekend / Next Tuesday"
+            placeholder="e.g. This Weekend or Next Week"
             className="w-full px-4 py-3 bg-white border border-[#E7E2D8] text-[16px] sm:text-[13px] text-[#1C1917] focus:outline-hidden focus:border-[#1C1917] disabled:opacity-60 rounded-xl"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
+        <label htmlFor="consultation-scope" className="block text-[12px] uppercase tracking-wider text-[#1C1917] font-medium mb-1.5">
           Site Location & Project Scope
         </label>
         <textarea
+          id="consultation-scope"
           rows={3}
           value={siteLocationAndScope}
           onChange={(e) => setSiteLocationAndScope(e.target.value)}
