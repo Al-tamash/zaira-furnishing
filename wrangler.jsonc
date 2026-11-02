@@ -11,6 +11,10 @@
   "images": {
     "binding": "IMAGES"
   },
+  "routes": [
+    { "pattern": "zairafurnishing.com", "custom_domain": true },
+    { "pattern": "www.zairafurnishing.com", "custom_domain": true }
+  ],
   "observability": {
     "enabled": true
   }
